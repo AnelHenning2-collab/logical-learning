@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/  Created with Perplexity Computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cryptography & PKI — Logical Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module.css">
+<style>
+  :root { --mod-color: #a78bfa; --mod-glow: rgba(167,139,250,0.12); }
+  .tls-flow { display: flex; flex-direction: column; gap: 6px; margin: 14px 0; }
+  .tls-msg { display: grid; grid-template-columns: 1fr 36px 1fr; gap: 8px; align-items: center; font-size: 12px; }
+  .tls-party { padding: 7px 10px; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); border-radius: 7px; text-align: center; font-weight: 600; color: #a78bfa; }
+  .tls-arrow { text-align: center; color: #a78bfa; font-size: 16px; }
+  .tls-label { font-size: 11px; color: var(--text-muted); text-align: center; }
+  .algo-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; margin: 2px; }
+  .sym { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+  .asym { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+  .hash { background: rgba(99,179,237,0.1); color: #63b3ed; border: 1px solid rgba(99,179,237,0.2); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+      <div class="nav-links">
+        <a href="threats.html">Threats</a>
+        <a href="crypto.html" class="active">Cryptography</a>
+        <a href="network.html">Network</a>
+        <a href="identity.html">Identity</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="module-header">
+  <div class="container">
+    <a href="index.html" class="back-link">← All Modules</a>
+    <div class="domain-badge">Domain 2 · SY0-701</div>
+    <h1>Cryptography &amp; PKI</h1>
+    <p>Symmetric vs asymmetric encryption, hashing, digital signatures, PKI, TLS handshakes, and certificate management. Weight: ~12% of exam.</p>
+    <div class="mod-progress">
+      <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+      <span class="mod-progress-label" id="modProgressLabel">0 / 6 concepts</span>
+    </div>
+  </div>
+</header>
+
+<section class="concepts">
+  <div class="container">
+    <div class="section-label">Visual Explainers — Read, then collapse and test yourself</div>
+
+    <!-- 1. Symmetric vs Asymmetric -->
+    <div class="concept-card fade-in" data-concept="0">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔑</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Symmetric vs Asymmetric Encryption</div>
+          <div class="concept-subtitle">AES · 3DES · RSA · ECC · Diffie-Hellman</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <table class="comp-table">
+          <thead><tr><th>Feature</th><th>Symmetric</th><th>Asymmetric</th></tr></thead>
+          <tbody>
+            <tr><td>Keys</td><td>One shared secret key</td><td>Public + Private key pair</td></tr>
+            <tr><td>Speed</td><td>Fast — good for bulk data</td><td>Slow — good for key exchange</td></tr>
+            <tr><td>Key problem</td><td>How to share the key securely?</td><td>Solves the key distribution problem</td></tr>
+            <tr><td>Common algorithms</td><td>AES, 3DES, ChaCha20</td><td>RSA, ECC, Diffie-Hellman</td></tr>
+            <tr><td>Use case</td><td>Encrypt file contents, disk encryption</td><td>TLS handshake, digital signatures</td></tr>
+          </tbody>
+        </table>
+        <p>In practice, <strong>TLS uses both</strong>: asymmetric encryption to exchange a symmetric session key, then symmetric encryption for the actual data — best of both worlds.</p>
+        <div style="margin: 12px 0;">
+          <span class="algo-pill sym">AES-256</span><span class="algo-pill sym">AES-128</span><span class="algo-pill sym">3DES</span>
+          <span style="margin: 0 8px; color:var(--text-faint); font-size:12px;">Symmetric →</span>
+          <span class="algo-pill asym">RSA-2048</span><span class="algo-pill asym">ECC P-256</span><span class="algo-pill asym">DH</span>
+          <span style="margin: 0 8px; color:var(--text-faint); font-size:12px;">Asymmetric →</span>
+          <span class="algo-pill hash">SHA-256</span><span class="algo-pill hash">SHA-3</span><span class="algo-pill hash">MD5 ⚠️</span>
+          <span style="margin: 0 8px; color:var(--text-faint); font-size:12px;">Hashing</span>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div>Symmetric = <strong>S</strong>ame key, <strong>S</strong>peedy. Asymmetric = <strong>A</strong>cts with <strong>A</strong> pair. When you see "fast bulk encryption" → AES. When you see "key exchange" or "signature" → RSA/ECC.</div>
+      </div>
+    </div>
+
+    <!-- 2. Hashing -->
+    <div class="concept-card fade-in" data-concept="1">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔢</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Hashing &amp; Integrity</div>
+          <div class="concept-subtitle">MD5 · SHA-1 · SHA-256 · HMAC · Salting · Rainbow Tables</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>A <strong>hash function</strong> takes any input and produces a fixed-length output (digest). It is <strong>one-way</strong> — you cannot reverse it to get the original data. Used to verify integrity, not encrypt.</p>
+        <table class="comp-table">
+          <thead><tr><th>Algorithm</th><th>Output Size</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>MD5</td><td>128-bit (32 hex chars)</td><td style="color:#ef4444;">Broken — collision attacks. Do NOT use for security.</td></tr>
+            <tr><td>SHA-1</td><td>160-bit</td><td style="color:#f59e0b;">Deprecated — collision found. Avoid.</td></tr>
+            <tr><td>SHA-256</td><td>256-bit</td><td style="color:#22c55e;">Current standard. Use for file integrity, certificates.</td></tr>
+            <tr><td>SHA-3</td><td>Variable (224-512)</td><td style="color:#22c55e;">Modern, different design from SHA-2. Very secure.</td></tr>
+            <tr><td>HMAC</td><td>Depends on hash used</td><td style="color:#22c55e;">Hash + secret key = message authentication code (integrity + authenticity)</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Salting</strong> adds a random value to a password before hashing — defeats rainbow table attacks. <strong>Rainbow tables</strong> are precomputed hash lookup tables used to crack unsalted passwords.</p>
+        <div class="mnemonic"><div class="mnemonic-label">Key Rule</div>MD5 and SHA-1 = <strong>broken for security</strong> but MD5 is still used for non-security checksums (file download verification). The exam will try to trick you — always flag MD5/SHA-1 as insecure options.</div>
+      </div>
+    </div>
+
+    <!-- 3. Digital Signatures -->
+    <div class="concept-card fade-in" data-concept="2">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">✍️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Digital Signatures &amp; Non-Repudiation</div>
+          <div class="concept-subtitle">Sign with private key · Verify with public key</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>A digital signature provides three things: <strong>Authentication</strong> (who sent it), <strong>Integrity</strong> (wasn't tampered), and <strong>Non-repudiation</strong> (sender can't deny it).</p>
+        <div class="diagram">
+          <div style="color:#a78bfa; margin-bottom:8px; font-size:13px; font-family:'DM Sans',sans-serif; font-weight:600;">How Digital Signing Works:</div>
+          Sender:   [Message] → Hash → [Digest] → Encrypt with PRIVATE key → [Signature]
+          <br><br>
+          Receiver: [Message] + [Signature]
+                    → Hash message → [Digest A]
+                    → Decrypt signature with PUBLIC key → [Digest B]
+                    → Compare: if A == B → ✓ Valid signature
+        </div>
+        <p><strong>Critical exam rule:</strong> You <strong>sign with your PRIVATE key</strong> (proves it came from you). Others <strong>verify with your PUBLIC key</strong>. This is the opposite of encryption (where you encrypt with recipient's public key).</p>
+        <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div>"<strong>Sign with Private, Verify with Public</strong>" — SVPP. Encryption is the reverse: "Encrypt with Public, Decrypt with Private" — EPDP.</div>
+      </div>
+    </div>
+
+    <!-- 4. PKI -->
+    <div class="concept-card fade-in" data-concept="3">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🏛️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">PKI &amp; Certificate Management</div>
+          <div class="concept-subtitle">CA · RA · CRL · OCSP · X.509 · Certificate types</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p><strong>PKI (Public Key Infrastructure)</strong> is the system for issuing, managing, and revoking digital certificates.</p>
+        <table class="comp-table">
+          <thead><tr><th>Component</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td>CA (Certificate Authority)</td><td>Issues and signs digital certificates. Root CA is the ultimate trust anchor.</td></tr>
+            <tr><td>RA (Registration Authority)</td><td>Verifies identity before requesting certificate from CA. Offloads CA workload.</td></tr>
+            <tr><td>CRL (Certificate Revocation List)</td><td>Published list of revoked certificates. Checked periodically — can be outdated.</td></tr>
+            <tr><td>OCSP</td><td>Online Certificate Status Protocol — real-time certificate validity check. Better than CRL.</td></tr>
+            <tr><td>X.509</td><td>Standard format for digital certificates (contains public key, subject, issuer, validity).</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Certificate types:</strong> DV (domain-only), OV (org validated), EV (extended validation — green bar). <strong>Wildcard cert:</strong> *.domain.com — covers all subdomains. <strong>SAN:</strong> Subject Alternative Name — multiple hostnames on one cert.</p>
+        <div class="mnemonic"><div class="mnemonic-label">CRL vs OCSP</div>CRL = <strong>old list, may be stale</strong>. OCSP = <strong>real-time check</strong>. The exam prefers OCSP for freshness. OCSP Stapling = server caches OCSP response to reduce latency.</div>
+      </div>
+    </div>
+
+    <!-- 5. TLS Handshake -->
+    <div class="concept-card fade-in" data-concept="4">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🤝</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">TLS Handshake</div>
+          <div class="concept-subtitle">How HTTPS establishes a secure connection</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>TLS (Transport Layer Security) uses asymmetric encryption to establish trust and exchange a session key, then switches to fast symmetric encryption for all data.</p>
+        <div class="tls-flow">
+          <div style="display:grid; grid-template-columns:140px 1fr 140px; gap:8px; font-size:12px; font-weight:600; color:var(--text-muted); text-align:center; margin-bottom:4px;"><span>CLIENT</span><span></span><span>SERVER</span></div>
+          <div class="tls-msg"><div class="tls-party">ClientHello</div><div class="tls-arrow">→</div><div style="font-size:11px; color:var(--text-muted);">TLS version, cipher suites supported, random nonce</div></div>
+          <div class="tls-msg"><div style="font-size:11px; color:var(--text-muted);">Chosen cipher, server certificate (public key)</div><div class="tls-arrow">←</div><div class="tls-party">ServerHello</div></div>
+          <div class="tls-msg"><div class="tls-party">Verify cert</div><div class="tls-arrow">→</div><div style="font-size:11px; color:var(--text-muted);">Client verifies cert against trusted CAs</div></div>
+          <div class="tls-msg"><div class="tls-party">Key Exchange</div><div class="tls-arrow">→</div><div style="font-size:11px; color:var(--text-muted);">Encrypted pre-master secret using server's public key</div></div>
+          <div class="tls-msg"><div style="font-size:11px; color:var(--text-muted);">Both derive session key from pre-master secret</div><div class="tls-arrow">⇌</div><div class="tls-party">Session Key</div></div>
+          <div class="tls-msg"><div class="tls-party" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.3); color:#22c55e;">Encrypted Data (AES)</div><div class="tls-arrow">⇌</div><div class="tls-party" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.3); color:#22c55e;">Encrypted Data (AES)</div></div>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Key Point</div>TLS 1.3 removed weak cipher suites (RC4, 3DES, SHA-1) and requires forward secrecy. The exam expects you to flag TLS 1.0/1.1 as deprecated and recommend TLS 1.2 minimum, TLS 1.3 preferred.</div>
+      </div>
+    </div>
+
+    <!-- 6. Encryption Use Cases -->
+    <div class="concept-card fade-in" data-concept="5">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🗂️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Encryption Use Cases &amp; Key Management</div>
+          <div class="concept-subtitle">Data at rest · Data in transit · Data in use · Key escrow</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <table class="comp-table">
+          <thead><tr><th>State</th><th>What It Means</th><th>Controls</th></tr></thead>
+          <tbody>
+            <tr><td>Data at Rest</td><td>Stored on disk, database, USB</td><td>AES disk encryption (BitLocker, FileVault), database encryption</td></tr>
+            <tr><td>Data in Transit</td><td>Moving across network</td><td>TLS, HTTPS, IPSec, SSH, SFTP</td></tr>
+            <tr><td>Data in Use</td><td>Being processed in memory/CPU</td><td>Trusted Execution Environment (TEE), memory encryption</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Key Escrow:</strong> A copy of the encryption key is held by a trusted third party — enables recovery if key is lost, but creates a risk if the escrow is compromised.</p>
+        <p><strong>HSM (Hardware Security Module):</strong> Physical device that stores and manages cryptographic keys. Tamper-resistant. Used for CA private keys, payment systems.</p>
+        <div class="tag-wrap">
+          <span class="tag purple">Perfect Forward Secrecy</span><span class="tag purple">Key Stretching</span><span class="tag purple">PBKDF2</span><span class="tag purple">bcrypt</span>
+        </div>
+        <p style="margin-top:10px;"><strong>Perfect Forward Secrecy (PFS)</strong>: Each session uses a unique key — even if a long-term key is compromised, past sessions remain safe. Required by TLS 1.3.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section">
+  <div class="container">
+    <div class="quiz-header-row">
+      <div class="quiz-title">🧪 Knowledge Check</div>
+      <div class="quiz-counter" id="quizCounter">0 / 12 answered</div>
+    </div>
+    <div id="quizContainer"></div>
+    <div class="score-banner" id="scoreBanner">
+      <div class="score-num" id="scoreNum">0<span>/12</span></div>
+      <div class="score-label">Cryptography &amp; PKI Quiz</div>
+      <div class="score-grade" id="scoreGrade"></div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="retakeQuiz()">Retake Quiz</button>
+        <a href="network.html" class="btn btn-outline">Next: Network Security →</a>
+        <a href="index.html" class="btn btn-outline">All Modules</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Logical Learning · Security+ SY0-701 · Anél Henning</p>
+        <p style="margin-top:4px;"><a href="threats.html">← Threats</a> · <a href="network.html">Next: Network →</a></p>
+      </div>
+      <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  { q: "Which type of encryption uses the SAME key for both encryption and decryption?", opts: ["Asymmetric", "Symmetric", "Hashing", "Elliptic curve"], ans: 1, exp: "<strong>Symmetric encryption</strong> uses a single shared secret key for both operations. AES is the primary symmetric algorithm. The main challenge is secure key distribution." },
+  { q: "You need to encrypt a large file quickly for storage. Which algorithm is the BEST choice?", opts: ["RSA-2048", "Diffie-Hellman", "AES-256", "SHA-256"], ans: 2, exp: "<strong>AES-256</strong> is symmetric — fast for bulk data encryption. RSA and DH are asymmetric (slow, used for key exchange). SHA-256 is a hash — it does not encrypt." },
+  { q: "Which hashing algorithm is considered BROKEN and should NOT be used for security purposes?", opts: ["SHA-256", "SHA-3", "HMAC-SHA256", "MD5"], ans: 3, exp: "<strong>MD5</strong> is cryptographically broken — collision attacks can produce the same hash for different inputs. SHA-256 and SHA-3 are current standards. HMAC adds a key to a hash for authentication." },
+  { q: "When creating a digital signature, which key does the sender use to sign the message?", opts: ["Recipient's public key", "Sender's public key", "Sender's private key", "A shared symmetric key"], ans: 2, exp: "The sender signs with their own <strong>private key</strong>. The recipient verifies with the sender's <strong>public key</strong>. This proves origin (only the private key owner could have signed it) and provides non-repudiation." },
+  { q: "What does OCSP provide that a Certificate Revocation List (CRL) does NOT?", opts: ["Certificate issuance", "Real-time certificate status checks", "Public key encryption", "Certificate signing requests"], ans: 1, exp: "<strong>OCSP</strong> (Online Certificate Status Protocol) provides real-time certificate validity checking. A CRL is a published list that may be outdated between updates. OCSP Stapling caches the response at the server." },
+  { q: "A company needs to ensure that even if their server's private key is compromised, past session data remains safe. Which feature provides this?", opts: ["Certificate pinning", "Key escrow", "Perfect Forward Secrecy", "OCSP Stapling"], ans: 2, exp: "<strong>Perfect Forward Secrecy (PFS)</strong> generates a unique ephemeral session key for each connection. Compromising the long-term private key does not decrypt past sessions. Required in TLS 1.3." },
+  { q: "Which PKI component verifies a user's identity before a Certificate Authority issues them a certificate?", opts: ["CRL", "OCSP", "Registration Authority (RA)", "HSM"], ans: 2, exp: "The <strong>Registration Authority (RA)</strong> offloads identity verification from the CA. It validates that the certificate requestor is who they claim to be, then forwards the request to the CA for signing." },
+  { q: "During the TLS handshake, after the server sends its certificate, the client encrypts the pre-master secret using the server's:", opts: ["Private key", "Symmetric session key", "Public key", "Certificate fingerprint"], ans: 2, exp: "The client encrypts the pre-master secret with the <strong>server's public key</strong> (from the certificate). Only the server's private key can decrypt it. Both sides then derive the same session key from the pre-master secret." },
+  { q: "An organization adds a random value to passwords before hashing to prevent rainbow table attacks. This is called:", opts: ["Key stretching", "Salting", "HMAC", "Key escrow"], ans: 1, exp: "<strong>Salting</strong> adds a unique random value to each password before hashing. This means identical passwords produce different hashes, defeating precomputed rainbow table lookups. PBKDF2 and bcrypt include salting built-in." },
+  { q: "Which of the following provides BOTH integrity and authenticity for a message?", opts: ["SHA-256 hash", "AES-256 encryption", "HMAC", "RSA encryption"], ans: 2, exp: "<strong>HMAC</strong> (Hash-based Message Authentication Code) combines a hash with a shared secret key. This provides integrity (data wasn't changed) AND authenticity (only key holders could have created it). A plain hash proves integrity only." },
+  { q: "A wildcard certificate (*.example.com) covers which of the following?", opts: ["example.com only", "All subdomains of example.com", "Any .com domain", "example.com and one subdomain only"], ans: 1, exp: "A <strong>wildcard certificate</strong> covers all immediate subdomains: mail.example.com, www.example.com, etc. It does NOT cover the root domain (example.com) itself or second-level subdomains (test.mail.example.com)." },
+  { q: "Which version of TLS is considered the current minimum acceptable standard?", opts: ["TLS 1.0", "TLS 1.1", "TLS 1.2", "SSL 3.0"], ans: 2, exp: "<strong>TLS 1.2</strong> is the current minimum. TLS 1.0 and 1.1 are deprecated (POODLE, BEAST attacks). SSL 3.0 is completely broken. TLS 1.3 is the preferred modern version — removed weak ciphers, requires forward secrecy." }
+];
+
+let answered = 0, correct = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  answered = 0; correct = 0;
+  updateCounter();
+  document.getElementById('scoreBanner').classList.remove('show');
+  QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card fade-in';
+    card.id = 'qcard-' + i;
+    card.innerHTML = `<div class="q-num">Q${i+1} of ${QUESTIONS.length}</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o,j)=>`<button class="opt" onclick="answer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}</div><div class="explanation" id="exp-${i}">${q.exp}</div>`;
+    container.appendChild(card);
+  });
+  setTimeout(() => document.querySelectorAll('.quiz-card.fade-in').forEach((c,i) => setTimeout(()=>c.classList.add('visible'), i*60)), 100);
+}
+
+function answer(qIdx, optIdx) {
+  const q = QUESTIONS[qIdx];
+  const card = document.getElementById('qcard-' + qIdx);
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(o => o.disabled = true);
+  opts[optIdx].classList.add(optIdx === q.ans ? 'correct' : 'wrong');
+  if (optIdx !== q.ans) opts[q.ans].classList.add('correct');
+  document.getElementById('exp-' + qIdx).classList.add('show');
+  answered++;
+  if (optIdx === q.ans) correct++;
+  updateCounter();
+  if (answered === QUESTIONS.length) setTimeout(showScore, 600);
+}
+
+function updateCounter() { document.getElementById('quizCounter').textContent = `${answered} / ${QUESTIONS.length} answered`; }
+
+function showScore() {
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('scoreNum').innerHTML = `${correct}<span>/${QUESTIONS.length}</span>`;
+  let grade, color;
+  if (pct >= 90) { grade = '🏆 Excellent — Ready for this domain'; color = '#22c55e'; }
+  else if (pct >= 75) { grade = '✅ Good — Review missed concepts'; color = '#f59e0b'; }
+  else if (pct >= 60) { grade = '📖 Keep studying — Focus on explanations'; color = '#f59e0b'; }
+  else { grade = '🔄 Needs work — Re-read all concepts first'; color = '#ef4444'; }
+  document.getElementById('scoreGrade').innerHTML = `<span style="color:${color}">${grade}</span>`;
+  document.getElementById('scoreBanner').classList.add('show');
+  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  localStorage.setItem('secplus_score_crypto', JSON.stringify({ correct, total: QUESTIONS.length }));
+}
+
+function retakeQuiz() { buildQuiz(); window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 80, behavior: 'smooth' }); }
+
+function toggleConcept(header) {
+  const card = header.parentElement;
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open', !wasOpen);
+  if (!wasOpen) { conceptsSeen.add(parseInt(card.dataset.concept)); updateConceptProgress(); }
+}
+
+const conceptsSeen = new Set();
+function updateConceptProgress() {
+  const total = document.querySelectorAll('.concept-card').length;
+  document.getElementById('modProgress').style.width = (conceptsSeen.size / total * 100) + '%';
+  document.getElementById('modProgressLabel').textContent = `${conceptsSeen.size} / ${total} concepts`;
+}
+
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+buildQuiz();
+</script>
+</body>
+</html>
