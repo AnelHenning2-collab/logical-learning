@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/  Created with Perplexity Computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Threats & Attacks — Logical Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module.css">
+<style>
+  :root { --mod-color: #ef4444; --mod-glow: rgba(239,68,68,0.12); }
+  .threat-actor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin: 14px 0; }
+  .actor-card { background: rgba(13,19,38,0.8); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .actor-icon { font-size: 20px; margin-bottom: 6px; }
+  .actor-name { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .actor-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .kill-chain { display: flex; flex-wrap: wrap; gap: 0; margin: 12px 0; }
+  .kc-step { flex: 1; min-width: 80px; padding: 10px 8px; text-align: center; font-size: 11px; font-weight: 600; color: var(--white); background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.2); position: relative; }
+  .kc-step:not(:last-child)::after { content: '›'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); z-index: 1; color: #ef4444; font-size: 16px; }
+  .kc-step span { display: block; font-size: 10px; font-weight: 400; color: var(--text-muted); margin-top: 3px; }
+  .attack-flow { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+  .flow-step { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(13,19,38,0.7); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
+  .flow-num { width: 22px; height: 22px; border-radius: 50%; background: rgba(239,68,68,0.2); color: #ef4444; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+      <div class="nav-links">
+        <a href="threats.html" class="active">Threats</a>
+        <a href="crypto.html">Cryptography</a>
+        <a href="network.html">Network</a>
+        <a href="identity.html">Identity</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="module-header">
+  <div class="container">
+    <a href="index.html" class="back-link">← All Modules</a>
+    <div class="domain-badge">Domain 1 · SY0-701</div>
+    <h1>Threats &amp; Attacks</h1>
+    <p>Threat actors, malware types, social engineering, attack vectors, and vulnerability categories. Weight: ~22% of exam.</p>
+    <div class="mod-progress">
+      <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+      <span class="mod-progress-label" id="modProgressLabel">0 / 6 concepts</span>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════ CONCEPTS ════════════════ -->
+<section class="concepts">
+  <div class="container">
+    <div class="section-label">Visual Explainers — Read, then collapse and test yourself</div>
+
+    <!-- 1. Threat Actors -->
+    <div class="concept-card fade-in" data-concept="0">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🎭</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Threat Actors &amp; Motivations</div>
+          <div class="concept-subtitle">Nation-state · Hacktivist · Insider · Script kiddie · Cybercriminal</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>A <strong>threat actor</strong> is any entity that poses a risk to your systems. The exam tests you on matching actor TYPE to their likely MOTIVATION and SOPHISTICATION level.</p>
+        <div class="threat-actor-grid">
+          <div class="actor-card"><div class="actor-icon">🏛️</div><div class="actor-name">Nation-State</div><div class="actor-desc">Highest sophistication. Motivation: espionage, disruption. APT groups. Example: Volt Typhoon, Lazarus Group.</div></div>
+          <div class="actor-card"><div class="actor-icon">✊</div><div class="actor-name">Hacktivist</div><div class="actor-desc">Political/ideological motivation. Medium skill. DDoS, defacement. Example: Anonymous.</div></div>
+          <div class="actor-card"><div class="actor-icon">💰</div><div class="actor-name">Cybercriminal</div><div class="actor-desc">Financial motivation. Ransomware, fraud, data theft. Operates in dark web markets.</div></div>
+          <div class="actor-card"><div class="actor-icon">🏢</div><div class="actor-name">Insider Threat</div><div class="actor-desc">Current or former employee. Can be malicious (revenge, money) or unintentional (negligence).</div></div>
+          <div class="actor-card"><div class="actor-icon">👾</div><div class="actor-name">Script Kiddie</div><div class="actor-desc">Low skill. Uses existing tools/exploits. Motivation: notoriety. Opportunistic, not targeted.</div></div>
+          <div class="actor-card"><div class="actor-icon">🤝</div><div class="actor-name">Competitor</div><div class="actor-desc">Corporate espionage. Motivation: financial advantage. Often hires others.</div></div>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div>"<strong>N</strong>ations <strong>H</strong>ack, <strong>C</strong>riminals <strong>I</strong>nvade, <strong>S</strong>cripts <strong>C</strong>opy" → Nation-state, Hacktivist, Cybercriminal, Insider, Script kiddie, Competitor</div>
+      </div>
+    </div>
+
+    <!-- 2. Malware Types -->
+    <div class="concept-card fade-in" data-concept="1">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🦠</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Malware Types</div>
+          <div class="concept-subtitle">Virus · Worm · Trojan · Ransomware · Rootkit · Spyware · Keylogger</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>The key exam distinction is <strong>how malware spreads</strong> and <strong>what it does</strong>. Know these pairs cold:</p>
+        <table class="comp-table">
+          <thead><tr><th>Type</th><th>Spreads How?</th><th>What It Does</th><th>Exam Clue</th></tr></thead>
+          <tbody>
+            <tr><td>Virus</td><td>Requires user action (open file)</td><td>Attaches to/infects other files</td><td>"Needs a host file"</td></tr>
+            <tr><td>Worm</td><td>Self-replicating, no user action</td><td>Spreads across networks</td><td>"Spreads itself"</td></tr>
+            <tr><td>Trojan</td><td>Disguised as legitimate software</td><td>Opens backdoor, drops payload</td><td>"Looks innocent"</td></tr>
+            <tr><td>Ransomware</td><td>Email, exploit kits</td><td>Encrypts files, demands payment</td><td>"Pay to decrypt"</td></tr>
+            <tr><td>Rootkit</td><td>Exploits, trojans</td><td>Hides at OS/firmware level</td><td>"Hardest to detect/remove"</td></tr>
+            <tr><td>Keylogger</td><td>Trojan, physical</td><td>Records keystrokes</td><td>"Steals credentials"</td></tr>
+            <tr><td>Spyware</td><td>Drive-by download</td><td>Monitors and exfiltrates data</td><td>"Watches silently"</td></tr>
+            <tr><td>Botnet/Bot</td><td>Worm, trojan</td><td>C2 controlled, used for DDoS/spam</td><td>"Command & Control"</td></tr>
+          </tbody>
+        </table>
+        <div class="mnemonic"><div class="mnemonic-label">Key Rule</div>Worm = <strong>self-spreads</strong>. Virus = needs a <strong>host file</strong>. Trojan = <strong>disguised</strong>. These three are the most commonly confused on the exam.</div>
+      </div>
+    </div>
+
+    <!-- 3. Social Engineering -->
+    <div class="concept-card fade-in" data-concept="2">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🎣</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Social Engineering Attacks</div>
+          <div class="concept-subtitle">Phishing · Spear phishing · Vishing · Smishing · Pretexting · Baiting</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Social engineering exploits <strong>human psychology</strong>, not technical vulnerabilities. The exam loves scenario questions: read the scenario, identify the attack type.</p>
+        <table class="comp-table">
+          <thead><tr><th>Attack</th><th>Vector</th><th>Key Feature</th></tr></thead>
+          <tbody>
+            <tr><td>Phishing</td><td>Email (mass)</td><td>Generic "click this link" to many targets</td></tr>
+            <tr><td>Spear Phishing</td><td>Email (targeted)</td><td>Uses victim's name, role, or context</td></tr>
+            <tr><td>Whaling</td><td>Email</td><td>Targeted at executives (C-suite)</td></tr>
+            <tr><td>Vishing</td><td>Voice/phone call</td><td>"Your account has been compromised, verify now"</td></tr>
+            <tr><td>Smishing</td><td>SMS text</td><td>Malicious link in a text message</td></tr>
+            <tr><td>Pretexting</td><td>Any channel</td><td>Attacker fabricates a scenario/identity</td></tr>
+            <tr><td>Baiting</td><td>Physical (USB drop)</td><td>Leave infected USB in parking lot</td></tr>
+            <tr><td>Tailgating</td><td>Physical</td><td>Following someone through a secure door</td></tr>
+          </tbody>
+        </table>
+        <div class="tag-wrap">
+          <span class="tag red">Urgency</span><span class="tag red">Authority</span><span class="tag red">Scarcity</span><span class="tag red">Familiarity</span><span class="tag red">Fear</span>
+        </div>
+        <p style="margin-top:12px;">These are the <strong>six principles of influence</strong> that social engineers exploit. The exam may ask which principle is being used.</p>
+        <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div><strong>P</strong>hishing = mass email. <strong>S</strong>pear = specific. <strong>W</strong>haling = C-suite. <strong>V</strong>ishing = Voice. <strong>S</strong>mishing = SMS. "PSW VS" — think Password Stolen Via Verbal/SMS.</div>
+      </div>
+    </div>
+
+    <!-- 4. Network Attacks -->
+    <div class="concept-card fade-in" data-concept="3">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">💥</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Network Attack Types</div>
+          <div class="concept-subtitle">DoS · DDoS · MitM · Replay · SQL Injection · XSS · Buffer Overflow</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p><strong>DoS vs DDoS:</strong> A DoS (Denial of Service) comes from one source. A DDoS (Distributed DoS) comes from many — typically a botnet. Both overwhelm a target with traffic or requests.</p>
+        <div class="attack-flow">
+          <div class="flow-step"><div class="flow-num">1</div><strong style="color:var(--white); min-width:120px;">SYN Flood</strong><span style="color:var(--text-muted); font-size:13px;">Sends many TCP SYN packets, never completes handshake — exhausts connection table</span></div>
+          <div class="flow-step"><div class="flow-num">2</div><strong style="color:var(--white); min-width:120px;">Man-in-Middle</strong><span style="color:var(--text-muted); font-size:13px;">Attacker intercepts traffic between two parties — ARP poisoning, rogue AP</span></div>
+          <div class="flow-step"><div class="flow-num">3</div><strong style="color:var(--white); min-width:120px;">Replay Attack</strong><span style="color:var(--text-muted); font-size:13px;">Captures valid auth token and replays it — mitigated by timestamps/nonces</span></div>
+          <div class="flow-step"><div class="flow-num">4</div><strong style="color:var(--white); min-width:120px;">SQL Injection</strong><span style="color:var(--text-muted); font-size:13px;">Inserts SQL code into input fields — ' OR '1'='1 — mitigated by parameterized queries</span></div>
+          <div class="flow-step"><div class="flow-num">5</div><strong style="color:var(--white); min-width:120px;">XSS</strong><span style="color:var(--text-muted); font-size:13px;">Cross-Site Scripting — injects malicious script into web page viewed by other users</span></div>
+          <div class="flow-step"><div class="flow-num">6</div><strong style="color:var(--white); min-width:120px;">Buffer Overflow</strong><span style="color:var(--text-muted); font-size:13px;">Sends more data than buffer can hold — overwrites memory, executes arbitrary code</span></div>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Exam Trap</div>XSS injects into a <strong>web page</strong>. CSRF forces a <strong>logged-in user to take an action</strong>. These are commonly confused — different targets, different mechanisms.</div>
+      </div>
+    </div>
+
+    <!-- 5. Attack Frameworks -->
+    <div class="concept-card fade-in" data-concept="4">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🗺️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Attack Frameworks</div>
+          <div class="concept-subtitle">MITRE ATT&CK · Cyber Kill Chain · Diamond Model</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>The <strong>Cyber Kill Chain</strong> (Lockheed Martin) describes the 7 stages of an advanced attack:</p>
+        <div class="kill-chain">
+          <div class="kc-step">Recon<span>Research</span></div>
+          <div class="kc-step">Weaponize<span>Build payload</span></div>
+          <div class="kc-step">Deliver<span>Email/web</span></div>
+          <div class="kc-step">Exploit<span>Run code</span></div>
+          <div class="kc-step">Install<span>Persistence</span></div>
+          <div class="kc-step">C2<span>Command</span></div>
+          <div class="kc-step">Exfil<span>Goal</span></div>
+        </div>
+        <p><strong>MITRE ATT&CK</strong> is a detailed knowledge base of adversary tactics and techniques (TTP). Used by security teams to map real-world attack behaviors. The exam expects you to know it exists and its purpose — not memorize every technique.</p>
+        <p>The <strong>Diamond Model</strong> analyzes attacks through four points: Adversary, Infrastructure, Capability, Victim — useful for threat intelligence correlation.</p>
+        <div class="mnemonic"><div class="mnemonic-label">Kill Chain Mnemonic</div><strong>R</strong>eal <strong>W</strong>omen <strong>D</strong>on't <strong>E</strong>at <strong>I</strong>cy <strong>C</strong>ake <strong>E</strong>very Day — Recon, Weaponize, Deliver, Exploit, Install, C2, Exfiltrate</div>
+      </div>
+    </div>
+
+    <!-- 6. Vulnerability Types -->
+    <div class="concept-card fade-in" data-concept="5">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔍</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Vulnerability Categories</div>
+          <div class="concept-subtitle">Zero-day · CVE · CVSS · Misconfigs · Weak credentials · Supply chain</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>A <strong>vulnerability</strong> is a weakness. A <strong>threat</strong> exploits it. A <strong>risk</strong> is the probability × impact. Know this triangle cold.</p>
+        <table class="comp-table">
+          <thead><tr><th>Term</th><th>Definition</th><th>Key Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Zero-day</td><td>Unknown vulnerability, no patch exists</td><td>Most dangerous — no defense except behavior monitoring</td></tr>
+            <tr><td>CVE</td><td>Common Vulnerabilities and Exposures</td><td>Standardized ID: CVE-2024-XXXXX</td></tr>
+            <tr><td>CVSS</td><td>Common Vulnerability Scoring System</td><td>0–10 severity score; drives patch priority</td></tr>
+            <tr><td>Misconfiguration</td><td>Default settings, open ports, weak ACLs</td><td>Most common real-world vuln category</td></tr>
+            <tr><td>Supply Chain</td><td>Compromise via third-party software/hardware</td><td>SolarWinds is the canonical example</td></tr>
+            <tr><td>Weak Credentials</td><td>Default/reused/simple passwords</td><td>Mitigated by MFA, PAM, password policy</td></tr>
+          </tbody>
+        </table>
+        <div class="tag-wrap">
+          <span class="tag red">Patch Management</span><span class="tag amber">Vulnerability Scanning</span><span class="tag green">Penetration Testing</span><span class="tag">Threat Intelligence</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ QUIZ ════════════════ -->
+<section class="quiz-section">
+  <div class="container">
+    <div class="quiz-header-row">
+      <div class="quiz-title">🧪 Knowledge Check</div>
+      <div class="quiz-counter" id="quizCounter">0 / 12 answered</div>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="score-banner" id="scoreBanner">
+      <div class="score-num" id="scoreNum">0<span>/12</span></div>
+      <div class="score-label">Threats &amp; Attacks Quiz</div>
+      <div class="score-grade" id="scoreGrade"></div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="retakeQuiz()">Retake Quiz</button>
+        <a href="crypto.html" class="btn btn-outline">Next: Cryptography →</a>
+        <a href="index.html" class="btn btn-outline">All Modules</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Logical Learning · Security+ SY0-701 · Anél Henning</p>
+        <p style="margin-top:4px;"><a href="index.html">← All Modules</a> · <a href="crypto.html">Next: Cryptography →</a></p>
+      </div>
+      <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  { q: "A threat actor launches a widespread email campaign with a generic 'click here to verify your account' message. What type of attack is this?", opts: ["Spear phishing", "Whaling", "Phishing", "Vishing"], ans: 2, exp: "<strong>Phishing</strong> targets many recipients with a generic message. Spear phishing is targeted to a specific individual. Whaling targets executives. Vishing uses voice/phone." },
+  { q: "Malware spreads automatically across a network with no user interaction required. What type of malware is this?", opts: ["Virus", "Trojan", "Worm", "Rootkit"], ans: 2, exp: "A <strong>worm</strong> self-replicates and spreads without user action. A virus requires a host file and user action to spread. A Trojan disguises itself as legitimate software." },
+  { q: "An attacker calls an employee pretending to be from IT support, asking for their password to 'fix an account issue.' Which technique is this?", opts: ["Smishing", "Pretexting", "Baiting", "Tailgating"], ans: 1, exp: "<strong>Pretexting</strong> involves fabricating a scenario or identity to extract information. The attacker created a pretext (IT support) to make the request seem legitimate." },
+  { q: "Which MITRE framework maps adversary tactics and techniques using real-world attack data?", opts: ["Cyber Kill Chain", "Diamond Model", "MITRE ATT&CK", "NIST CSF"], ans: 2, exp: "<strong>MITRE ATT&CK</strong> is the comprehensive knowledge base of adversary TTPs (Tactics, Techniques, Procedures). The Cyber Kill Chain is Lockheed Martin's 7-stage model. Diamond Model analyzes adversary, infrastructure, capability, victim." },
+  { q: "A user finds a USB drive in the parking lot, plugs it in, and infects their workstation. Which social engineering technique was used?", opts: ["Tailgating", "Baiting", "Vishing", "Spear phishing"], ans: 1, exp: "<strong>Baiting</strong> leaves physical media (USB drives, CDs) in public places hoping a victim will pick them up and use them, triggering a malware infection." },
+  { q: "An attacker exploits a vulnerability that the vendor does not yet know about and for which no patch exists. This is called a:", opts: ["CVE", "Zero-day vulnerability", "CVSS critical finding", "Known exploit"], ans: 1, exp: "A <strong>zero-day vulnerability</strong> is unknown to the vendor — no patch exists. CVE is the naming standard. CVSS is the severity scoring system. Zero-day is the most dangerous because there is no defensive patch." },
+  { q: "Which attack captures legitimate authentication tokens transmitted over a network and retransmits them to gain access?", opts: ["SQL Injection", "Cross-Site Scripting", "Replay Attack", "Buffer Overflow"], ans: 2, exp: "A <strong>replay attack</strong> captures and re-uses valid authentication data. Mitigated by session tokens with timestamps and nonces. SQL injection targets databases. XSS injects scripts into web pages." },
+  { q: "An attacker inserts malicious code into a web application's input field that is then executed in other users' browsers. This is:", opts: ["SQL Injection", "Cross-Site Scripting (XSS)", "CSRF", "Buffer Overflow"], ans: 1, exp: "<strong>Cross-Site Scripting (XSS)</strong> injects client-side scripts that run in other users' browsers. SQL injection targets the database back-end. CSRF tricks logged-in users into taking actions. Buffer overflow overwrites memory." },
+  { q: "In the Cyber Kill Chain, during which stage does the attacker install persistent access (e.g., a backdoor) on the compromised system?", opts: ["Delivery", "Exploitation", "Installation", "Command & Control"], ans: 2, exp: "The <strong>Installation</strong> stage (stage 5) is when the attacker installs a backdoor or RAT for persistent access. Exploitation (stage 4) is running the exploit. C2 (stage 6) is establishing remote control." },
+  { q: "Which threat actor is MOST likely motivated by political ideology rather than financial gain?", opts: ["Cybercriminal", "Insider threat", "Nation-state", "Hacktivist"], ans: 3, exp: "A <strong>hacktivist</strong> is primarily motivated by political or social ideology — using hacking to promote a cause. Cybercriminals are financially motivated. Nation-states are motivated by espionage or disruption. Insider threats vary." },
+  { q: "A nation-state group conducts a long-term, stealthy intrusion into a defense contractor's network. This is best described as:", opts: ["Botnet attack", "Advanced Persistent Threat (APT)", "Script kiddie attack", "Ransomware campaign"], ans: 1, exp: "An <strong>APT (Advanced Persistent Threat)</strong> is a prolonged, targeted attack typically by a nation-state or sophisticated group. The key characteristics are: advanced (sophisticated), persistent (long-term), and threat (active actor)." },
+  { q: "The SolarWinds attack is a canonical example of which vulnerability type?", opts: ["Zero-day", "Misconfiguration", "Supply chain attack", "Weak credentials"], ans: 2, exp: "The <strong>SolarWinds attack</strong> compromised a software update mechanism — the attacker injected malicious code into a trusted vendor's software. This is the defining example of a supply chain attack on the Security+ exam." }
+];
+
+let answered = 0;
+let correct = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  answered = 0; correct = 0;
+  updateCounter();
+  document.getElementById('scoreBanner').classList.remove('show');
+
+  QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card fade-in';
+    card.id = 'qcard-' + i;
+    card.innerHTML = `
+      <div class="q-num">Q${i+1} of ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o, j) => `<button class="opt" onclick="answer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}
+      </div>
+      <div class="explanation" id="exp-${i}">${q.exp}</div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Trigger fade-in
+  setTimeout(() => {
+    document.querySelectorAll('.quiz-card.fade-in').forEach((c, i) => {
+      setTimeout(() => c.classList.add('visible'), i * 60);
+    });
+  }, 100);
+}
+
+function answer(qIdx, optIdx) {
+  const q = QUESTIONS[qIdx];
+  const card = document.getElementById('qcard-' + qIdx);
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(o => o.disabled = true);
+  opts[optIdx].classList.add(optIdx === q.ans ? 'correct' : 'wrong');
+  if (optIdx !== q.ans) opts[q.ans].classList.add('correct');
+
+  const exp = document.getElementById('exp-' + qIdx);
+  exp.classList.add('show');
+
+  answered++;
+  if (optIdx === q.ans) correct++;
+  updateCounter();
+
+  if (answered === QUESTIONS.length) {
+    setTimeout(showScore, 600);
+  }
+}
+
+function updateCounter() {
+  document.getElementById('quizCounter').textContent = `${answered} / ${QUESTIONS.length} answered`;
+}
+
+function showScore() {
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('scoreNum').innerHTML = `${correct}<span>/${QUESTIONS.length}</span>`;
+  let grade, color;
+  if (pct >= 90) { grade = '🏆 Excellent — Ready for this domain'; color = '#22c55e'; }
+  else if (pct >= 75) { grade = '✅ Good — Review missed concepts'; color = '#f59e0b'; }
+  else if (pct >= 60) { grade = '📖 Keep studying — Focus on explanations'; color = '#f59e0b'; }
+  else { grade = '🔄 Needs work — Re-read all concepts first'; color = '#ef4444'; }
+  document.getElementById('scoreGrade').innerHTML = `<span style="color:${color}">${grade}</span>`;
+  document.getElementById('scoreBanner').classList.add('show');
+  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Save to localStorage
+  localStorage.setItem('secplus_score_threats', JSON.stringify({ correct, total: QUESTIONS.length }));
+}
+
+function retakeQuiz() { buildQuiz(); window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 80, behavior: 'smooth' }); }
+
+// Concept expand/collapse
+function toggleConcept(header) {
+  const card = header.parentElement;
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open', !wasOpen);
+  if (!wasOpen) {
+    const idx = parseInt(card.dataset.concept);
+    conceptsSeen.add(idx);
+    updateConceptProgress();
+  }
+}
+
+const conceptsSeen = new Set();
+function updateConceptProgress() {
+  const total = document.querySelectorAll('.concept-card').length;
+  const seen = conceptsSeen.size;
+  document.getElementById('modProgress').style.width = (seen / total * 100) + '%';
+  document.getElementById('modProgressLabel').textContent = `${seen} / ${total} concepts`;
+}
+
+// Intersection observer
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+buildQuiz();
+</script>
+</body>
+</html>
