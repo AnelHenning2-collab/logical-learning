@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  Created with Perplexity Computer — https://www.perplexity.ai/computer -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Security — Logical Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module.css">
+<style>
+  :root { --mod-color: #22c55e; --mod-glow: rgba(34,197,94,0.12); }
+  .net-diagram { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: rgba(13,19,38,0.9); border: 1px solid var(--border); border-radius: 10px; padding: 20px; line-height: 2; color: var(--text-muted); }
+  .net-diagram .zone { color: #22c55e; font-weight: 600; }
+  .net-diagram .device { color: #63b3ed; }
+  .net-diagram .arrow { color: #f59e0b; }
+  .port-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 12px 0; }
+  .port-item { background: rgba(13,19,38,0.8); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .port-num { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; color: #22c55e; }
+  .port-svc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+<nav><div class="container"><div class="nav-inner">
+  <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+  <div class="nav-links"><a href="threats.html">Threats</a><a href="crypto.html">Cryptography</a><a href="network.html" class="active">Network</a><a href="identity.html">Identity</a></div>
+</div></div></nav>
+
+<header class="module-header"><div class="container">
+  <a href="index.html" class="back-link">← All Modules</a>
+  <div class="domain-badge">Domain 3 · SY0-701</div>
+  <h1>Network Security</h1>
+  <p>Firewalls, IDS/IPS, VPNs, DMZ architecture, network segmentation, protocols, and wireless security. Weight: ~18% of exam.</p>
+  <div class="mod-progress"><div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div><span class="mod-progress-label" id="modProgressLabel">0 / 6 concepts</span></div>
+</div></header>
+
+<section class="concepts"><div class="container">
+  <div class="section-label">Visual Explainers — Read, then collapse and test yourself</div>
+
+  <!-- 1. Firewalls -->
+  <div class="concept-card fade-in" data-concept="0">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-icon">🧱</div>
+      <div class="concept-title-wrap"><div class="concept-title">Firewall Types</div><div class="concept-subtitle">Packet filter · Stateful · NGFW · WAF · Host-based</div></div>
+      <div class="concept-chevron">▼</div>
+    </div>
+    <div class="concept-body">
+      <table class="comp-table">
+        <thead><tr><th>Type</th><th>What It Inspects</th><th>Key Feature</th></tr></thead>
+        <tbody>
+          <tr><td>Packet Filtering</td><td>IP headers only (src/dst IP, port, protocol)</td><td>Layer 3/4. Fast but no context. Stateless.</td></tr>
+          <tr><td>Stateful Inspection</td><td>Connection state table</td><td>Tracks sessions — knows if packet is part of established connection</td></tr>
+          <tr><td>NGFW (Next-Gen)</td><td>Full packet content + application identity</td><td>Deep packet inspection, app-aware, IPS built-in</td></tr>
+          <tr><td>WAF (Web App)</td><td>HTTP/HTTPS traffic specifically</td><td>Protects web apps from XSS, SQLi, OWASP Top 10</td></tr>
+          <tr><td>Host-based</td><td>Traffic to/from one specific host</td><td>Software on endpoint (Windows Defender Firewall)</td></tr>
+        </tbody>
+      </table>
+      <div class="mnemonic"><div class="mnemonic-label">Exam Rule</div>WAF = specifically web (HTTP/HTTPS). NGFW = all traffic, deep inspection. When the scenario mentions "web application attacks" → WAF. When it says "network perimeter with app visibility" → NGFW.</div>
+    </div>
+  </div>
+
+  <!-- 2. IDS vs IPS -->
+  <div class="concept-card fade-in" data-concept="1">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-icon">👁️</div>
+      <div class="concept-title-wrap"><div class="concept-title">IDS vs IPS</div><div class="concept-subtitle">Detection only vs Active prevention · Signature vs Anomaly</div></div>
+      <div class="concept-chevron">▼</div>
+    </div>
+    <div class="concept-body">
+      <table class="comp-table">
+        <thead><tr><th>Feature</th><th>IDS</th><th>IPS</th></tr></thead>
+        <tbody>
+          <tr><td>Action</td><td>Detects and ALERTS only — passive</td><td>Detects and BLOCKS — active inline</td></tr>
+          <tr><td>Placement</td><td>Out-of-band (copy of traffic via tap/SPAN)</td><td>Inline — all traffic passes through it</td></tr>
+          <tr><td>False positive impact</td><td>Alert noise — no traffic disruption</td><td>Can block legitimate traffic — service disruption</td></tr>
+          <tr><td>Detection method — Signature</td><td>Matches known attack patterns</td><td>Same — known signatures</td></tr>
+          <tr><td>Detection method — Anomaly/Heuristic</td><td>Baseline behavior, detects deviations</td><td>Same — can catch zero-days</td></tr>
+        </tbody>
+      </table>
+      <div class="mnemonic"><div class="mnemonic-label">One-Liner Rule</div>IDS = <strong>I</strong> <strong>D</strong>etect and <strong>S</strong>hout (alert only). IPS = <strong>I</strong> <strong>P</strong>revent and <strong>S</strong>top (blocks inline). If the scenario says "notified but traffic continued" → IDS. If it says "traffic was blocked" → IPS.</div>
+    </div>
+  </div>
+
+  <!-- 3. DMZ & Segmentation -->
+  <div class="concept-card fade-in" data-concept="2">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-icon">🗺️</div>
+      <div class="concept-title-wrap"><div class="concept-title">DMZ &amp; Network Segmentation</div><div class="concept-subtitle">DMZ · VLAN · Air gap · Microsegmentation · Zero Trust network</div></div>
+      <div class="concept-chevron">▼</div>
+    </div>
+    <div class="concept-body">
+      <p>A <strong>DMZ (Demilitarized Zone)</strong> is a network segment that sits between the public internet and the internal private network. Public-facing servers (web, email, DNS) live here so a compromise doesn't directly reach internal systems.</p>
+      <div class="net-diagram">
+        <span class="device">Internet</span> <span class="arrow">→</span> [<span class="zone">Outer Firewall</span>] <span class="arrow">→</span> <span class="zone">DMZ</span> (Web Server, Email, DNS)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="zone">Inner Firewall</span>]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="zone">Internal LAN</span> (DB, HR, Finance)
+      </div>
+      <p><strong>VLANs</strong> logically segment a physical network — a compromised device in VLAN 10 (users) cannot directly reach VLAN 20 (servers) without going through a router/firewall. <strong>Microsegmentation</strong> takes this further — each workload gets its own segment.</p>
+      <p>An <strong>air gap</strong> is physical isolation — no network connection at all. Used for top-secret or critical infrastructure systems.</p>
+    </div>
+  </div>
+
+  <!-- 4. VPN Types -->
+  <div class="concept-card fade-in" data-concept="3">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-icon">🔒</div>
+      <div class="concept-title-wrap"><div class="concept-title">VPN Technologies</div><div class="concept-subtitle">IPSec · SSL/TLS VPN · Split tunnel · Full tunnel · Site-to-site</div></div>
+      <div class="concept-chevron">▼</div>
+    </div>
+    <div class="concept-body">
+      <table class="comp-table">
+        <thead><tr><th>Type</th><th>Protocol</th><th>Use Case</th></tr></thead>
+        <tbody>
+          <tr><td>Remote Access VPN</td><td>IPSec, SSL/TLS</td><td>Individual user connecting to corporate network</td></tr>
+          <tr><td>Site-to-Site VPN</td><td>IPSec</td><td>Connects two offices' networks permanently</td></tr>
+          <tr><td>SSL VPN</td><td>TLS (port 443)</td><td>Browser-based, no client software needed — clientless</td></tr>
+          <tr><td>Split Tunneling</td><td>Any</td><td>Only corporate traffic goes through VPN; internet traffic is direct</td></tr>
+          <tr><td>Full Tunneling</td><td>Any</td><td>ALL traffic routed through VPN — more secure, slower</td></tr>
+        </tbody>
+      </table>
+      <p><strong>IPSec modes:</strong> <strong>Transport mode</strong> encrypts only the payload (used for host-to-host). <strong>Tunnel mode</strong> encrypts the entire original packet (used for site-to-site VPNs).</p>
+      <div class="mnemonic"><div class="mnemonic-label">Exam Trap</div>Split tunneling is a <strong>security risk</strong> — a compromised endpoint can access both the internet AND the corporate network simultaneously. The exam expects you to recommend full tunnel or to flag split tunneling as a risk.</div>
+    </div>
+  </div>
+
+  <!-- 5. Wireless Security -->
+  <div class="concept-card fade-in" data-concept="4">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-icon">📶</div>
+      <div class="concept-title-wrap"><div class="concept-title">Wireless Security</div><div class="concept-subtitle">WEP · WPA · WPA2 · WPA3 · 802.1X · Evil twin · Deauth attack</div></div>
+      <div class="concept-chevron">▼</div>
+    </div>
+    <div class="concept-body">
+      <table class="comp-table">
+        <thead><tr><th>Protocol</th><th>Encryption</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>WEP</td><td>RC4 (40/104-bit)</td><td style="color:#ef4444;">Broken — cracked in minutes. Never use.</td></tr>
+          <tr><td>WPA</td><td>TKIP (RC4-based)</td><td style="color:#ef4444;">Deprecated — TKIP has weaknesses.</td></tr>
+          <tr><td>WPA2</td><td>AES-CCMP</td><td style="color:#f59e0b;">Current minimum. KRACK vulnerability exists.</td></tr>
+          <tr><td>WPA3</td><td>AES-GCMP-256, SAE</td><td style="color:#22c55e;">Current best. SAE replaces PSK — resists offline dictionary attacks.</td></tr>
+          <tr><td>802.1X / EAP</td><td>Varies by EAP type</td><td style="color:#22c55e;">Enterprise — per-user authentication via RADIUS server.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Evil Twin attack:</strong> Attacker sets up a rogue AP with the same SSID as a legitimate network. Users connect thinking it's real — MitM. Mitigated by 802.1X enterprise auth.</p>
+      <p><strong>Deauthentication attack:</strong> Attacker sends deauth frames to disconnect users. Part of WPA2 cracking workflow — forces reconnect to capture handshake for offline cracking.</p>
+    </div>
+  </div>
+
+  <!-- 6. Common Ports -->
+  <div class="concept-card fade-in" data-concept="5">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <div class="concept-icon">🔌</div>
+      <div class="concept-title-wrap"><div class="concept-title">Common Ports &amp; Protocols</div><div class="concept-subtitle">The ports Security+ expects you to know cold</div></div>
+      <div class="concept-chevron">▼</div>
+    </div>
+    <div class="concept-body">
+      <div class="port-grid">
+        <div class="port-item"><div class="port-num">20/21</div><div class="port-svc">FTP (data/control) — unencrypted</div></div>
+        <div class="port-item"><div class="port-num">22</div><div class="port-svc">SSH · SFTP · SCP</div></div>
+        <div class="port-item"><div class="port-num">23</div><div class="port-svc">Telnet — unencrypted, avoid</div></div>
+        <div class="port-item"><div class="port-num">25</div><div class="port-svc">SMTP — email sending</div></div>
+        <div class="port-item"><div class="port-num">53</div><div class="port-svc">DNS — UDP (queries), TCP (zone transfers)</div></div>
+        <div class="port-item"><div class="port-num">80</div><div class="port-svc">HTTP — unencrypted web</div></div>
+        <div class="port-item"><div class="port-num">110/143</div><div class="port-svc">POP3 / IMAP — email retrieval</div></div>
+        <div class="port-item"><div class="port-num">443</div><div class="port-svc">HTTPS · SSL VPN — encrypted web</div></div>
+        <div class="port-item"><div class="port-num">445</div><div class="port-svc">SMB — file sharing (Windows)</div></div>
+        <div class="port-item"><div class="port-num">3389</div><div class="port-svc">RDP — Remote Desktop</div></div>
+        <div class="port-item"><div class="port-num">1433</div><div class="port-svc">Microsoft SQL Server</div></div>
+        <div class="port-item"><div class="port-num">161/162</div><div class="port-svc">SNMP — network monitoring (UDP)</div></div>
+      </div>
+      <div class="mnemonic"><div class="mnemonic-label">Risk Ports</div>Telnet (23), FTP (21), HTTP (80), SNMP v1/2 (161) are all unencrypted. The exam will ask you to replace these: Telnet→SSH, FTP→SFTP, HTTP→HTTPS, SNMPv1→SNMPv3.</div>
+    </div>
+  </div>
+
+</div></section>
+
+<section class="quiz-section"><div class="container">
+  <div class="quiz-header-row"><div class="quiz-title">🧪 Knowledge Check</div><div class="quiz-counter" id="quizCounter">0 / 12 answered</div></div>
+  <div id="quizContainer"></div>
+  <div class="score-banner" id="scoreBanner">
+    <div class="score-num" id="scoreNum">0<span>/12</span></div>
+    <div class="score-label">Network Security Quiz</div>
+    <div class="score-grade" id="scoreGrade"></div>
+    <div class="score-actions">
+      <button class="btn btn-accent" onclick="retakeQuiz()">Retake Quiz</button>
+      <a href="identity.html" class="btn btn-outline">Next: Identity &amp; Access →</a>
+      <a href="index.html" class="btn btn-outline">All Modules</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="container"><div class="footer-inner">
+  <div><p>Logical Learning · Security+ SY0-701 · Anél Henning</p><p style="margin-top:4px;"><a href="crypto.html">← Cryptography</a> · <a href="identity.html">Next: Identity →</a></p></div>
+  <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+</div></div></footer>
+
+<script>
+const QUESTIONS = [
+  { q: "A firewall that tracks TCP connection state and only allows packets that are part of an established session is called:", opts: ["Packet filtering firewall", "Stateful inspection firewall", "WAF", "Host-based firewall"], ans: 1, exp: "<strong>Stateful inspection</strong> maintains a connection state table. It tracks the full TCP handshake and only permits packets belonging to known sessions — unlike simple packet filters that check each packet in isolation." },
+  { q: "An IDS detects potential malicious traffic. What does it do with it?", opts: ["Drops the packet immediately", "Generates an alert only", "Resets the TCP connection", "Quarantines the source IP"], ans: 1, exp: "An IDS (Intrusion Detection System) is <strong>passive</strong> — it only alerts/logs. It does NOT block traffic. An IPS (Intrusion Prevention System) is inline and actively blocks. If the exam says 'traffic continued after detection' → IDS." },
+  { q: "A web server needs to be publicly accessible but the company's internal database should be protected. Where should the web server be placed?", opts: ["On the internal LAN", "In the DMZ", "On the internet with no firewall", "Behind the inner firewall"], ans: 1, exp: "The <strong>DMZ</strong> (Demilitarized Zone) hosts public-facing servers. Two firewalls protect it: the outer firewall filters internet traffic to the DMZ; the inner firewall restricts DMZ access to the internal LAN." },
+  { q: "A user connects to a VPN but their streaming video still goes directly to the internet instead of through the VPN tunnel. This is:", opts: ["Full tunneling", "Split tunneling", "A VPN misconfiguration error", "IPSec transport mode"], ans: 1, exp: "<strong>Split tunneling</strong> routes only corporate-destined traffic through the VPN. Internet traffic bypasses the tunnel. It reduces VPN load but is a security risk — a compromised endpoint bridges internet and corporate network." },
+  { q: "Which wireless security protocol uses SAE (Simultaneous Authentication of Equals) and is resistant to offline dictionary attacks?", opts: ["WEP", "WPA", "WPA2", "WPA3"], ans: 3, exp: "<strong>WPA3</strong> replaces the PSK handshake with SAE, which prevents offline password cracking (KRACK and similar attacks on WPA2). WPA3 also uses AES-GCMP-256 and provides forward secrecy per session." },
+  { q: "Port 22 is associated with which secure protocol?", opts: ["Telnet", "FTP", "SSH", "RDP"], ans: 2, exp: "<strong>SSH (Secure Shell)</strong> uses port 22. It provides encrypted remote administration. Telnet (23) is the unencrypted predecessor. RDP uses port 3389. SFTP and SCP also operate over port 22 via SSH." },
+  { q: "An attacker sets up a rogue Wi-Fi access point with the same SSID as a legitimate corporate network. This attack is called:", opts: ["Deauthentication attack", "Evil twin", "War driving", "Bluesnarfing"], ans: 1, exp: "An <strong>evil twin</strong> is a rogue AP mimicking a legitimate one. Users unknowingly connect, exposing their traffic to the attacker. Mitigated by 802.1X enterprise authentication, which requires certificate/credential validation." },
+  { q: "Which firewall type is specifically designed to protect web applications from SQL injection and XSS attacks?", opts: ["Stateful inspection firewall", "Packet filtering firewall", "Web Application Firewall (WAF)", "NGFW"], ans: 2, exp: "A <strong>WAF (Web Application Firewall)</strong> operates at Layer 7 and inspects HTTP/HTTPS traffic specifically for web app attack patterns like SQLi and XSS. An NGFW also does deep inspection but is a general-purpose network device." },
+  { q: "IPSec in TUNNEL mode is typically used for:", opts: ["Host-to-host encryption of payload only", "Site-to-site VPN connections", "Encrypting email messages", "Wireless WPA3 connections"], ans: 1, exp: "<strong>Tunnel mode</strong> encrypts the entire original IP packet and adds a new IP header — used for <strong>site-to-site VPNs</strong>. Transport mode only encrypts the payload — used for host-to-host. The exam loves this distinction." },
+  { q: "An organization uses VLANs to separate user traffic from server traffic. A user in VLAN 10 cannot reach servers in VLAN 20. What controls this traffic?", opts: ["The switch only", "A router or Layer 3 switch with ACLs", "The SSID configuration", "MAC address filtering"], ans: 1, exp: "Inter-VLAN routing requires a <strong>Layer 3 device</strong> (router or L3 switch). ACLs on that device control what traffic is permitted between VLANs. A switch alone forwards traffic within VLANs — it cannot route between them." },
+  { q: "Which protocol should replace Telnet for secure remote server management?", opts: ["FTP", "SSH", "HTTP", "SNMP v2"], ans: 1, exp: "<strong>SSH (port 22)</strong> is the encrypted replacement for Telnet (port 23). SSH encrypts all communication including credentials. Telnet sends everything in plaintext — any network observer can capture the session." },
+  { q: "An IPS is placed INLINE in the network. What is the primary risk of this placement?", opts: ["It cannot detect zero-day attacks", "A false positive could block legitimate traffic", "It requires a SPAN port", "It cannot log traffic"], ans: 1, exp: "An inline IPS can <strong>block legitimate traffic</strong> if it generates a false positive (flags normal traffic as malicious). This can cause service disruption. An out-of-band IDS only alerts — no traffic disruption from false positives." }
+];
+
+let answered = 0, correct = 0;
+function buildQuiz() {
+  const c = document.getElementById('quizContainer'); c.innerHTML = ''; answered = 0; correct = 0; updateCounter();
+  document.getElementById('scoreBanner').classList.remove('show');
+  QUESTIONS.forEach((q, i) => { const card = document.createElement('div'); card.className='quiz-card fade-in'; card.id='qcard-'+i; card.innerHTML=`<div class="q-num">Q${i+1} of ${QUESTIONS.length}</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o,j)=>`<button class="opt" onclick="answer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}</div><div class="explanation" id="exp-${i}">${q.exp}</div>`; c.appendChild(card); });
+  setTimeout(()=>document.querySelectorAll('.quiz-card.fade-in').forEach((c,i)=>setTimeout(()=>c.classList.add('visible'),i*60)),100);
+}
+function answer(qIdx, optIdx) {
+  const q=QUESTIONS[qIdx]; const card=document.getElementById('qcard-'+qIdx); if(card.dataset.answered)return; card.dataset.answered='1';
+  const opts=card.querySelectorAll('.opt'); opts.forEach(o=>o.disabled=true); opts[optIdx].classList.add(optIdx===q.ans?'correct':'wrong'); if(optIdx!==q.ans)opts[q.ans].classList.add('correct');
+  document.getElementById('exp-'+qIdx).classList.add('show'); answered++; if(optIdx===q.ans)correct++; updateCounter(); if(answered===QUESTIONS.length)setTimeout(showScore,600);
+}
+function updateCounter(){document.getElementById('quizCounter').textContent=`${answered} / ${QUESTIONS.length} answered`;}
+function showScore(){
+  const pct=Math.round((correct/QUESTIONS.length)*100); document.getElementById('scoreNum').innerHTML=`${correct}<span>/${QUESTIONS.length}</span>`;
+  let grade,color; if(pct>=90){grade='🏆 Excellent';color='#22c55e';}else if(pct>=75){grade='✅ Good — Review missed concepts';color='#f59e0b';}else if(pct>=60){grade='📖 Keep studying';color='#f59e0b';}else{grade='🔄 Needs work';color='#ef4444';}
+  document.getElementById('scoreGrade').innerHTML=`<span style="color:${color}">${grade}</span>`;
+  document.getElementById('scoreBanner').classList.add('show'); document.getElementById('scoreBanner').scrollIntoView({behavior:'smooth',block:'center'});
+  localStorage.setItem('secplus_score_network',JSON.stringify({correct,total:QUESTIONS.length}));
+}
+function retakeQuiz(){buildQuiz();window.scrollTo({top:document.querySelector('.quiz-section').offsetTop-80,behavior:'smooth'});}
+function toggleConcept(header){const card=header.parentElement;const wasOpen=card.classList.contains('open');card.classList.toggle('open',!wasOpen);if(!wasOpen){conceptsSeen.add(parseInt(card.dataset.concept));updateConceptProgress();}}
+const conceptsSeen=new Set();
+function updateConceptProgress(){const total=document.querySelectorAll('.concept-card').length;document.getElementById('modProgress').style.width=(conceptsSeen.size/total*100)+'%';document.getElementById('modProgressLabel').textContent=`${conceptsSeen.size} / ${total} concepts`;}
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+buildQuiz();
+</script>
+</body>
+</html>
