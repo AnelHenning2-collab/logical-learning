@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/  Created with Perplexity Computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identity &amp; Access — Logical Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module.css">
+<style>
+  :root { --mod-color: #f59e0b; --mod-glow: rgba(245,158,11,0.12); }
+
+  /* Factor grid */
+  .factor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 14px 0; }
+  .factor-card { background: rgba(13,19,38,0.8); border: 1px solid var(--border); border-radius: 10px; padding: 16px 14px; text-align: center; }
+  .factor-icon { font-size: 24px; margin-bottom: 8px; }
+  .factor-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 4px; }
+  .factor-name { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .factor-ex { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Protocol flow */
+  .proto-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 14px 0; }
+  .proto-box { padding: 8px 14px; border-radius: 8px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); font-size: 13px; font-weight: 600; color: #f59e0b; }
+  .proto-arrow { color: var(--text-faint); font-size: 14px; }
+  .proto-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Zero trust diagram */
+  .zt-pillars { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 14px 0; }
+  .zt-pillar { background: rgba(13,19,38,0.8); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 14px; }
+  .zt-pillar-title { font-size: 13px; font-weight: 700; color: #f59e0b; margin-bottom: 6px; }
+  .zt-pillar-body { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  /* Access model rows */
+  .ac-flow { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+  .ac-row { display: grid; grid-template-columns: 90px 1fr 1fr; gap: 12px; align-items: start; padding: 12px 14px; background: rgba(13,19,38,0.7); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; }
+  .ac-label { font-weight: 700; color: #f59e0b; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .ac-name { color: var(--white); font-weight: 600; }
+  .ac-detail { color: var(--text-muted); line-height: 1.5; }
+
+  /* Directory row */
+  .dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 14px 0; }
+  .dir-card { background: rgba(13,19,38,0.8); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .dir-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
+  .dir-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+  .dir-tag { display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 6px; background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+      <div class="nav-links">
+        <a href="threats.html">Threats</a>
+        <a href="crypto.html">Cryptography</a>
+        <a href="network.html">Network</a>
+        <a href="identity.html" class="active">Identity</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="module-header">
+  <div class="container">
+    <a href="index.html" class="back-link">← All Modules</a>
+    <div class="domain-badge">Domain 4 · SY0-701</div>
+    <h1>Identity &amp; Access</h1>
+    <p>Authentication factors, MFA, SSO, Zero Trust, PAM, access control models, and directory services. Weight: ~16% of exam.</p>
+    <div class="mod-progress">
+      <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+      <span class="mod-progress-label" id="modProgressLabel">0 / 6 concepts</span>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════ CONCEPTS ════════════════ -->
+<section class="concepts">
+  <div class="container">
+    <div class="section-label">Visual Explainers — Read, then collapse and test yourself</div>
+
+    <!-- 1. Authentication Factors & MFA -->
+    <div class="concept-card fade-in" data-concept="0">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔑</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Authentication Factors &amp; MFA</div>
+          <div class="concept-subtitle">Something you know · have · are · somewhere · do</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p><strong>Authentication</strong> proves you are who you claim to be. The exam categorizes auth into five factor types — know each category and its examples cold.</p>
+        <div class="factor-grid">
+          <div class="factor-card">
+            <div class="factor-icon">🧠</div>
+            <div class="factor-type">Knowledge</div>
+            <div class="factor-name">Something You Know</div>
+            <div class="factor-ex">Password, PIN, security questions, passphrase</div>
+          </div>
+          <div class="factor-card">
+            <div class="factor-icon">📱</div>
+            <div class="factor-type">Possession</div>
+            <div class="factor-name">Something You Have</div>
+            <div class="factor-ex">Smart card, hardware token (YubiKey), OTP app (Google Authenticator), badge</div>
+          </div>
+          <div class="factor-card">
+            <div class="factor-icon">👁️</div>
+            <div class="factor-type">Inherence</div>
+            <div class="factor-name">Something You Are</div>
+            <div class="factor-ex">Fingerprint, retina scan, facial recognition, voice print, vein pattern</div>
+          </div>
+          <div class="factor-card">
+            <div class="factor-icon">📍</div>
+            <div class="factor-type">Location</div>
+            <div class="factor-name">Somewhere You Are</div>
+            <div class="factor-ex">IP geolocation, GPS coordinates, country restriction, network zone check</div>
+          </div>
+          <div class="factor-card">
+            <div class="factor-icon">🖱️</div>
+            <div class="factor-type">Behavior</div>
+            <div class="factor-name">Something You Do</div>
+            <div class="factor-ex">Typing cadence, signature dynamics, mouse movement patterns</div>
+          </div>
+        </div>
+        <p><strong>MFA</strong> requires at least two factors from <em>different categories</em>. Password + PIN is NOT MFA (both are "something you know"). Password + OTP app is MFA.</p>
+        <div class="tag-wrap">
+          <span class="tag amber">TOTP</span><span class="tag amber">HOTP</span><span class="tag amber">Push Notification</span><span class="tag amber">Hardware Token</span><span class="tag amber">Biometric</span>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Exam Trap</div>Password + security question = NOT MFA. Both are knowledge factors. MFA requires <strong>different factor categories</strong>. Common wrong-answer trap on the exam.</div>
+      </div>
+    </div>
+
+    <!-- 2. SSO & Federation -->
+    <div class="concept-card fade-in" data-concept="1">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔗</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">SSO &amp; Federation</div>
+          <div class="concept-subtitle">SAML · OAuth 2.0 · OpenID Connect · Kerberos · SSO flow</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p><strong>Single Sign-On (SSO)</strong> lets users authenticate once and access multiple systems without re-entering credentials. The key is understanding which protocol does what.</p>
+        <table class="comp-table">
+          <thead><tr><th>Protocol</th><th>Purpose</th><th>Used For</th><th>Exam Clue</th></tr></thead>
+          <tbody>
+            <tr><td>SAML 2.0</td><td>Authentication + Authorization assertions (XML)</td><td>Enterprise SSO, cross-domain federation</td><td>"XML tokens" or "federated identity"</td></tr>
+            <tr><td>OAuth 2.0</td><td>Authorization delegation (not authentication)</td><td>"Login with Google" — grants access without sharing password</td><td>"Delegate access" — NOT authentication by itself</td></tr>
+            <tr><td>OIDC</td><td>Identity layer on top of OAuth 2.0</td><td>Authentication via JWT ID token</td><td>"OAuth + identity" — adds the who</td></tr>
+            <tr><td>Kerberos</td><td>Ticket-based auth in Active Directory</td><td>Internal Windows/AD environments</td><td>"TGT / TGS tickets" or "KDC"</td></tr>
+          </tbody>
+        </table>
+        <div class="proto-flow">
+          <div class="proto-box">User</div>
+          <div class="proto-arrow">→</div>
+          <div class="proto-box">Identity Provider (IdP)</div>
+          <div class="proto-arrow">→</div>
+          <div class="proto-box">Token / Assertion</div>
+          <div class="proto-arrow">→</div>
+          <div class="proto-box">Service Provider (SP)</div>
+        </div>
+        <p class="proto-desc">Federation: different organizations trust the same IdP. User logs in with Company A credentials to access Company B's app.</p>
+        <div class="mnemonic"><div class="mnemonic-label">Key Distinction</div>OAuth = <strong>authorization</strong> (what you can do). OIDC = OAuth + <strong>authentication</strong> (who you are). SAML = <strong>enterprise federation</strong> with XML. These three are exam favorites.</div>
+      </div>
+    </div>
+
+    <!-- 3. Zero Trust -->
+    <div class="concept-card fade-in" data-concept="2">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🛡️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Zero Trust Architecture</div>
+          <div class="concept-subtitle">Never trust, always verify · Microsegmentation · Least privilege</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p><strong>Zero Trust</strong> rejects the concept of a trusted internal network. Every access request is authenticated, authorized, and continuously validated — regardless of source.</p>
+        <div class="zt-pillars">
+          <div class="zt-pillar">
+            <div class="zt-pillar-title">Never Trust, Always Verify</div>
+            <div class="zt-pillar-body">No implicit trust based on network location. Being inside the corporate LAN grants no automatic access.</div>
+          </div>
+          <div class="zt-pillar">
+            <div class="zt-pillar-title">Least Privilege Access</div>
+            <div class="zt-pillar-body">Users and systems receive only the minimum access needed for their task. No standing elevated permissions.</div>
+          </div>
+          <div class="zt-pillar">
+            <div class="zt-pillar-title">Microsegmentation</div>
+            <div class="zt-pillar-body">Network divided into small zones. Lateral movement is blocked — compromise of one zone doesn't mean access to others.</div>
+          </div>
+          <div class="zt-pillar">
+            <div class="zt-pillar-title">Continuous Validation</div>
+            <div class="zt-pillar-body">Authentication isn't one-time. Device posture, user behavior, and session context are checked continuously.</div>
+          </div>
+          <div class="zt-pillar">
+            <div class="zt-pillar-title">Assume Breach</div>
+            <div class="zt-pillar-body">Design as if attackers are already inside. Focus on containment, detection, and minimizing blast radius.</div>
+          </div>
+        </div>
+        <table class="comp-table">
+          <thead><tr><th></th><th>Traditional Perimeter</th><th>Zero Trust</th></tr></thead>
+          <tbody>
+            <tr><td>Trust model</td><td>Trust inside network</td><td>Trust no one by default</td></tr>
+            <tr><td>Lateral movement</td><td>Possible once inside</td><td>Blocked by microsegmentation</td></tr>
+            <tr><td>Auth frequency</td><td>One-time at login</td><td>Continuous re-validation</td></tr>
+            <tr><td>Remote work</td><td>VPN extends perimeter</td><td>Identity-based, device posture-aware</td></tr>
+          </tbody>
+        </table>
+        <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div><strong>Z</strong>ero trust = <strong>Z</strong>ap the perimeter, <strong>Z</strong>one everything, <strong>Z</strong>ero assumptions. Key terms: microsegmentation, least privilege, assume breach, continuous validation.</div>
+      </div>
+    </div>
+
+    <!-- 4. PAM — Privileged Access Management -->
+    <div class="concept-card fade-in" data-concept="3">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔓</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">PAM — Privileged Access Management</div>
+          <div class="concept-subtitle">Just-in-time · Password vaulting · Session recording · Least privilege</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p><strong>PAM</strong> controls, monitors, and audits access for privileged accounts (admins, root, service accounts). These accounts are high-value targets — PAM reduces the attack surface around them.</p>
+        <table class="comp-table">
+          <thead><tr><th>PAM Feature</th><th>What It Does</th><th>Why It Matters</th></tr></thead>
+          <tbody>
+            <tr><td>Password Vaulting</td><td>Stores and rotates privileged credentials centrally</td><td>No one knows the actual password — vault grants access on demand</td></tr>
+            <tr><td>Just-in-Time (JIT) Access</td><td>Grants elevated rights only when needed, for a limited time</td><td>Eliminates standing privileges — access expires automatically</td></tr>
+            <tr><td>Session Recording</td><td>Records and logs every privileged session</td><td>Provides forensic audit trail; deters insider abuse</td></tr>
+            <tr><td>Multi-Factor Auth</td><td>Requires MFA for privileged account access</td><td>Stolen password alone cannot elevate access</td></tr>
+            <tr><td>Least Privilege Enforcement</td><td>Grants only the permissions required for the task</td><td>Limits blast radius if account is compromised</td></tr>
+          </tbody>
+        </table>
+        <div class="tag-wrap">
+          <span class="tag amber">CyberArk</span><span class="tag amber">BeyondTrust</span><span class="tag amber">HashiCorp Vault</span><span class="tag">Service Accounts</span><span class="tag">Root Accounts</span>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Exam Clue</div>If the question mentions admin accounts, root access, or credential rotation → think <strong>PAM</strong>. If it mentions temporary elevated access → think <strong>Just-in-Time</strong> provisioning.</div>
+      </div>
+    </div>
+
+    <!-- 5. Access Control Models -->
+    <div class="concept-card fade-in" data-concept="4">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🗂️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Access Control Models</div>
+          <div class="concept-subtitle">DAC · MAC · RBAC · ABAC · Rule-Based</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Access control models define <strong>who decides</strong> what a subject can access. This is one of the highest-tested IAM topics — know every model's distinguishing characteristic.</p>
+        <div class="ac-flow">
+          <div class="ac-row">
+            <div class="ac-label">DAC</div>
+            <div class="ac-name">Discretionary AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Owner decides who gets access</span></div>
+            <div class="ac-detail">File owner sets permissions (e.g., Windows NTFS, Linux chmod). Most flexible — least secure. User can share their own files freely.</div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-label">MAC</div>
+            <div class="ac-name">Mandatory AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">System enforces based on labels</span></div>
+            <div class="ac-detail">OS assigns sensitivity labels (Top Secret, Secret, Unclassified). Users cannot override. Used in government/military. SELinux is a MAC implementation.</div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-label">RBAC</div>
+            <div class="ac-name">Role-Based AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Access assigned to roles, not individuals</span></div>
+            <div class="ac-detail">User assigned to role (Admin, HR, Sales). Role has permissions. Most common enterprise model. Easy to manage at scale — change role, change access.</div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-label">ABAC</div>
+            <div class="ac-name">Attribute-Based AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Access based on multiple attributes</span></div>
+            <div class="ac-detail">Evaluates user attributes (dept, clearance, time, device) dynamically. Most flexible and granular — "HR managers on corporate devices during business hours." Used in Zero Trust environments.</div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-label">Rule-Based</div>
+            <div class="ac-name">Rule-Based AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Access based on predefined rules</span></div>
+            <div class="ac-detail">Access granted based on conditions (time of day, IP range). Firewall ACLs are a common example. Often confused with RBAC — Rule-Based uses conditions, RBAC uses roles.</div>
+          </div>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">Quick Recall</div><strong>D</strong>iscretionary = <strong>D</strong>ecide yourself (owner). <strong>M</strong>andatory = <strong>M</strong>ilitary labels. <strong>R</strong>ole-Based = <strong>R</strong>ole gets access. <strong>A</strong>ttribute = <strong>A</strong>nything goes (most granular). "DMRA" — Department of Military Role Attributes.</div>
+      </div>
+    </div>
+
+    <!-- 6. Directory Services -->
+    <div class="concept-card fade-in" data-concept="5">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">📁</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Directory Services</div>
+          <div class="concept-subtitle">LDAP · Active Directory · Kerberos · RADIUS · TACACS+</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Directory services store and manage user identities and access policies. The exam expects you to match protocols to use cases and key ports.</p>
+        <div class="dir-grid">
+          <div class="dir-card">
+            <div class="dir-name">LDAP</div>
+            <div class="dir-desc">Lightweight Directory Access Protocol. Query and modify directory entries (users, groups, OUs). Port 389 (plain), 636 (LDAPS — encrypted).</div>
+            <div class="dir-tag">Port 389 / 636</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-name">Active Directory</div>
+            <div class="dir-desc">Microsoft's directory service using LDAP + Kerberos + DNS. Organizes objects in Domains → Trees → Forests. The standard enterprise identity store.</div>
+            <div class="dir-tag">Windows Enterprise</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-name">Kerberos</div>
+            <div class="dir-desc">Ticket-based auth protocol. User gets Ticket-Granting Ticket (TGT) from KDC, exchanges for service tickets. Mutual auth — both sides verify identity. Port 88.</div>
+            <div class="dir-tag">Port 88 · TGT / TGS</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-name">RADIUS</div>
+            <div class="dir-desc">Remote Authentication Dial-In User Service. Centralized AAA (Authentication, Authorization, Accounting) for network access. Used for VPN, Wi-Fi, dial-up. UDP 1812/1813.</div>
+            <div class="dir-tag">UDP 1812/1813</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-name">TACACS+</div>
+            <div class="dir-desc">Cisco's AAA protocol. Separates Authentication, Authorization, and Accounting into independent processes. TCP 49. More granular command-level authorization than RADIUS.</div>
+            <div class="dir-tag">TCP 49 · Cisco AAA</div>
+          </div>
+          <div class="dir-card">
+            <div class="dir-name">802.1X</div>
+            <div class="dir-desc">Port-based NAC (Network Access Control). Authenticates devices before granting network access. Uses EAP over LAN (EAPOL). Supplicant → Authenticator → Auth Server (RADIUS).</div>
+            <div class="dir-tag">NAC · EAPOL</div>
+          </div>
+        </div>
+        <div class="mnemonic"><div class="mnemonic-label">RADIUS vs TACACS+</div>RADIUS: <strong>UDP</strong>, combines AuthN + AuthZ, used for <strong>network access</strong> (VPN, Wi-Fi). TACACS+: <strong>TCP</strong>, separates all three AAA, used for <strong>device administration</strong> (Cisco routers/switches). This distinction is a guaranteed exam topic.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ QUIZ ════════════════ -->
+<section class="quiz-section">
+  <div class="container">
+    <div class="quiz-header-row">
+      <div class="quiz-title">🧪 Knowledge Check</div>
+      <div class="quiz-counter" id="quizCounter">0 / 12 answered</div>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="score-banner" id="scoreBanner">
+      <div class="score-num" id="scoreNum">0<span>/12</span></div>
+      <div class="score-label">Identity &amp; Access Quiz</div>
+      <div class="score-grade" id="scoreGrade"></div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="retakeQuiz()">Retake Quiz</button>
+        <a href="index.html" class="btn btn-outline">All Modules</a>
+        <a href="threats.html" class="btn btn-outline">Review: Threats</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Logical Learning · Security+ SY0-701 · Anél Henning</p>
+        <p style="margin-top:4px;"><a href="index.html">← All Modules</a> · <a href="threats.html">Start Over: Threats →</a></p>
+      </div>
+      <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "A user logs in with a password and then receives a push notification on their smartphone to approve access. Which type of authentication factor does the smartphone push represent?",
+    opts: ["Something you know", "Something you have", "Something you are", "Somewhere you are"],
+    ans: 1,
+    exp: "<strong>Something you have</strong> refers to a physical possession — the smartphone receiving the push notification. The password is 'something you know.' Together they form true MFA because they are different factor categories."
+  },
+  {
+    q: "A security policy requires two authentication factors from the SAME category (password + PIN). Is this MFA?",
+    opts: ["Yes — any two factors qualify as MFA", "No — MFA requires factors from different categories", "Yes — as long as both are strong enough", "No — MFA requires biometrics"],
+    ans: 1,
+    exp: "<strong>MFA requires factors from different categories</strong>. Password and PIN are both 'something you know' — same category. True MFA combines, for example, something you know (password) with something you have (token) or something you are (fingerprint)."
+  },
+  {
+    q: "An enterprise needs users to authenticate once and access multiple cloud applications without re-entering credentials. Which technology best addresses this?",
+    opts: ["PAM", "Single Sign-On (SSO)", "LDAP directory lookup", "TACACS+"],
+    ans: 1,
+    exp: "<strong>Single Sign-On (SSO)</strong> allows one authentication event to grant access to multiple systems. PAM manages privileged accounts. LDAP is a directory query protocol. TACACS+ handles network device AAA."
+  },
+  {
+    q: "Which protocol provides authentication assertions using XML tokens and is commonly used for enterprise federation between organizations?",
+    opts: ["OAuth 2.0", "OpenID Connect", "SAML 2.0", "Kerberos"],
+    ans: 2,
+    exp: "<strong>SAML 2.0</strong> uses XML-based assertions and is the standard for enterprise federated identity — allowing users from one organization to access resources at another. OAuth 2.0 handles authorization delegation. OIDC adds identity to OAuth. Kerberos is ticket-based for internal AD."
+  },
+  {
+    q: "OAuth 2.0 is primarily used for which security function?",
+    opts: ["Authentication — verifying user identity", "Authorization — delegating access without sharing credentials", "Encryption — protecting tokens in transit", "Auditing — logging access events"],
+    ans: 1,
+    exp: "<strong>OAuth 2.0 is an authorization framework</strong>, not an authentication protocol. It allows an application to obtain limited access to a user's account without exposing credentials ('Login with Google'). OpenID Connect (OIDC) adds authentication on top of OAuth."
+  },
+  {
+    q: "A Zero Trust architecture segments the network so that compromise of one system cannot lead to lateral movement across other systems. What is this technique called?",
+    opts: ["Defense in depth", "Microsegmentation", "Network Address Translation", "Air gapping"],
+    ans: 1,
+    exp: "<strong>Microsegmentation</strong> divides the network into small isolated zones. Zero Trust assumes breach and uses microsegmentation to contain compromises, preventing lateral movement. Defense in depth is a broader layered security strategy."
+  },
+  {
+    q: "A PAM solution grants elevated admin rights to a user for exactly 30 minutes to complete a maintenance task, after which the rights are automatically revoked. What feature is this?",
+    opts: ["Password vaulting", "Session recording", "Just-in-Time (JIT) provisioning", "Role-based access control"],
+    ans: 2,
+    exp: "<strong>Just-in-Time (JIT) provisioning</strong> grants elevated access only when needed and for a defined period, then automatically revokes it. This eliminates standing privileges — a key PAM principle. Password vaulting stores/rotates credentials. Session recording creates audit trails."
+  },
+  {
+    q: "In which access control model does the data owner decide who has access to their files, with no system-level enforcement overriding those decisions?",
+    opts: ["MAC", "RBAC", "DAC", "ABAC"],
+    ans: 2,
+    exp: "<strong>Discretionary Access Control (DAC)</strong> lets the resource owner decide permissions. Windows NTFS and Linux file permissions are DAC examples. MAC enforces system-defined labels. RBAC assigns permissions to roles. ABAC evaluates dynamic attributes."
+  },
+  {
+    q: "A government system classifies all data with sensitivity labels (Top Secret, Secret, Unclassified) and users cannot access data above their clearance level, even if they own a file. Which access control model is this?",
+    opts: ["DAC", "RBAC", "Rule-Based AC", "MAC"],
+    ans: 3,
+    exp: "<strong>Mandatory Access Control (MAC)</strong> enforces access based on sensitivity labels assigned by the system — users cannot override them regardless of ownership. Common in military/government environments. SELinux implements MAC in Linux."
+  },
+  {
+    q: "Which AAA protocol uses TCP port 49, is developed by Cisco, and separates authentication, authorization, and accounting into independent processes?",
+    opts: ["RADIUS", "LDAP", "TACACS+", "Kerberos"],
+    ans: 2,
+    exp: "<strong>TACACS+</strong> uses TCP port 49, is a Cisco protocol, and separates the three AAA functions. RADIUS uses UDP ports 1812/1813 and combines authentication and authorization. LDAP (port 389) is for directory queries. Kerberos (port 88) handles ticket-based auth."
+  },
+  {
+    q: "A Kerberos authentication process involves two key components: the TGT and the TGS. What does TGT stand for, and which component issues it?",
+    opts: ["Token Grant Ticket — issued by the Service Provider", "Ticket-Granting Ticket — issued by the Key Distribution Center (KDC)", "Trust Grant Token — issued by Active Directory", "Temporal Grant Ticket — issued by the RADIUS server"],
+    ans: 1,
+    exp: "<strong>TGT = Ticket-Granting Ticket</strong>, issued by the <strong>KDC (Key Distribution Center)</strong>. The user presents the TGT to the KDC's Ticket-Granting Service (TGS) to receive service tickets for specific resources. Kerberos provides mutual authentication on port 88."
+  },
+  {
+    q: "An access control policy grants access based on a combination of the user's department, their device compliance status, the time of day, and their location. Which access control model does this describe?",
+    opts: ["RBAC", "DAC", "MAC", "ABAC"],
+    ans: 3,
+    exp: "<strong>Attribute-Based Access Control (ABAC)</strong> evaluates multiple dynamic attributes simultaneously — user attributes, resource attributes, and environmental context (time, location, device). This is the most flexible and granular model, widely used in Zero Trust environments."
+  }
+];
+
+let answered = 0;
+let correct = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  answered = 0; correct = 0;
+  updateCounter();
+  document.getElementById('scoreBanner').classList.remove('show');
+
+  QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card fade-in';
+    card.id = 'qcard-' + i;
+    card.innerHTML = `
+      <div class="q-num">Q${i+1} of ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o, j) => `<button class="opt" onclick="answer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}
+      </div>
+      <div class="explanation" id="exp-${i}">${q.exp}</div>
+    `;
+    container.appendChild(card);
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('.quiz-card.fade-in').forEach((c, i) => {
+      setTimeout(() => c.classList.add('visible'), i * 60);
+    });
+  }, 100);
+}
+
+function answer(qIdx, optIdx) {
+  const q = QUESTIONS[qIdx];
+  const card = document.getElementById('qcard-' + qIdx);
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(o => o.disabled = true);
+  opts[optIdx].classList.add(optIdx === q.ans ? 'correct' : 'wrong');
+  if (optIdx !== q.ans) opts[q.ans].classList.add('correct');
+
+  const exp = document.getElementById('exp-' + qIdx);
+  exp.classList.add('show');
+
+  answered++;
+  if (optIdx === q.ans) correct++;
+  updateCounter();
+
+  if (answered === QUESTIONS.length) {
+    setTimeout(showScore, 600);
+  }
+}
+
+function updateCounter() {
+  document.getElementById('quizCounter').textContent = `${answered} / ${QUESTIONS.length} answered`;
+}
+
+function showScore() {
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('scoreNum').innerHTML = `${correct}<span>/${QUESTIONS.length}</span>`;
+  let grade, color;
+  if (pct >= 90) { grade = '🏆 Excellent — Ready for this domain'; color = '#22c55e'; }
+  else if (pct >= 75) { grade = '✅ Good — Review missed concepts'; color = '#f59e0b'; }
+  else if (pct >= 60) { grade = '📖 Keep studying — Focus on explanations'; color = '#f59e0b'; }
+  else { grade = '🔄 Needs work — Re-read all concepts first'; color = '#ef4444'; }
+  document.getElementById('scoreGrade').innerHTML = `<span style="color:${color}">${grade}</span>`;
+  document.getElementById('scoreBanner').classList.add('show');
+  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  localStorage.setItem('secplus_score_identity', JSON.stringify({ correct, total: QUESTIONS.length }));
+}
+
+function retakeQuiz() { buildQuiz(); window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 80, behavior: 'smooth' }); }
+
+// Concept expand/collapse
+function toggleConcept(header) {
+  const card = header.parentElement;
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open', !wasOpen);
+  if (!wasOpen) {
+    const idx = parseInt(card.dataset.concept);
+    conceptsSeen.add(idx);
+    updateConceptProgress();
+  }
+}
+
+const conceptsSeen = new Set();
+function updateConceptProgress() {
+  const total = document.querySelectorAll('.concept-card').length;
+  const seen = conceptsSeen.size;
+  document.getElementById('modProgress').style.width = (seen / total * 100) + '%';
+  document.getElementById('modProgressLabel').textContent = `${seen} / ${total} concepts`;
+}
+
+// Intersection observer
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+buildQuiz();
+</script>
+</body>
+</html>
