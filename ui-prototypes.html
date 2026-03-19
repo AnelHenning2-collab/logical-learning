@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX Design Prototypes — Adobe XD · Anél Henning</title>
+<meta name="description" content="Adobe XD design prototypes: PayPath, Chicly, Sweat, Shooting Stars Post, and The Spiaggia Hotel. UI/UX portfolio by Anél Henning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg-mid: #111827;
+    --bg-card: #161d2e;
+    --border: rgba(99,179,237,0.14);
+    --accent: #63b3ed;
+    --accent-glow: rgba(99,179,237,0.15);
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --purple: #a78bfa;
+    --teal: #2dd4bf;
+    --pink: #f472b6;
+    --orange: #fb923c;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-faint: #4b5563;
+    --white: #f8fafc;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(99,179,237,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none; z-index: 0;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,30,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .nav-brand { font-size: 15px; font-weight: 700; color: var(--accent); text-decoration: none; }
+  .nav-brand span { color: var(--text-muted); font-weight: 400; }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;
+    text-decoration: none; color: var(--text-muted); transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); background: var(--accent-glow); }
+
+  /* HERO */
+  .hero { padding: 80px 0 48px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    background: rgba(244,114,182,0.12); border: 1px solid rgba(244,114,182,0.25);
+    color: var(--pink); text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pink); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  h1 { font-size: clamp(32px, 5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--white); }
+  h1 em { font-style: normal; color: var(--pink); }
+  .hero-sub { font-size: 17px; color: var(--text-muted); max-width: 620px; margin-top: 16px; line-height: 1.65; }
+
+  /* TOOLS BAR */
+  .tools-bar {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px;
+  }
+  .tool-tag {
+    font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px;
+    border: 1px solid var(--border); color: var(--text-muted);
+    background: var(--bg-card);
+  }
+
+  /* PROJECT GRID */
+  .projects { padding: 48px 0 64px; }
+  .project-card {
+    display: grid; grid-template-columns: 120px 1fr; gap: 28px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; margin-bottom: 24px;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: var(--card-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--card-accent), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-icon {
+    width: 120px; height: 120px;
+    background: var(--bg-mid); border: 1px solid var(--border);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+  }
+  .project-content { display: flex; flex-direction: column; gap: 10px; }
+  .project-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--text-faint);
+  }
+  .project-name {
+    font-size: 24px; font-weight: 700; color: var(--white); line-height: 1.2;
+  }
+  .project-category {
+    font-size: 13px; font-weight: 600;
+    padding: 3px 10px; border-radius: 10px;
+    display: inline-block; width: fit-content;
+  }
+  .project-desc {
+    font-size: 14px; color: var(--text-muted); line-height: 1.65;
+    max-width: 600px;
+  }
+  .project-features {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+  }
+  .feature-tag {
+    font-size: 11px; padding: 3px 10px; border-radius: 8px;
+    background: rgba(99,179,237,0.08); color: var(--accent);
+    border: 1px solid rgba(99,179,237,0.12);
+  }
+
+  /* SOURCE LINK */
+  .source-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 48px; padding: 14px 28px; border-radius: 12px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    text-decoration: none; color: var(--text-muted); font-size: 14px; font-weight: 600;
+    transition: all 0.2s;
+  }
+  .source-link:hover { border-color: var(--accent); color: var(--accent); }
+  .source-link svg { width: 20px; height: 20px; fill: currentColor; }
+
+  /* FOOTER */
+  footer { padding: 32px 0; border-top: 1px solid var(--border); }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 13px; color: var(--text-faint); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .project-card { grid-template-columns: 1fr; }
+    .project-icon { width: 80px; height: 80px; font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+      <div class="nav-links">
+        <a href="threats.html">Threats</a>
+        <a href="crypto.html">Cryptography</a>
+        <a href="network.html">Network</a>
+        <a href="identity.html">Identity</a>
+        <a href="logika-learning.html">Logika Learng</a>
+        <a href="cornell-notes.html">Cornell Notes</a>
+        <a href="ui-prototypes.html" class="active">UI Prototypes</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Design Portfolio</div>
+    <h1>Adobe XD<br><em>Design Prototypes</em></h1>
+    <p class="hero-sub">UI/UX prototypes across finance, fashion, fitness, photography, and hospitality — designed with Adobe XD, InDesign, and Photoshop as part of Purdue Global coursework.</p>
+    <div class="tools-bar">
+      <span class="tool-tag">Adobe XD</span>
+      <span class="tool-tag">Adobe InDesign</span>
+      <span class="tool-tag">Adobe Photoshop</span>
+      <span class="tool-tag">UI/UX Design</span>
+      <span class="tool-tag">Prototyping</span>
+      <span class="tool-tag">Brand Identity</span>
+    </div>
+  </div>
+</section>
+
+<section class="projects">
+  <div class="container">
+
+    <!-- PayPath -->
+    <div class="project-card" style="--card-accent: #22c55e;">
+      <div class="project-icon" style="background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2);">💳</div>
+      <div class="project-content">
+        <span class="project-label">Project 01</span>
+        <h2 class="project-name">PayPath</h2>
+        <span class="project-category" style="background:rgba(34,197,94,0.12); color:#22c55e;">Financial App</span>
+        <p class="project-desc">Financial application prototype designed for mobile — clean interface for managing payments and transactions. Focused on intuitive navigation, clear typography, and trust-building visual design patterns for sensitive financial data.</p>
+        <div class="project-features">
+          <span class="feature-tag">Mobile-first</span>
+          <span class="feature-tag">Payment flows</span>
+          <span class="feature-tag">Transaction history</span>
+          <span class="feature-tag">Clean UI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chicly -->
+    <div class="project-card" style="--card-accent: #f472b6;">
+      <div class="project-icon" style="background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.2);">👗</div>
+      <div class="project-content">
+        <span class="project-label">Project 02</span>
+        <h2 class="project-name">Chicly</h2>
+        <span class="project-category" style="background:rgba(244,114,182,0.12); color:#f472b6;">Boutique App</span>
+        <p class="project-desc">Chic boutique shopping app with elegant typography and fashion-forward design aesthetic. Product browsing, wishlist, and checkout experience optimized for a luxury retail audience.</p>
+        <div class="project-features">
+          <span class="feature-tag">E-commerce</span>
+          <span class="feature-tag">Luxury typography</span>
+          <span class="feature-tag">Product gallery</span>
+          <span class="feature-tag">Wishlist UX</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sweat -->
+    <div class="project-card" style="--card-accent: #fb923c;">
+      <div class="project-icon" style="background: rgba(251,146,60,0.08); border-color: rgba(251,146,60,0.2);">💪</div>
+      <div class="project-content">
+        <span class="project-label">Project 03</span>
+        <h2 class="project-name">Sweat</h2>
+        <span class="project-category" style="background:rgba(251,146,60,0.12); color:#fb923c;">Fitness App</span>
+        <p class="project-desc">Fitness tracking and workout planning app with energetic design language. Bold color schemes, progress visualization, and motivational micro-interactions to keep users engaged.</p>
+        <div class="project-features">
+          <span class="feature-tag">Workout planner</span>
+          <span class="feature-tag">Progress tracking</span>
+          <span class="feature-tag">Energetic palette</span>
+          <span class="feature-tag">Micro-interactions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shooting Stars Post -->
+    <div class="project-card" style="--card-accent: #a78bfa;">
+      <div class="project-icon" style="background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.2);">📸</div>
+      <div class="project-content">
+        <span class="project-label">Project 04</span>
+        <h2 class="project-name">Shooting Stars Post</h2>
+        <span class="project-category" style="background:rgba(167,139,250,0.12); color:#a78bfa;">Photography Brand</span>
+        <p class="project-desc">Professional photographer brand identity — logo design, stationery suite, and marketing materials. Visual identity system built to convey artistic precision and creative storytelling.</p>
+        <div class="project-features">
+          <span class="feature-tag">Logo design</span>
+          <span class="feature-tag">Stationery</span>
+          <span class="feature-tag">Marketing materials</span>
+          <span class="feature-tag">Brand identity</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Spiaggia Hotel -->
+    <div class="project-card" style="--card-accent: #2dd4bf;">
+      <div class="project-icon" style="background: rgba(45,212,191,0.08); border-color: rgba(45,212,191,0.2);">🏨</div>
+      <div class="project-content">
+        <span class="project-label">Project 05</span>
+        <h2 class="project-name">The Spiaggia Hotel</h2>
+        <span class="project-category" style="background:rgba(45,212,191,0.12); color:#2dd4bf;">Hospitality Brand</span>
+        <p class="project-desc">Complete brand package for an Italian hotel: brand guidelines, signage system, stationery package, and lifestyle poster. Full hospitality identity design — from lobby signage to guest-room collateral.</p>
+        <div class="project-features">
+          <span class="feature-tag">Brand guidelines</span>
+          <span class="feature-tag">Signage system</span>
+          <span class="feature-tag">Stationery package</span>
+          <span class="feature-tag">Lifestyle poster</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://github.com/AnelHenning2-collab/PurdueGlobal/tree/main/portfolio/21-adobe-xd-design-prototypes" target="_blank" class="source-link">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      View source on GitHub
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Anél Henning · Purdue Global · Adobe XD Design Portfolio</p>
+        <p style="margin-top:4px;"><a href="https://github.com/AnelHenning2-collab" target="_blank">GitHub</a> · <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a></p>
+      </div>
+      <p><a href="index.html" style="font-size:12px;">← Back to Security+ Study</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
