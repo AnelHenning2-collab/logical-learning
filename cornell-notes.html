@@ -6989,19 +6989,21 @@
 (function(){
   var v = document.getElementById('ch2-3-video');
   if(!v) return;
-  v.addEventListener('error', function(){
+  var src = v.querySelector('source');
+  function showFallback(){
     v.style.display='none';
     var fb = document.getElementById('ch2-3-fallback');
     if(fb) fb.style.display='block';
-  }, true);
-  // Also check after a timeout in case error event doesn't fire
+  }
+  // True error on the <source> element (bad URL, 404, etc.)
+  if(src) src.addEventListener('error', showFallback);
+  v.addEventListener('error', showFallback, true);
+  // Extended timeout — large files (600MB+) need time to start buffering
   setTimeout(function(){
-    if(v.readyState === 0 && v.networkState >= 2){
-      v.style.display='none';
-      var fb = document.getElementById('ch2-3-fallback');
-      if(fb) fb.style.display='block';
+    if(v.readyState === 0 && v.networkState === 3){
+      showFallback();
     }
-  }, 5000);
+  }, 15000);
 })();
 </script>
 </body>
