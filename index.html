@@ -179,6 +179,7 @@
         <a href="logika-learning.html">Logika Learng</a>
         <a href="cornell-notes.html">Cornell Notes</a>
         <a href="ui-prototypes.html">UI Prototypes</a>
+        <a href="physics.html">Physics</a>
       </div>
     </div>
   </div>
@@ -257,6 +258,20 @@
         </div>
       </a>
 
+      <a href="physics.html" class="module-card" style="--card-color:#06b6d4; --card-glow:rgba(6,182,212,0.12);" id="card-physics">
+        <div class="card-score" id="score-physics"></div>
+        <div class="module-icon">⚛️</div>
+        <div>
+          <div class="module-num">Applied Physics</div>
+          <div class="module-title">Physics &amp; Quantum Computing</div>
+        </div>
+        <div class="module-desc">EM theory, semiconductor physics, quantum mechanics, gates, algorithms, error correction, post-quantum cryptography, and GlideCart research contacts.</div>
+        <div class="module-meta">
+          <span class="module-count">12 questions</span>
+          <span class="module-status" id="status-physics">Start →</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -287,7 +302,7 @@
 
 <script>
 // Load scores from localStorage
-const modules = ['threats','crypto','network','identity'];
+const modules = ['threats','crypto','network','identity','physics'];
 let completed = 0;
 modules.forEach(m => {
   const saved = localStorage.getItem('secplus_score_' + m);
@@ -303,8 +318,8 @@ modules.forEach(m => {
 });
 const bar = document.getElementById('overallBar');
 const pct = document.getElementById('overallPct');
-bar.style.width = (completed / 4 * 100) + '%';
-pct.textContent = completed + ' / 4 complete';
+bar.style.width = (completed / 5 * 100) + '%';
+pct.textContent = completed + ' / 5 complete';
 </script>
 </body>
 </html>

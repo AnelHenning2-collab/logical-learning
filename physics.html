@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/  Created with Perplexity Computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics for Software Engineers — Logical Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module.css">
+<style>
+  :root { --mod-color: #06b6d4; --mod-glow: rgba(6,182,212,0.12); }
+
+  /* Physics-specific mnemonic styling */
+  .mnemonic { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.2); }
+  .mnemonic-label { color: #06b6d4; }
+
+  /* Equation block */
+  .eq-block {
+    background: rgba(13,19,38,0.8); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px; margin: 14px 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: #06b6d4; text-align: center; line-height: 1.8;
+  }
+  .eq-block .eq-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--text-faint); text-align: left;
+    margin-bottom: 8px; display: block;
+  }
+
+  /* Gate matrix styling */
+  .gate-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin: 14px 0;
+  }
+  .gate-box {
+    background: rgba(13,19,38,0.8); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; text-align: center;
+  }
+  .gate-box .gate-name {
+    font-size: 14px; font-weight: 600; color: #06b6d4; margin-bottom: 6px;
+  }
+  .gate-box .gate-matrix {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-muted); line-height: 1.6;
+  }
+  .gate-box .gate-desc {
+    font-size: 11px; color: var(--text-faint); margin-top: 6px;
+  }
+
+  /* Researcher cards */
+  .researcher-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px; margin-top: 20px;
+  }
+  .researcher-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; transition: border-color 0.2s;
+  }
+  .researcher-card:hover { border-color: rgba(6,182,212,0.4); }
+  .researcher-card .rc-name {
+    font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 2px;
+  }
+  .researcher-card .rc-title {
+    font-size: 12px; color: #06b6d4; font-weight: 500; margin-bottom: 4px;
+  }
+  .researcher-card .rc-inst {
+    font-size: 12px; color: var(--text-faint); margin-bottom: 10px;
+  }
+  .researcher-card .rc-relevance {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+  }
+  .researcher-card .rc-link {
+    display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600;
+    color: #06b6d4; text-decoration: none; transition: opacity 0.2s;
+  }
+  .researcher-card .rc-link:hover { opacity: 0.7; }
+  .researcher-card .rc-category {
+    display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .cat-a { background: rgba(6,182,212,0.12); color: #06b6d4; border: 1px solid rgba(6,182,212,0.25); }
+  .cat-b { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+  .cat-c { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+  .cat-d { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+
+  /* References list */
+  .ref-list { list-style: none; padding: 0; counter-reset: ref; }
+  .ref-list li {
+    counter-increment: ref; padding: 10px 0 10px 40px; position: relative;
+    font-size: 13px; color: var(--text-muted); line-height: 1.65;
+    border-bottom: 1px solid rgba(99,179,237,0.05);
+  }
+  .ref-list li::before {
+    content: counter(ref) ".";
+    position: absolute; left: 0; top: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #06b6d4; font-weight: 600; width: 30px; text-align: right;
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li a { color: #06b6d4; text-decoration: none; word-break: break-all; }
+  .ref-list li a:hover { text-decoration: underline; }
+  .ref-list li em { font-style: italic; color: var(--text); }
+
+  /* Section divider */
+  .part-divider {
+    padding: 32px 0 12px; margin-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .part-divider .part-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.12em; color: #06b6d4;
+  }
+  .part-divider .part-title {
+    font-size: 22px; font-weight: 700; color: var(--white); margin-top: 4px;
+  }
+
+  /* Allow large concept bodies to expand fully */
+  .concept-card.open .concept-body { max-height: 5000px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+      <div class="nav-links">
+        <a href="threats.html">Threats</a>
+        <a href="crypto.html">Cryptography</a>
+        <a href="network.html">Network</a>
+        <a href="identity.html">Identity</a>
+        <a href="logika-learning.html">Logika Learng</a>
+        <a href="cornell-notes.html">Cornell Notes</a>
+        <a href="ui-prototypes.html">UI Prototypes</a>
+        <a href="physics.html" class="active">Physics</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="module-header">
+  <div class="container">
+    <a href="index.html" class="back-link">← All Modules</a>
+    <div class="domain-badge">Applied Physics</div>
+    <h1>Physics for Software Engineers &amp; Cybersecurity Analysts</h1>
+    <p>Electromagnetic theory, semiconductor physics, thermodynamics of computing, quantum mechanics, quantum algorithms, post-quantum cryptography, and quantum hardware — the physical foundations that define the limits and capabilities of every system you build or secure.</p>
+    <div class="mod-progress">
+      <div class="mod-progress-bar"><div class="mod-progress-fill" id="modProgress" style="width:0%"></div></div>
+      <span class="mod-progress-label" id="modProgressLabel">0 / 16 concepts</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  PART 1: PHYSICS FOUNDATIONS                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="concepts">
+  <div class="container">
+    <div class="part-divider" style="border-top:none; padding-top:0;">
+      <div class="part-label">Part 1</div>
+      <div class="part-title">Physics Foundations</div>
+    </div>
+    <div class="section-label">Classical physics concepts critical to computing &amp; security</div>
+
+    <!-- 1. Electromagnetic Theory -->
+    <div class="concept-card fade-in" data-concept="0">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">📡</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Electromagnetic Theory &amp; Signal Propagation</div>
+          <div class="concept-subtitle">Maxwell's Equations · Shannon's Theorem · Path Loss · TEMPEST</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Every wireless communication system — from Wi-Fi to 5G to satellite links — operates according to <strong>Maxwell's equations</strong>, the four fundamental laws governing electric and magnetic fields (Griffiths &amp; Schroeter, 2018). For software engineers, understanding EM theory explains bandwidth limits, signal interference, and side-channel vulnerabilities.</p>
+
+        <div class="eq-block">
+          <span class="eq-label">Shannon's Channel Capacity Theorem</span>
+          C = B log₂(1 + S/N)
+          <br><small style="color:var(--text-faint);">C = channel capacity (bits/s) · B = bandwidth (Hz) · S/N = signal-to-noise ratio</small>
+        </div>
+
+        <p><strong>Shannon's theorem</strong> (C = B log₂(1 + S/N)) is a direct consequence of electromagnetic signal physics. The physical bandwidth of a channel bounds the maximum achievable data rate. This is why 5G uses higher-frequency millimeter waves — more bandwidth — at the cost of shorter range due to increased path loss.</p>
+
+        <p><strong>Free-space path loss</strong> follows the inverse-square law: FSPL = (4πdf/c)², where d is distance, f is frequency, and c is the speed of light. Higher frequencies experience greater path loss, which is why 5G millimeter-wave signals require dense cell deployments.</p>
+
+        <p><strong>Relevance to cybersecurity:</strong></p>
+        <ul style="font-size:13px; color:var(--text-muted); margin: 8px 0 14px 20px; line-height:1.7;">
+          <li><strong>TEMPEST attacks</strong>: Every electronic device emits unintentional electromagnetic radiation that correlates with internal data processing. The NSA's TEMPEST program classifies techniques to intercept EM emanations from monitors, keyboards, and CPUs at distances up to hundreds of meters (Kocher et al., 1999).</li>
+          <li><strong>RF jamming &amp; interference</strong>: Wireless networks can be disrupted by intentional EM interference — a denial-of-service attack at the physical layer.</li>
+          <li><strong>Antenna design &amp; directional attacks</strong>: Understanding antenna radiation patterns enables targeted wireless attacks (Evil Twin APs, deauthentication attacks).</li>
+        </ul>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Insight</div>Every digital system is ultimately an electromagnetic system. Side-channel attacks exploit the gap between the logical abstraction (software) and the physical reality (EM fields, power consumption, heat).</div>
+      </div>
+    </div>
+
+    <!-- 2. Semiconductor Physics -->
+    <div class="concept-card fade-in" data-concept="1">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔬</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Semiconductor Physics &amp; Computing</div>
+          <div class="concept-subtitle">Band Theory · MOSFET · Power Analysis · Rowhammer</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Every transistor — the building block of CPUs, GPUs, FPGAs, and memory chips — is a <strong>quantum mechanical device</strong>. Semiconductor physics explains how hardware works at the atomic level and reveals exploitable vulnerabilities (Seabaugh &amp; Zhang, 2010).</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Concept</th><th>Explanation</th><th>Security Implication</th></tr></thead>
+          <tbody>
+            <tr><td>Band Theory</td><td>Electrons occupy energy bands separated by band gaps (~1 eV for Si). Conductors, insulators, and semiconductors differ by gap size.</td><td>Basis for all transistor operation</td></tr>
+            <tr><td>Doping &amp; p-n Junctions</td><td>Donor/acceptor atoms create n-type/p-type regions. The p-n junction is the basis of diodes and transistors.</td><td>Hardware Trojans at transistor level</td></tr>
+            <tr><td>MOSFET Operation</td><td>Gate voltage modulates channel conductivity. Gate oxides approaching atomic layers → quantum tunneling leakage.</td><td>Moore's Law physical limits</td></tr>
+            <tr><td>Johnson-Nyquist Noise</td><td>S_V = 4k_BT·R — thermal noise sets the noise floor for ADCs and RF receivers.</td><td>Affects side-channel signal quality</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Power analysis attacks (SPA/DPA):</strong> The dynamic power consumption of a CMOS circuit (P = α C V² f) correlates with data being processed. Simple and differential power analysis can extract cryptographic keys from smart cards, HSMs, and embedded devices (Kocher et al., 1999).</p>
+
+        <p><strong>Rowhammer attacks:</strong> Repeated electrical access to one row of DRAM cells induces bit flips in adjacent rows through capacitive coupling — an exploitable vulnerability arising directly from semiconductor physics.</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Insight</div>Hardware vulnerabilities (Rowhammer, power analysis, EM emanations) are <strong>physics problems</strong>, not software bugs. You cannot patch the laws of physics — only mitigate their exploitation through shielding, constant-time code, and power-noise injection.</div>
+      </div>
+    </div>
+
+    <!-- 3. Photonics -->
+    <div class="concept-card fade-in" data-concept="2">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">💡</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Photonics &amp; Optical Computing</div>
+          <div class="concept-subtitle">Fiber Optics · LiDAR · QKD · Photonic Integrated Circuits</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Photonics — the science of generating, controlling, and detecting light — is increasingly central to computing and networking (Strikis et al., 2025).</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Technology</th><th>How It Works</th><th>Application</th></tr></thead>
+          <tbody>
+            <tr><td>Optical Fiber</td><td>Total internal reflection confines light in glass fiber. ~0.2 dB/km attenuation at 1550 nm.</td><td>Global internet backbone, WDM multiplexing</td></tr>
+            <tr><td>Photonic ICs (PICs)</td><td>Waveguides, modulators, detectors integrated on silicon chips.</td><td>PsiQuantum's photonic quantum computers</td></tr>
+            <tr><td>Optical Interconnects</td><td>VCSELs and photodetectors replace copper at ever-shorter distances.</td><td>Data center rack-to-rack and chip-to-chip</td></tr>
+            <tr><td>LiDAR</td><td>Time-of-flight measurement of laser pulses for 3D mapping.</td><td>Autonomous vehicles, GlideCart navigation</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Fiber tapping:</strong> Physical layer interception requires bending the fiber to extract evanescent field coupling. Optical time-domain reflectometry (OTDR) can detect unauthorized splices.</p>
+        <p><strong>Quantum Key Distribution (QKD)</strong> uses the quantum properties of photons (polarization states) to distribute cryptographic keys with information-theoretic security (Bennett &amp; Brassard, 1984).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">GlideCart Connection</div>LiDAR is the primary navigation sensor for autonomous systems like GlideCart. Photonic technologies bridge classical hardware (LiDAR, fiber optics) and quantum hardware (photonic quantum computers, QKD).</div>
+      </div>
+    </div>
+
+    <!-- 4. Thermodynamics -->
+    <div class="concept-card fade-in" data-concept="3">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🌡️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Thermodynamics of Computing</div>
+          <div class="concept-subtitle">Landauer's Principle · Reversible Computing · Entropy &amp; Key Generation</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>The relationship between information processing and thermodynamics has deep implications for energy efficiency, hardware design, and fundamental computing limits (Landauer, 1961; Bérut et al., 2012).</p>
+
+        <div class="eq-block">
+          <span class="eq-label">Landauer's Principle (1961)</span>
+          E_min = k_B · T · ln2 ≈ 2.9 × 10⁻²¹ J per bit (at 300 K)
+          <br><small style="color:var(--text-faint);">The minimum energy required to erase one bit of information</small>
+        </div>
+
+        <p>Rolf Landauer proved that <strong>erasing one bit of information</strong> must dissipate at least k_BT·ln2 of energy as heat. Modern processors dissipate ~10⁹ times more energy per operation than this fundamental limit — indicating enormous room for efficiency improvement, but also a hard physical floor.</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Implication</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Reversible Computing</td><td>If operations are thermodynamically reversible (no information erasure), power consumption approaches zero. Motivates adiabatic computing research.</td></tr>
+            <tr><td>Data Center Cooling</td><td>Large data centers consume 10–50 MW. Chip thermal management (liquid cooling, phase-change) is grounded in thermodynamics.</td></tr>
+            <tr><td>Quantum Computer Cooling</td><td>Superconducting quantum processors operate at ~15 millikelvin — colder than outer space — requiring dilution refrigerators.</td></tr>
+            <tr><td>Entropy &amp; Key Generation</td><td>The second law guarantees truly random processes exist, providing the physical basis for hardware random number generators (HRNGs) in cryptographic key generation.</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Von Neumann-Landauer entropy:</strong> The minimum thermodynamic entropy decrease associated with a quantum measurement is S = k_B·ln2 per qubit, connecting quantum mechanics and thermodynamics.</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Insight</div>Information is physical. Erasing a bit costs energy. True randomness comes from physical entropy. These aren't abstractions — they're engineering constraints on every computing system.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  PART 2: QUANTUM PHYSICS                                -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="part-divider">
+      <div class="part-label">Part 2</div>
+      <div class="part-title">Quantum Physics</div>
+    </div>
+    <div class="section-label">The physics underpinning quantum computing, quantum cryptography, and the post-quantum transition</div>
+
+    <!-- 5. Wave-Particle Duality -->
+    <div class="concept-card fade-in" data-concept="4">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🌊</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Wave-Particle Duality</div>
+          <div class="concept-subtitle">Double-Slit Experiment · de Broglie Wavelength · Born Rule</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Wave-particle duality is one of the most counterintuitive and foundational principles of quantum mechanics. Every quantum entity — electrons, photons, atoms — exhibits both wave-like and particle-like behavior depending on the experimental context (Griffiths &amp; Schroeter, 2018; de Broglie, 1925).</p>
+
+        <div class="diagram">
+          <div style="color:#06b6d4; margin-bottom:8px; font-size:13px; font-weight:600;">The Double-Slit Experiment:</div>
+          Source → | | → Detector Screen
+                   |S|    (one electron at a time)
+                   |L|
+                   |I|    After many electrons:
+                   |T|    ██░░██░░██░░██  ← Interference pattern!
+                   | |
+          <br>
+          Each electron lands at a single point (particle),
+          but the statistical distribution forms an interference
+          pattern (wave) — as if each electron interfered with itself.
+        </div>
+
+        <div class="eq-block">
+          <span class="eq-label">de Broglie Wavelength (1924)</span>
+          λ = h / p
+          <br><small style="color:var(--text-faint);">λ = wavelength · h = Planck's constant · p = momentum</small>
+        </div>
+
+        <p><strong>Historical milestones:</strong></p>
+        <ul style="font-size:13px; color:var(--text-muted); margin: 8px 0 14px 20px; line-height:1.7;">
+          <li>1801 — Thomas Young's double-slit experiment demonstrated light's wave nature</li>
+          <li>1905 — Einstein explained the photoelectric effect (E = hf) — light as particles (photons)</li>
+          <li>1924 — de Broglie proposed matter has wave nature with λ = h/p</li>
+          <li>1927 — Davisson and Germer confirmed electron diffraction experimentally</li>
+        </ul>
+
+        <p><strong>Born rule:</strong> The quantum state is described by a wave function ψ(x, t). The probability of finding the particle at position x is |ψ(x,t)|² — quantum mechanics is inherently probabilistic (Sakurai &amp; Napolitano, 2017).</p>
+
+        <p><strong>Complementarity principle (Bohr):</strong> Wave and particle behaviors are complementary. When you measure which slit an electron passed through, the interference pattern disappears.</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Computing Relevance</div>The wave nature of electrons explains quantum tunneling (limiting transistor scaling), electron diffraction (chip defect inspection), and photon behavior (QKD security).</div>
+      </div>
+    </div>
+
+    <!-- 6. Superposition -->
+    <div class="concept-card fade-in" data-concept="5">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">⚛️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Superposition</div>
+          <div class="concept-subtitle">Probability Amplitudes · Exponential State Space · Interference</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Superposition is one of the two foundational pillars of quantum computing power (the other being entanglement). In classical computing, a bit is either 0 or 1. In quantum mechanics, a system can exist in a <strong>linear combination of multiple states simultaneously</strong> (Nielsen &amp; Chuang, 2010).</p>
+
+        <div class="eq-block">
+          <span class="eq-label">General Qubit State</span>
+          |ψ⟩ = α|0⟩ + β|1⟩
+          <br><small style="color:var(--text-faint);">|α|² + |β|² = 1 · Probabilities: P(0) = |α|² , P(1) = |β|²</small>
+        </div>
+
+        <table class="comp-table">
+          <thead><tr><th>Feature</th><th>Classical Bit</th><th>Qubit</th></tr></thead>
+          <tbody>
+            <tr><td>State</td><td>Either 0 or 1</td><td>α|0⟩ + β|1⟩ (both simultaneously)</td></tr>
+            <tr><td>n units</td><td>Holds exactly 1 value</td><td>Superposition of 2ⁿ values</td></tr>
+            <tr><td>50 units</td><td>One 50-bit number</td><td>2⁵⁰ ≈ 10¹⁵ states simultaneously</td></tr>
+            <tr><td>Measurement</td><td>Read without disturbance</td><td>Collapses to |0⟩ or |1⟩ (irreversible)</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Interference:</strong> Because amplitudes are complex numbers, they can interfere constructively (adding up) or destructively (canceling). Quantum algorithms amplify correct answers and cancel wrong ones through controlled interference.</p>
+
+        <p><strong>The Hadamard gate (H)</strong> creates superposition: applying H to |0...0⟩ creates an equal superposition of all 2ⁿ computational basis states. This is the gateway to quantum parallelism (Preskill, 1998).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Concept</div>Superposition is NOT "the qubit is 0 and 1 at the same time" — it exists in a <strong>probability amplitude space</strong> where measurement forces a definite outcome. The power comes from manipulating amplitudes <em>before</em> measurement.</div>
+      </div>
+    </div>
+
+    <!-- 7. Entanglement -->
+    <div class="concept-card fade-in" data-concept="6">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔗</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Entanglement</div>
+          <div class="concept-subtitle">Bell States · Bell Inequalities · EPR Paradox · Quantum Teleportation</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Entanglement is the phenomenon where quantum states of two or more particles become correlated such that the state of each particle cannot be described independently — even when separated by arbitrarily large distances. Einstein called it "spooky action at a distance" (Bell, 1964; Ekert, 1991).</p>
+
+        <div class="eq-block">
+          <span class="eq-label">Bell State (Maximally Entangled)</span>
+          |Φ⁺⟩ = (1/√2)(|00⟩ + |11⟩)
+          <br><small style="color:var(--text-faint);">Cannot be written as |ψ_A⟩ ⊗ |ψ_B⟩ — the particles are inseparable</small>
+        </div>
+
+        <p>If qubit A is measured as |0⟩, qubit B instantaneously collapses to |0⟩; if A gives |1⟩, B gives |1⟩ — regardless of distance.</p>
+
+        <p><strong>Bell's theorem (1964):</strong> John Bell proved that if quantum correlations were due to local hidden variables, they would satisfy certain mathematical inequalities (Bell inequalities). Experiments by Aspect (1982), Hensen et al. (2015, loophole-free), and others have repeatedly <strong>violated</strong> Bell inequalities, confirming that entanglement is genuinely non-local (Bell, 1964).</p>
+
+        <p><strong>How entanglement is created:</strong></p>
+        <ul style="font-size:13px; color:var(--text-muted); margin: 8px 0 14px 20px; line-height:1.7;">
+          <li><strong>SPDC:</strong> A photon through a nonlinear crystal splits into two entangled photons</li>
+          <li><strong>Quantum gates:</strong> H gate + CNOT on |00⟩ creates the Bell state |Φ⁺⟩</li>
+          <li><strong>Atomic interactions:</strong> Controlled collisions or photon exchange</li>
+        </ul>
+
+        <table class="comp-table">
+          <thead><tr><th>Application</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Quantum Teleportation</td><td>Transmit an unknown quantum state via entanglement + classical channel (no FTL information)</td></tr>
+            <tr><td>Quantum Dense Coding</td><td>Send 2 classical bits using 1 qubit via pre-shared entanglement</td></tr>
+            <tr><td>Quantum Computing</td><td>Multi-qubit entanglement enables quantum parallelism (Shor's exponential speedup)</td></tr>
+            <tr><td>E91 Protocol</td><td>Entanglement-based QKD — Bell inequality violation certifies key security (Ekert, 1991)</td></tr>
+          </tbody>
+        </table>
+
+        <p>With <strong>300 entangled qubits</strong>, the system inhabits a Hilbert space with 2³⁰⁰ dimensions — vastly exceeding the number of atoms in the observable universe (Nielsen &amp; Chuang, 2010).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Concept</div>Entanglement is a resource, not communication. No information travels faster than light. The classical channel is always required. But entanglement enables computational and cryptographic feats impossible classically.</div>
+      </div>
+    </div>
+
+    <!-- 8. Quantum Tunneling -->
+    <div class="concept-card fade-in" data-concept="7">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🚇</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Tunneling</div>
+          <div class="concept-subtitle">Transmission Coefficient · Flash Memory · Josephson Junctions · MOSFET Leakage</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Quantum tunneling is the phenomenon by which a particle penetrates and passes through a potential energy barrier that it would classically be forbidden to cross. It arises from the wave nature of particles (Seabaugh &amp; Zhang, 2010).</p>
+
+        <div class="eq-block">
+          <span class="eq-label">Transmission Coefficient (Tunneling Probability)</span>
+          T ≈ exp(−2κL) , where κ = √(2m(V₀−E)) / ℏ
+          <br><small style="color:var(--text-faint);">L = barrier width · V₀ = barrier height · E = particle energy · m = mass</small>
+        </div>
+
+        <p><strong>Key observations:</strong> Tunneling probability decreases exponentially with barrier width L, increases for lighter particles, and decreases with the barrier height above the particle's energy.</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Application</th><th>Mechanism</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Flash Memory</td><td>Fowler-Nordheim tunneling through thin gate oxide traps charge on floating gate</td><td>How flash drives write/erase data</td></tr>
+            <tr><td>Tunnel Diodes</td><td>Heavily doped p-n junctions exploit tunneling for ultra-fast switching</td><td>High-frequency oscillators</td></tr>
+            <tr><td>STM Microscope</td><td>Tunneling current varies exponentially with tip-surface distance</td><td>Atomic-resolution imaging</td></tr>
+            <tr><td>MOSFET Leakage</td><td>Gate oxides below ~2 nm → direct tunneling becomes dominant leakage</td><td>Limits transistor scaling</td></tr>
+            <tr><td>Josephson Junctions</td><td>Cooper pairs tunnel through thin insulator between superconductors</td><td>Basis of IBM/Google quantum processors</td></tr>
+            <tr><td>D-Wave Annealing</td><td>Quantum tunneling escapes local minima in optimization landscapes</td><td>Optimization faster than classical annealing</td></tr>
+          </tbody>
+        </table>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Insight</div>Quantum tunneling is both a problem (MOSFET leakage limits Moore's Law) and a resource (flash memory, Josephson junctions, quantum annealing). The same physics that limits classical computing enables quantum computing.</div>
+      </div>
+    </div>
+
+    <!-- 9. Quantum States & Dirac Notation -->
+    <div class="concept-card fade-in" data-concept="8">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">📐</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum States &amp; Dirac Notation</div>
+          <div class="concept-subtitle">Kets · Bra-Ket · Density Matrices · Hilbert Space</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Paul Dirac introduced bra-ket notation in 1939 as a compact mathematical language for quantum mechanics. It is now universally used in quantum computing (Nielsen &amp; Chuang, 2010; Sakurai &amp; Napolitano, 2017).</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Notation</th><th>Name</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>|ψ⟩</td><td>Ket</td><td>State vector in Hilbert space. |0⟩ = [1,0]ᵀ, |1⟩ = [0,1]ᵀ</td></tr>
+            <tr><td>⟨ψ|</td><td>Bra</td><td>Conjugate transpose of ket. ⟨0| = [1,0], ⟨1| = [0,1]</td></tr>
+            <tr><td>⟨φ|ψ⟩</td><td>Inner product</td><td>Complex number. ⟨0|0⟩ = 1 (normalized), ⟨0|1⟩ = 0 (orthogonal)</td></tr>
+            <tr><td>|ψ⟩⟨φ|</td><td>Outer product</td><td>Matrix/operator. |ψ⟩⟨ψ| is a projector onto |ψ⟩</td></tr>
+            <tr><td>⟨ψ|Ô|ψ⟩</td><td>Expectation value</td><td>Average measurement outcome for observable Ô in state |ψ⟩</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Physical qubit implementations:</strong></p>
+        <ul style="font-size:13px; color:var(--text-muted); margin: 8px 0 14px 20px; line-height:1.7;">
+          <li>Spin-up/spin-down states of an electron</li>
+          <li>Two lowest energy levels of a trapped ion (IonQ)</li>
+          <li>Two polarization states of a photon (PsiQuantum)</li>
+          <li>Two energy levels of a superconducting circuit — transmon (IBM, Google)</li>
+          <li>Ground/excited state of a neutral atom (QuEra)</li>
+        </ul>
+
+        <p><strong>Multi-qubit states:</strong> Two qubits span a 4-dimensional Hilbert space: |ψ⟩ = a₀₀|00⟩ + a₀₁|01⟩ + a₁₀|10⟩ + a₁₁|11⟩. In general, n qubits require 2ⁿ complex numbers — the source of quantum computational power.</p>
+
+        <p><strong>Density matrices:</strong> A mixed state (statistical ensemble due to decoherence) is described by ρ = Σᵢ pᵢ |ψᵢ⟩⟨ψᵢ| where pᵢ are classical probabilities with Σpᵢ = 1.</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Concept</div>Dirac notation is the "programming language" of quantum mechanics. |0⟩ and |1⟩ are the quantum analog of bits 0 and 1. Master bra-ket notation and everything else in quantum computing follows.</div>
+      </div>
+    </div>
+
+    <!-- 10. Bloch Sphere -->
+    <div class="concept-card fade-in" data-concept="9">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🌐</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">The Bloch Sphere</div>
+          <div class="concept-subtitle">Parameterization · Visual Representation · Gates as Rotations</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>The Bloch sphere is a geometric representation of the state space of a single qubit. It maps every pure qubit state to a unique point on the surface of a unit sphere, providing intuitive visualization of quantum operations (Nielsen &amp; Chuang, 2010).</p>
+
+        <div class="eq-block">
+          <span class="eq-label">Bloch Sphere Parameterization</span>
+          |ψ⟩ = cos(θ/2)|0⟩ + e^(iφ) sin(θ/2)|1⟩
+          <br><small style="color:var(--text-faint);">θ ∈ [0, π] (polar angle) · φ ∈ [0, 2π) (azimuthal angle)</small>
+        </div>
+
+        <table class="comp-table">
+          <thead><tr><th>Point</th><th>Angles</th><th>State</th></tr></thead>
+          <tbody>
+            <tr><td>North pole (+Z)</td><td>θ = 0</td><td>|0⟩</td></tr>
+            <tr><td>South pole (−Z)</td><td>θ = π</td><td>|1⟩</td></tr>
+            <tr><td>+X axis</td><td>θ = π/2, φ = 0</td><td>(|0⟩+|1⟩)/√2 = |+⟩</td></tr>
+            <tr><td>−X axis</td><td>θ = π/2, φ = π</td><td>(|0⟩−|1⟩)/√2 = |−⟩</td></tr>
+            <tr><td>+Y axis</td><td>θ = π/2, φ = π/2</td><td>(|0⟩+i|1⟩)/√2</td></tr>
+            <tr><td>−Y axis</td><td>θ = π/2, φ = 3π/2</td><td>(|0⟩−i|1⟩)/√2</td></tr>
+          </tbody>
+        </table>
+
+        <div class="diagram">
+          <div style="color:#06b6d4; margin-bottom:8px; font-size:13px; font-weight:600;">Bloch Sphere Visualization:</div>
+                      |0⟩  (North pole)
+                       ●
+                      /|\
+                     / | \
+              |−⟩ ●---|---● |+⟩    ← equator = superposition states
+                     \ | /
+                      \|/
+                       ●
+                      |1⟩  (South pole)
+
+          Single-qubit gates = rotations of the Bloch vector:
+          • Pauli-X: 180° around X-axis (bit flip)
+          • Pauli-Z: 180° around Z-axis (phase flip)
+          • Hadamard: 180° around axis bisecting X and Z
+        </div>
+
+        <p><strong>Mixed states</strong> (caused by decoherence) are points <em>inside</em> the sphere (Bloch vector length &lt; 1). The center represents the maximally mixed state ρ = I/2.</p>
+
+        <p><strong>Limitation:</strong> The Bloch sphere represents single-qubit states only. Entangled multi-qubit states require higher-dimensional Hilbert spaces that cannot be visualized on a single sphere (Preskill, 1998).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Concept</div>The Bloch sphere is your visual debugger for single-qubit operations. North pole = |0⟩, South pole = |1⟩, Equator = superposition states. Every quantum gate is a rotation on this sphere.</div>
+      </div>
+    </div>
+
+    <!-- 11. Quantum Gates -->
+    <div class="concept-card fade-in" data-concept="10">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔀</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Gates</div>
+          <div class="concept-subtitle">Pauli X/Y/Z · Hadamard · CNOT · Toffoli · SWAP · Universality</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Quantum gates are reversible transformations on qubit states, represented by <strong>unitary matrices</strong> (U†U = I). All quantum gates preserve total probability and are reversible — a fundamental difference from classical gates like AND/OR (Nielsen &amp; Chuang, 2010).</p>
+
+        <p style="font-size:13px; font-weight:600; color:var(--white); margin-bottom:10px;">Single-Qubit Gates:</p>
+        <div class="gate-grid">
+          <div class="gate-box">
+            <div class="gate-name">Pauli-X</div>
+            <div class="gate-matrix">[ 0  1 ]<br>[ 1  0 ]</div>
+            <div class="gate-desc">Bit flip: |0⟩↔|1⟩ (quantum NOT)</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">Pauli-Y</div>
+            <div class="gate-matrix">[ 0  −i ]<br>[ i   0 ]</div>
+            <div class="gate-desc">Combined bit + phase flip</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">Pauli-Z</div>
+            <div class="gate-matrix">[ 1   0 ]<br>[ 0  −1 ]</div>
+            <div class="gate-desc">Phase flip: |1⟩ → −|1⟩</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">Hadamard (H)</div>
+            <div class="gate-matrix">(1/√2) [ 1   1 ]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1  −1 ]</div>
+            <div class="gate-desc">Creates superposition: H|0⟩ = |+⟩</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">S Gate</div>
+            <div class="gate-matrix">[ 1  0 ]<br>[ 0  i ]</div>
+            <div class="gate-desc">π/2 phase to |1⟩</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">T Gate</div>
+            <div class="gate-matrix">[ 1       0      ]<br>[ 0  e^(iπ/4) ]</div>
+            <div class="gate-desc">π/4 phase to |1⟩ · {H,T} is universal</div>
+          </div>
+        </div>
+
+        <p style="font-size:13px; font-weight:600; color:var(--white); margin: 16px 0 10px;">Multi-Qubit Gates:</p>
+        <div class="gate-grid">
+          <div class="gate-box">
+            <div class="gate-name">CNOT</div>
+            <div class="gate-matrix">[ 1 0 0 0 ]<br>[ 0 1 0 0 ]<br>[ 0 0 0 1 ]<br>[ 0 0 1 0 ]</div>
+            <div class="gate-desc">If control=|1⟩, flip target. Creates entanglement.</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">Toffoli (CCNOT)</div>
+            <div class="gate-matrix">3-qubit: flip target only<br>when BOTH controls = |1⟩</div>
+            <div class="gate-desc">Universal for classical reversible computation</div>
+          </div>
+          <div class="gate-box">
+            <div class="gate-name">SWAP</div>
+            <div class="gate-matrix">Exchanges states of<br>two qubits = 3 CNOTs</div>
+            <div class="gate-desc">|ψ⟩|φ⟩ → |φ⟩|ψ⟩</div>
+          </div>
+        </div>
+
+        <p><strong>Universality:</strong> A gate set is universal if any n-qubit unitary can be approximated to arbitrary precision. Universal sets include: <strong>{H, CNOT, T}</strong>, {Toffoli, H}, and {CNOT, all single-qubit unitaries} (Di Vincenzo, 1995).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Concept</div>H + CNOT = entanglement factory (creates Bell states). H + T = any single-qubit rotation (Solovay-Kitaev theorem). {H, CNOT, T} = universal quantum computation. These three gates are all you need.</div>
+      </div>
+    </div>
+
+    <!-- 12. Quantum Algorithms -->
+    <div class="concept-card fade-in" data-concept="11">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">⚡</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Algorithms</div>
+          <div class="concept-subtitle">Shor's · Grover's · QAOA · VQE</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Quantum algorithms exploit superposition, interference, and entanglement to solve specific problems exponentially or polynomially faster than the best known classical algorithms (Shor, 1994; Grover, 1996; Farhi et al., 2014).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Shor's Algorithm (1994) — Integer Factorization</p>
+        <div class="diagram">
+          <div style="color:#06b6d4; margin-bottom:8px; font-size:13px; font-weight:600;">How Shor's Algorithm Works:</div>
+          Step 1: Reduce factoring to order-finding:
+                  find period r of f(x) = aˣ mod N
+
+          Step 2: Quantum Fourier Transform (QFT) finds r efficiently
+                  QFT maps periodic function → frequency peaks at multiples of 1/r
+
+          Step 3: Classical post-processing:
+                  gcd(a^(r/2) ± 1, N) → factors with high probability
+
+          Classical: exp(O(n^⅓ log^⅔ n)) — sub-exponential
+          Quantum:   O((log N)² log log N) — POLYNOMIAL ← exponential speedup!
+        </div>
+        <p><strong>Security impact:</strong> A fault-tolerant quantum computer running Shor's would break <strong>RSA, Diffie-Hellman, and ECC</strong>. Estimates: ~20 million physical qubits needed to break RSA-2048 in 8 hours. This motivates the urgent PQC transition (NIST, 2024a).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Grover's Algorithm (1996) — Unstructured Search</p>
+        <div class="diagram">
+          <div style="color:#06b6d4; margin-bottom:8px; font-size:13px; font-weight:600;">Grover's Search Steps:</div>
+          1. Initialize n qubits → equal superposition of all N = 2ⁿ states
+          2. Apply oracle O_ω → flips phase of target: O_ω|ω⟩ = −|ω⟩
+          3. Apply diffusion operator (inversion about the average)
+             → amplifies marked state amplitude
+          4. Repeat ~π√N/4 times, then measure
+
+          Classical: O(N) checks needed
+          Quantum:   O(√N) checks — QUADRATIC speedup
+        </div>
+        <p><strong>Security impact:</strong> Grover's effectively halves symmetric key security. <strong>AES-128</strong> → only 64-bit quantum security. <strong>AES-256</strong> → 128-bit quantum security (considered quantum-safe) (Grover, 1996).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">QAOA — Quantum Approximate Optimization (Farhi et al., 2014)</p>
+        <table class="comp-table">
+          <thead><tr><th>Step</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>1. Encode</td><td>Map optimization problem to cost Hamiltonian H_C (ground state = optimal solution)</td></tr>
+            <tr><td>2. Apply layers</td><td>p alternating layers of cost unitary e^(−iγH_C) and mixing unitary e^(−iβH_B)</td></tr>
+            <tr><td>3. Measure &amp; optimize</td><td>Measure ⟨H_C⟩, classically optimize γ and β via gradient descent</td></tr>
+            <tr><td>4. Extract</td><td>Repeat until convergence; measure to extract approximate solution</td></tr>
+          </tbody>
+        </table>
+        <p><strong>GlideCart relevance:</strong> QAOA is directly applicable to Vehicle Routing Problem (VRP) and Traveling Salesman Problem (TSP) — optimal delivery paths for an autonomous cart. Encodable as QUBO. IBM Quantum demonstrated convergence in ~25 iterations (Farhi et al., 2014).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">VQE — Variational Quantum Eigensolver (Peruzzo et al., 2014)</p>
+        <p>A hybrid quantum-classical algorithm that finds ground state energy of quantum systems. Choose ansatz U(θ), prepare |ψ(θ)⟩ on quantum hardware, measure E(θ) = ⟨ψ(θ)|H|ψ(θ)⟩, and classically optimize θ. By the variational principle, E(θ) ≥ E₀, so minimization converges toward the ground state. Applications: drug discovery, materials science, battery design (Peruzzo et al., 2014).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Algorithm Summary</div><strong>Shor's</strong> = breaks RSA (exponential speedup). <strong>Grover's</strong> = fast search (quadratic speedup, halves key length). <strong>QAOA</strong> = optimization on NISQ hardware (GlideCart routing). <strong>VQE</strong> = quantum chemistry simulation.</div>
+      </div>
+    </div>
+
+    <!-- 13. Quantum Error Correction -->
+    <div class="concept-card fade-in" data-concept="12">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🛡️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Error Correction</div>
+          <div class="concept-subtitle">Repetition Codes · Steane [7,1,3] · Surface Codes · Fault-Tolerant Thresholds</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Quantum information is extraordinarily fragile. Unlike classical bits, qubits suffer from bit-flip errors (X), phase-flip errors (Z), and decoherence. The <strong>no-cloning theorem</strong> prevents redundant copying, so quantum error correction must encode logical qubits into larger entangled states (Steane, 1996; Calderbank &amp; Shor, 1996).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Repetition Code (Bit-Flip Protection)</p>
+        <div class="diagram">
+          <div style="color:#06b6d4; margin-bottom:8px; font-size:13px; font-weight:600;">3-Qubit Repetition Code:</div>
+          Encode: |0_L⟩ = |000⟩ ,  |1_L⟩ = |111⟩
+
+          If one qubit flips: |010⟩ → majority vote → correct!
+
+          Limitation: Only corrects bit-flip errors, not phase flips.
+        </div>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Steane [[7,1,3]] Code (1996)</p>
+        <table class="comp-table">
+          <thead><tr><th>Property</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Encoding</td><td>1 logical qubit in 7 physical qubits</td></tr>
+            <tr><td>Error correction</td><td>Corrects any single-qubit error (both bit-flip and phase-flip)</td></tr>
+            <tr><td>Distance</td><td>3 — corrects up to 1 error, detects up to 2</td></tr>
+            <tr><td>Based on</td><td>Classical [7,4,3] Hamming code (CSS construction)</td></tr>
+            <tr><td>Implementation</td><td>9 CNOT + 4 Hadamard gates; demonstrated on trapped-ion and superconducting platforms (Steane, 1996)</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Surface Codes — The Leading Approach</p>
+        <p>Surface codes are favored by Google, IBM, and Microsoft for large-scale fault-tolerant quantum computing. Physical qubits are arranged on a 2D grid; a <strong>distance-d surface code</strong> encodes 1 logical qubit in ~d² physical qubits and corrects up to ⌊(d−1)/2⌋ errors (Acharya et al., 2024).</p>
+
+        <p><strong>Google Willow (2024) breakthrough:</strong> Distance-7 code on 101 qubits achieved <strong>0.143% ± 0.003%</strong> logical error per cycle. Logical error rate suppressed by factor Λ = 2.14 ± 0.02 when code distance increased by 2. First convincing demonstration of <strong>below-threshold</strong> operation (Acharya et al., 2024).</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Code Type</th><th>Threshold</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Surface code</td><td>~0.5–1% per gate</td><td>Most hardware-compatible</td></tr>
+            <tr><td>Concatenated codes</td><td>~10⁻³–10⁻⁴</td><td>Theoretical; harder experimentally</td></tr>
+            <tr><td>Color codes</td><td>~0.1–0.2%</td><td>Advantages for transversal gates</td></tr>
+          </tbody>
+        </table>
+
+        <div class="mnemonic"><div class="mnemonic-label">Fault-Tolerance Theorem</div>If physical error rates per gate are below threshold p_th (~1% for surface codes), then arbitrarily accurate quantum computation is possible at polynomial overhead cost (Knill et al., 1998; Aharonov &amp; Ben-Or, 1997).</div>
+      </div>
+    </div>
+
+    <!-- 14. Quantum Cryptography & Post-Quantum -->
+    <div class="concept-card fade-in" data-concept="13">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🔐</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Cryptography &amp; Post-Quantum</div>
+          <div class="concept-subtitle">BB84 Protocol · QKD · NIST FIPS 203/204/205 · Lattice Cryptography</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Quantum cryptography uses the laws of physics — rather than computational hardness assumptions — to achieve provably secure communication (Bennett &amp; Brassard, 1984).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">BB84 Protocol (Bennett &amp; Brassard, 1984)</p>
+        <div class="diagram">
+          <div style="color:#06b6d4; margin-bottom:8px; font-size:13px; font-weight:600;">BB84 QKD Protocol Steps:</div>
+          1. Alice prepares photons in random polarization states:
+             Rectilinear (+): → (0) or ↑ (1)
+             Diagonal    (×): ↗ (0) or ↘ (1)
+
+          2. Alice → sends photons → Bob (quantum channel)
+
+          3. Bob measures each photon using random basis (+) or (×)
+
+          4. Sifting: Compare bases over classical channel.
+             Keep only matching-basis bits (~50%) → "sifted key"
+
+          5. Error check: Compare random subset → estimate QBER
+             If QBER > ~11% → ABORT (eavesdropping detected!)
+
+          6. Post-processing: Error correction + privacy amplification
+             → Final secure key
+
+          Security: Heisenberg uncertainty + no-cloning theorem
+                    → ANY eavesdropping introduces detectable errors
+        </div>
+
+        <p><strong>QKD landscape:</strong></p>
+        <table class="comp-table">
+          <thead><tr><th>Protocol</th><th>Year</th><th>Type</th><th>Key Feature</th></tr></thead>
+          <tbody>
+            <tr><td>BB84</td><td>1984</td><td>Prepare-and-measure</td><td>Polarization states (Bennett &amp; Brassard, 1984)</td></tr>
+            <tr><td>B92</td><td>1992</td><td>Prepare-and-measure</td><td>Only 2 non-orthogonal states</td></tr>
+            <tr><td>E91 (Ekert)</td><td>1991</td><td>Entanglement-based</td><td>Bell inequality violation certifies security (Ekert, 1991)</td></tr>
+            <tr><td>SARG04</td><td>2004</td><td>Prepare-and-measure</td><td>Improved vs. photon-number-splitting attacks</td></tr>
+            <tr><td>CV-QKD</td><td>2000s</td><td>Continuous variable</td><td>Gaussian states, standard detectors</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">NIST Post-Quantum Cryptography Standards (August 2024)</p>
+        <table class="comp-table">
+          <thead><tr><th>Standard</th><th>Algorithm</th><th>Type</th><th>Mathematical Basis</th></tr></thead>
+          <tbody>
+            <tr><td>FIPS 203</td><td>ML-KEM (Kyber)</td><td>Key encapsulation</td><td>Module lattice (Learning With Errors)</td></tr>
+            <tr><td>FIPS 204</td><td>ML-DSA (Dilithium)</td><td>Digital signature</td><td>Module lattice</td></tr>
+            <tr><td>FIPS 205</td><td>SLH-DSA (SPHINCS+)</td><td>Digital signature</td><td>Stateless hash-based</td></tr>
+          </tbody>
+        </table>
+        <p>Lattice problems (Learning With Errors, Shortest Vector Problem) are believed hard for both classical and quantum computers — no known quantum speedup. NIST IR 8547 mandates federal migration to PQC by 2025–2026, with full migration by 2035 (NIST, 2024d).</p>
+
+        <p><strong>"Harvest Now, Decrypt Later" (HNDL):</strong> Adversaries store encrypted data today to decrypt once quantum computers arrive. This makes immediate PQC migration critical — even though large-scale quantum computers are years away.</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Dual Strategy</div><strong>PQC</strong> (FIPS 203/204/205) = deploy NOW on existing hardware for software security. <strong>QKD</strong> = deploy for high-assurance point-to-point links (government, finance). Use <strong>hybrid classical+PQC</strong> encryption as a transition measure.</div>
+      </div>
+    </div>
+
+    <!-- 15. Decoherence & Noise -->
+    <div class="concept-card fade-in" data-concept="14">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">📉</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Decoherence &amp; Noise Models</div>
+          <div class="concept-subtitle">T₁/T₂ Times · Depolarizing · Amplitude Damping · Magic State Distillation</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Decoherence is the process by which a quantum system loses its coherent quantum properties through unintended interactions with its environment. It is the <strong>primary obstacle</strong> to building useful quantum computers (Abanin et al., 2019).</p>
+
+        <table class="comp-table">
+          <thead><tr><th>Parameter</th><th>Symbol</th><th>Definition</th><th>Typical Values</th></tr></thead>
+          <tbody>
+            <tr><td>Relaxation time</td><td>T₁</td><td>Time for excited → ground state decay</td><td>Superconducting: 10–500 μs; Ions: ~100 s</td></tr>
+            <tr><td>Dephasing time</td><td>T₂</td><td>Time for phase coherence decay</td><td>T₂ ≤ 2T₁</td></tr>
+            <tr><td>Gate time</td><td>t_gate</td><td>Time to perform one quantum gate</td><td>SC: ~10–100 ns; Ions: ~1–100 μs</td></tr>
+            <tr><td>Coherence ratio</td><td>T₂/t_gate</td><td>Gates possible before decoherence</td><td>Need &gt;10,000 for fault tolerance</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Standard Noise Models</p>
+        <table class="comp-table">
+          <thead><tr><th>Model</th><th>Formula</th><th>Physical Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Depolarizing</td><td>ε(ρ) = (1−p)ρ + p·I/2</td><td>With probability p, qubit replaced by completely mixed state</td></tr>
+            <tr><td>Amplitude damping</td><td>|1⟩ decays to |0⟩</td><td>Models T₁ relaxation (spontaneous emission)</td></tr>
+            <tr><td>Dephasing</td><td>Off-diagonals of ρ decay</td><td>Models T₂ dephasing without energy loss</td></tr>
+            <tr><td>Pauli channel</td><td>Random {I, X, Y, Z} errors</td><td>Standard model for surface code threshold calculations</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Magic state distillation:</strong> Universal fault-tolerant quantum computation requires high-quality T gates (non-Clifford). These cannot be implemented transversally in most codes, requiring distillation of high-fidelity T states from many noisy ones. QuEra and Harvard demonstrated the first logical-level magic state distillation in 2025 — a key milestone (Bluvstein et al., 2024).</p>
+
+        <div class="mnemonic"><div class="mnemonic-label">Key Concept</div>Decoherence is the enemy. T₂/t_gate &gt; 10,000 is the target. Trapped ions have the best coherence times (seconds) but slowest gates. Superconducting qubits are fast but decohere in microseconds. The race is to push error rates below threshold before decoherence destroys the computation.</div>
+      </div>
+    </div>
+
+    <!-- 16. Quantum Hardware -->
+    <div class="concept-card fade-in" data-concept="15">
+      <div class="concept-header" onclick="toggleConcept(this)">
+        <div class="concept-icon">🖥️</div>
+        <div class="concept-title-wrap">
+          <div class="concept-title">Quantum Hardware Platforms</div>
+          <div class="concept-subtitle">IonQ · IBM · Google · PsiQuantum · QuEra — Comparison</div>
+        </div>
+        <div class="concept-chevron">▼</div>
+      </div>
+      <div class="concept-body">
+        <p>Four major physical platforms compete for quantum advantage, each with distinct trade-offs (Duan &amp; Monroe, 2010; Acharya et al., 2024; Strikis et al., 2025; Bluvstein et al., 2024).</p>
+
+        <p style="font-size:14px; font-weight:600; color:#06b6d4; margin: 16px 0 8px;">Platform Comparison</p>
+        <table class="comp-table">
+          <thead><tr><th>Property</th><th>Trapped Ion (IonQ)</th><th>Superconducting (IBM/Google)</th><th>Photonic (PsiQuantum)</th><th>Neutral Atom (QuEra)</th></tr></thead>
+          <tbody>
+            <tr><td>Coherence</td><td style="color:#22c55e;">Excellent (s–min)</td><td>Good (μs–ms)</td><td style="color:#22c55e;">Excellent</td><td style="color:#22c55e;">Excellent (s)</td></tr>
+            <tr><td>Gate Speed</td><td>Slow (μs)</td><td style="color:#22c55e;">Fast (ns)</td><td>Moderate</td><td>Moderate (μs)</td></tr>
+            <tr><td>Fidelity</td><td style="color:#22c55e;">Highest (99.99%)</td><td>High (99.5–99.9%)</td><td>Moderate</td><td>High (99.5%+)</td></tr>
+            <tr><td>Scalability</td><td>Modular</td><td style="color:#22c55e;">CMOS-compatible</td><td style="color:#22c55e;">CMOS-compatible</td><td>Tweezer arrays</td></tr>
+            <tr><td>Temperature</td><td>Room + trap</td><td style="color:#f59e0b;">15 mK (cryo)</td><td style="color:#22c55e;">Room temp</td><td style="color:#22c55e;">Near room temp</td></tr>
+            <tr><td>Connectivity</td><td style="color:#22c55e;">All-to-all</td><td>Limited grid</td><td>Flexible</td><td style="color:#22c55e;">Reconfigurable</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:14px; font-weight:600; color:var(--white); margin: 16px 0 8px;">Key Milestones (2024–2025):</p>
+        <ul style="font-size:13px; color:var(--text-muted); margin: 8px 0 14px 20px; line-height:1.7;">
+          <li><strong>IonQ Forte Enterprise:</strong> Commercially deployed on AWS, Azure, Google Cloud. 99.99% two-qubit fidelity. Targeting &gt;2M physical qubits by end of decade (Duan &amp; Monroe, 2010).</li>
+          <li><strong>IBM Condor/Heron:</strong> 1,000+ qubit processors deployed. Heavy-hex connectivity. Million-qubit target by end of decade.</li>
+          <li><strong>Google Willow (2024):</strong> Below-threshold surface code on 105 qubits. Benchmark: 10²⁵ years on classical supercomputer (Acharya et al., 2024).</li>
+          <li><strong>PsiQuantum (2025):</strong> Silicon photonics modules with 98.9% single-photon detector efficiency. Room-temperature, CMOS-compatible manufacturing (Strikis et al., 2025).</li>
+          <li><strong>Harvard/MIT/QuEra (2025):</strong> 448-atom processor, 96 logical qubits, 400+ logical entangling gates below fault-tolerance threshold. First logical-level magic state distillation (Bluvstein et al., 2024).</li>
+        </ul>
+
+        <div class="mnemonic"><div class="mnemonic-label">Platform Summary</div><strong>IonQ</strong> = highest fidelity, slow gates, cloud-accessible. <strong>IBM/Google</strong> = fastest gates, CMOS scalable, needs cryo. <strong>PsiQuantum</strong> = room temp, photonic, fab-compatible. <strong>QuEra</strong> = reconfigurable, most advanced fault-tolerant demo.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  PART 3: GLIDECART RESEARCH CONTACTS                   -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="part-divider">
+      <div class="part-label">Part 3</div>
+      <div class="part-title">GlideCart Research Contacts</div>
+    </div>
+    <div class="section-label">World-leading researchers relevant to GlideCart's quantum optimization, quantum security, and autonomous navigation</div>
+
+    <div class="researcher-grid">
+      <!-- 1 Eleanor Rieffel -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-a">Quantum Optimization</span>
+        <div class="rc-name">Eleanor G. Rieffel</div>
+        <div class="rc-title">Senior Researcher; Leader, Quantum AI Laboratory (QuAIL)</div>
+        <div class="rc-inst">NASA Ames Research Center</div>
+        <div class="rc-relevance">Leads NASA QuAIL, applying QAOA to real-world optimization (scheduling, routing). Directly applicable to GlideCart's optimal path planning and inventory routing. Co-authored <em>Quantum Computing: A Gentle Introduction</em> (Rieffel &amp; Polak, 2011).</div>
+        <a class="rc-link" href="https://www.nasa.gov/people/eleanor-rieffel/" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 2 Edward Farhi -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-a">Quantum Optimization</span>
+        <div class="rc-name">Edward Farhi</div>
+        <div class="rc-title">Research Scientist</div>
+        <div class="rc-inst">Google Quantum AI / MIT</div>
+        <div class="rc-relevance">Inventor of QAOA — the algorithm directly applicable to GlideCart's Vehicle Routing Problem (VRP). His 2014 paper established QAOA and performance guarantees for combinatorial problems (Farhi et al., 2014).</div>
+        <a class="rc-link" href="https://scholar.google.com/citations?user=DamXbWAAAAAJ" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 3 Daniel Lidar -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-a">Quantum Optimization</span>
+        <div class="rc-name">Daniel Lidar</div>
+        <div class="rc-title">Professor; Director, Center for Quantum Information Science &amp; Technology</div>
+        <div class="rc-inst">University of Southern California</div>
+        <div class="rc-relevance">World leader in quantum computing for optimization and error suppression on NISQ hardware. Critical for practical QAOA deployment for GlideCart's routing on current noisy quantum hardware.</div>
+        <a class="rc-link" href="https://viterbi.usc.edu/directory/faculty/Lidar/Daniel" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 4 Mikhail Lukin -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-b">Quantum Hardware</span>
+        <div class="rc-name">Mikhail Lukin</div>
+        <div class="rc-title">George Vasmer Leverett Professor of Physics; Chief Scientist, QuEra</div>
+        <div class="rc-inst">Harvard University</div>
+        <div class="rc-relevance">Led the 448-qubit neutral atom fault-tolerant demonstration (2025). Reconfigurable all-to-all connectivity is uniquely suited for QAOA circuits required by VRP routing formulations (Bluvstein et al., 2024).</div>
+        <a class="rc-link" href="https://lukin.physics.harvard.edu/" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 5 Christopher Monroe -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-b">Quantum Hardware</span>
+        <div class="rc-name">Christopher Monroe</div>
+        <div class="rc-title">Professor of Physics; Co-Founder, IonQ</div>
+        <div class="rc-inst">University of Maryland</div>
+        <div class="rc-relevance">Co-inventor of the quantum logic gate. IonQ Forte offers 99.99% two-qubit fidelity on AWS/Azure/GCP — accessible for GlideCart quantum optimization experiments without on-premise hardware (Duan &amp; Monroe, 2010).</div>
+        <a class="rc-link" href="https://www.umdphysics.umd.edu/people/faculty/current/item/348-monroe.html" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 6 John Preskill -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-b">Quantum Hardware</span>
+        <div class="rc-name">John Preskill</div>
+        <div class="rc-title">Richard P. Feynman Professor of Theoretical Physics; Director, IQIM</div>
+        <div class="rc-inst">California Institute of Technology</div>
+        <div class="rc-relevance">Coined "quantum supremacy." Leading theorist of quantum error correction. IQIM work on NISQ-era algorithms informs what quantum advantage GlideCart can achieve with current hardware (Preskill, 1998).</div>
+        <a class="rc-link" href="https://www.preskill.caltech.edu" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 7 Stephanie Wehner -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-c">Quantum Cryptography</span>
+        <div class="rc-name">Stephanie Wehner</div>
+        <div class="rc-title">Professor; Director, European Quantum Internet Alliance</div>
+        <div class="rc-inst">QuTech / TU Delft</div>
+        <div class="rc-relevance">World's foremost quantum networking researcher. Developed first quantum network link layer protocol and operating system. Provides blueprint for securing GlideCart retail transactions with quantum-cryptographic primitives (Wehner et al., 2018).</div>
+        <a class="rc-link" href="https://qutech.nl/person/stephanie-wehner/" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 8 Isaac Chuang -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-c">Quantum Cryptography</span>
+        <div class="rc-name">Isaac Chuang</div>
+        <div class="rc-title">Julius A. Stratton Professor of EE and Physics</div>
+        <div class="rc-inst">Massachusetts Institute of Technology</div>
+        <div class="rc-relevance">Co-author of the definitive quantum computing textbook. Pioneered experimental quantum computers. Work on quantum algorithm implementation and entanglement-based cryptography directly applicable to GlideCart's transaction security (Nielsen &amp; Chuang, 2010).</div>
+        <a class="rc-link" href="https://physics.mit.edu/faculty/isaac-chuang/" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 9 Dieter Fox -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-d">Robotics &amp; Navigation</span>
+        <div class="rc-name">Dieter Fox</div>
+        <div class="rc-title">Senior Research Director, Ai2; Professor of Computer Science</div>
+        <div class="rc-inst">Allen Institute for AI / University of Washington</div>
+        <div class="rc-relevance">Co-author of <em>Probabilistic Robotics</em>. Co-developed Monte Carlo Localization (particle filter SLAM) — the industry standard for autonomous robot navigation. Directly applicable to GlideCart's in-store navigation (Fox et al., 1997; Thrun et al., 2005).</div>
+        <a class="rc-link" href="https://homes.cs.washington.edu/~fox/" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 10 Sebastian Thrun -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-d">Robotics &amp; Navigation</span>
+        <div class="rc-name">Sebastian Thrun</div>
+        <div class="rc-title">Founder, Sage AI Labs; Adjunct Professor; Founder of Waymo &amp; Google X</div>
+        <div class="rc-inst">Stanford University / Sage AI Labs</div>
+        <div class="rc-relevance">Father of the modern self-driving vehicle (DARPA Grand Challenge, Waymo). Foundational work on SLAM and autonomous navigation in unstructured environments directly addresses GlideCart's core navigation challenges and commercialization path (Thrun et al., 2005; Dellaert et al., 1999).</div>
+        <a class="rc-link" href="https://robots.stanford.edu" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+
+      <!-- 11 Jeremy O'Brien -->
+      <div class="researcher-card fade-in">
+        <span class="rc-category cat-b">Quantum Hardware</span>
+        <div class="rc-name">Jeremy O'Brien</div>
+        <div class="rc-title">Co-Founder &amp; Executive Chairman</div>
+        <div class="rc-inst">PsiQuantum</div>
+        <div class="rc-relevance">World's foremost photonic quantum computing researcher. Building fault-tolerant photonic quantum computers using silicon photonics. Bridges GlideCart's optical components (LiDAR, sensors) with quantum-secure communications (Strikis et al., 2025).</div>
+        <a class="rc-link" href="https://www.psiquantum.com/prof-jeremy-obrien" target="_blank" rel="noopener">View Profile →</a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  PART 4: APA 7 REFERENCES                               -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="part-divider">
+      <div class="part-label">Part 4</div>
+      <div class="part-title">APA 7 References</div>
+    </div>
+    <div class="section-label">All sources cited throughout this module, formatted per APA 7th edition</div>
+
+    <ol class="ref-list" style="margin-bottom: 48px;">
+      <li>Nielsen, M. A., &amp; Chuang, I. L. (2010). <em>Quantum computation and quantum information</em> (10th anniversary ed.). Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511976667" target="_blank" rel="noopener">https://doi.org/10.1017/CBO9780511976667</a></li>
+
+      <li>Griffiths, D. J., &amp; Schroeter, D. F. (2018). <em>Introduction to quantum mechanics</em> (3rd ed.). Cambridge University Press. <a href="https://doi.org/10.1017/9781316995433" target="_blank" rel="noopener">https://doi.org/10.1017/9781316995433</a></li>
+
+      <li>Preskill, J. (1998). <em>Lecture notes on quantum computation</em> [Lecture notes, Physics 229]. California Institute of Technology. <a href="http://www.theory.caltech.edu/~preskill/ph229/" target="_blank" rel="noopener">http://www.theory.caltech.edu/~preskill/ph229/</a></li>
+
+      <li>Sakurai, J. J., &amp; Napolitano, J. (2017). <em>Modern quantum mechanics</em> (2nd ed.). Cambridge University Press. <a href="https://doi.org/10.1017/9781108499996" target="_blank" rel="noopener">https://doi.org/10.1017/9781108499996</a></li>
+
+      <li>Thrun, S., Burgard, W., &amp; Fox, D. (2005). <em>Probabilistic robotics</em>. MIT Press. <a href="https://mitpress.mit.edu/9780262201629/probabilistic-robotics/" target="_blank" rel="noopener">https://mitpress.mit.edu/9780262201629/probabilistic-robotics/</a></li>
+
+      <li>Rieffel, E., &amp; Polak, W. (2011). <em>Quantum computing: A gentle introduction</em>. MIT Press. <a href="https://mitpress.mit.edu/9780262015066/quantum-computing/" target="_blank" rel="noopener">https://mitpress.mit.edu/9780262015066/quantum-computing/</a></li>
+
+      <li>Bennett, C. H., &amp; Brassard, G. (1984). Quantum cryptography: Public key distribution and coin tossing. <em>Proceedings of IEEE International Conference on Computers, Systems, and Signal Processing</em>, 175–179. <a href="https://doi.org/10.1016/j.tcs.2014.05.025" target="_blank" rel="noopener">https://doi.org/10.1016/j.tcs.2014.05.025</a></li>
+
+      <li>Shor, P. W. (1994). Algorithms for quantum computation: Discrete logarithms and factoring. <em>Proceedings of the 35th Annual Symposium on Foundations of Computer Science</em>, 124–134. <a href="https://doi.org/10.1109/SFCS.1994.365700" target="_blank" rel="noopener">https://doi.org/10.1109/SFCS.1994.365700</a></li>
+
+      <li>Grover, L. K. (1996). A fast quantum mechanical algorithm for database search. <em>Proceedings of the 28th Annual ACM Symposium on Theory of Computing</em>, 212–219. <a href="https://doi.org/10.1145/237814.237866" target="_blank" rel="noopener">https://doi.org/10.1145/237814.237866</a></li>
+
+      <li>Farhi, E., Goldstone, J., &amp; Gutmann, S. (2014). <em>A quantum approximate optimization algorithm</em>. arXiv. <a href="https://arxiv.org/abs/1411.4028" target="_blank" rel="noopener">https://arxiv.org/abs/1411.4028</a></li>
+
+      <li>Peruzzo, A., McClean, J., Shadbolt, P., Yung, M.-H., Zhou, X.-Q., Love, P. J., Aspuru-Guzik, A., &amp; O'Brien, J. L. (2014). A variational eigenvalue solver on a photonic quantum processor. <em>Nature Communications</em>, <em>5</em>, Article 4213. <a href="https://doi.org/10.1038/ncomms5213" target="_blank" rel="noopener">https://doi.org/10.1038/ncomms5213</a></li>
+
+      <li>Steane, A. M. (1996). Error correcting codes in quantum theory. <em>Physical Review Letters</em>, <em>77</em>(5), 793–797. <a href="https://doi.org/10.1103/PhysRevLett.77.793" target="_blank" rel="noopener">https://doi.org/10.1103/PhysRevLett.77.793</a></li>
+
+      <li>Landauer, R. (1961). Irreversibility and heat generation in the computing process. <em>IBM Journal of Research and Development</em>, <em>5</em>(3), 183–191. <a href="https://doi.org/10.1147/rd.53.0183" target="_blank" rel="noopener">https://doi.org/10.1147/rd.53.0183</a></li>
+
+      <li>Bell, J. S. (1964). On the Einstein Podolsky Rosen paradox. <em>Physics Physique Fizika</em>, <em>1</em>(3), 195–200. <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195" target="_blank" rel="noopener">https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195</a></li>
+
+      <li>de Broglie, L. (1925). Recherches sur la théorie des quanta. <em>Annales de physique</em>, <em>10</em>(3), 22–128. <a href="https://doi.org/10.1051/anphys/192510030022" target="_blank" rel="noopener">https://doi.org/10.1051/anphys/192510030022</a></li>
+
+      <li>Ekert, A. K. (1991). Quantum cryptography based on Bell's theorem. <em>Physical Review Letters</em>, <em>67</em>(6), 661–663. <a href="https://doi.org/10.1103/PhysRevLett.67.661" target="_blank" rel="noopener">https://doi.org/10.1103/PhysRevLett.67.661</a></li>
+
+      <li>Acharya, R., Aleiner, I. L., Andersen, T. I., et al. (Google Quantum AI). (2024). Quantum error correction below the surface code threshold. <em>Nature</em>, <em>638</em>, 920–926. <a href="https://doi.org/10.1038/s41586-024-08449-y" target="_blank" rel="noopener">https://doi.org/10.1038/s41586-024-08449-y</a></li>
+
+      <li>Bluvstein, D., Evered, S. J., Geim, A. A., et al. (2024). Logical quantum processor based on reconfigurable atom arrays. <em>Nature</em>, <em>626</em>, 58–65. <a href="https://doi.org/10.1038/s41586-023-06927-3" target="_blank" rel="noopener">https://doi.org/10.1038/s41586-023-06927-3</a></li>
+
+      <li>Strikis, A., Dhand, I., Gimeno-Segovia, M., et al. (PsiQuantum). (2025). A manufacturable platform for photonic quantum computing. <em>Nature</em>, <em>639</em>, 60–69. <a href="https://doi.org/10.1038/s41586-025-08820-7" target="_blank" rel="noopener">https://doi.org/10.1038/s41586-025-08820-7</a></li>
+
+      <li>Duan, L.-M., &amp; Monroe, C. (2010). Colloquium: Quantum networks with trapped ions. <em>Reviews of Modern Physics</em>, <em>82</em>(2), 1209–1224. <a href="https://doi.org/10.1103/RevModPhys.82.1209" target="_blank" rel="noopener">https://doi.org/10.1103/RevModPhys.82.1209</a></li>
+
+      <li>National Institute of Standards and Technology. (2024a). <em>Module-lattice-based key-encapsulation mechanism standard</em> (FIPS 203). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.203" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.FIPS.203</a></li>
+
+      <li>National Institute of Standards and Technology. (2024b). <em>Module-lattice-based digital signature standard</em> (FIPS 204). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.204" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.FIPS.204</a></li>
+
+      <li>National Institute of Standards and Technology. (2024c). <em>Stateless hash-based digital signature standard</em> (FIPS 205). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.205" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.FIPS.205</a></li>
+
+      <li>National Institute of Standards and Technology. (2024d). <em>Initial public draft: Transition to post-quantum cryptography standards</em> (NIST IR 8547). U.S. Department of Commerce. <a href="https://csrc.nist.gov/pubs/ir/8547/ipd" target="_blank" rel="noopener">https://csrc.nist.gov/pubs/ir/8547/ipd</a></li>
+
+      <li>Knill, E., Laflamme, R., &amp; Zurek, W. H. (1998). Resilient quantum computation: Error models and thresholds. <em>Proceedings of the Royal Society of London A</em>, <em>454</em>, 365–396. <a href="https://doi.org/10.1098/rspa.1998.0166" target="_blank" rel="noopener">https://doi.org/10.1098/rspa.1998.0166</a></li>
+
+      <li>Aharonov, D., &amp; Ben-Or, M. (1997). Fault-tolerant quantum computation with constant error rate. <em>Proceedings of the 29th Annual ACM Symposium on Theory of Computing</em>, 176–188. <a href="https://doi.org/10.1145/258533.258579" target="_blank" rel="noopener">https://doi.org/10.1145/258533.258579</a></li>
+
+      <li>Calderbank, A. R., &amp; Shor, P. W. (1996). Good quantum error-correcting codes exist. <em>Physical Review A</em>, <em>54</em>(2), 1098–1105. <a href="https://doi.org/10.1103/PhysRevA.54.1098" target="_blank" rel="noopener">https://doi.org/10.1103/PhysRevA.54.1098</a></li>
+
+      <li>Abanin, D. A., Altman, E., Bloch, I., &amp; Serbyn, M. (2019). Colloquium: Many-body localization, thermalization, and entanglement. <em>Reviews of Modern Physics</em>, <em>91</em>(2), Article 021001. <a href="https://doi.org/10.1103/RevModPhys.91.021001" target="_blank" rel="noopener">https://doi.org/10.1103/RevModPhys.91.021001</a></li>
+
+      <li>Biamonte, J., Wittek, P., Pancotti, N., Rebentrost, P., Wiebe, N., &amp; Lloyd, S. (2017). Quantum machine learning. <em>Nature</em>, <em>549</em>, 195–202. <a href="https://doi.org/10.1038/nature23474" target="_blank" rel="noopener">https://doi.org/10.1038/nature23474</a></li>
+
+      <li>Di Vincenzo, D. P. (1995). Quantum computation. <em>Science</em>, <em>270</em>(5234), 255–261. <a href="https://doi.org/10.1126/science.270.5234.255" target="_blank" rel="noopener">https://doi.org/10.1126/science.270.5234.255</a></li>
+
+      <li>Bérut, A., Arakelyan, A., Petrosyan, A., Ciliberto, S., Dillenschneider, R., &amp; Lutz, E. (2012). Experimental verification of Landauer's principle linking information and thermodynamics. <em>Nature</em>, <em>483</em>, 187–189. <a href="https://doi.org/10.1038/nature10872" target="_blank" rel="noopener">https://doi.org/10.1038/nature10872</a></li>
+
+      <li>Kocher, P., Jaffe, J., &amp; Jun, B. (1999). Differential power analysis. In M. Wiener (Ed.), <em>Advances in Cryptology — CRYPTO 1999</em> (LNCS, Vol. 1666, pp. 388–397). Springer. <a href="https://doi.org/10.1007/3-540-48405-1_25" target="_blank" rel="noopener">https://doi.org/10.1007/3-540-48405-1_25</a></li>
+
+      <li>Seabaugh, A. C., &amp; Zhang, Q. (2010). Low-voltage tunnel transistors for beyond CMOS logic. <em>Proceedings of the IEEE</em>, <em>98</em>(12), 2095–2110. <a href="https://doi.org/10.1109/JPROC.2010.2070470" target="_blank" rel="noopener">https://doi.org/10.1109/JPROC.2010.2070470</a></li>
+
+      <li>Fox, D., Burgard, W., &amp; Thrun, S. (1997). The dynamic window approach to collision avoidance. <em>IEEE Robotics &amp; Automation Magazine</em>, <em>4</em>(1), 23–33. <a href="https://doi.org/10.1109/100.580977" target="_blank" rel="noopener">https://doi.org/10.1109/100.580977</a></li>
+
+      <li>Dellaert, F., Fox, D., Burgard, W., &amp; Thrun, S. (1999). Monte Carlo localization for mobile robots. <em>Proceedings of IEEE International Conference on Robotics and Automation</em>, 1322–1328. <a href="https://doi.org/10.1109/ROBOT.1999.772544" target="_blank" rel="noopener">https://doi.org/10.1109/ROBOT.1999.772544</a></li>
+
+      <li>Wehner, S., Elkouss, D., &amp; Hanson, R. (2018). Quantum internet: A vision for the road ahead. <em>Science</em>, <em>362</em>(6412), Article eaam9288. <a href="https://doi.org/10.1126/science.aam9288" target="_blank" rel="noopener">https://doi.org/10.1126/science.aam9288</a></li>
+
+      <li>Duan, L.-M., Lukin, M. D., Cirac, J. I., &amp; Zoller, P. (2001). Long-distance quantum communication with atomic ensembles and linear optics. <em>Nature</em>, <em>414</em>, 413–418. <a href="https://doi.org/10.1038/35106500" target="_blank" rel="noopener">https://doi.org/10.1038/35106500</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUIZ                                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="quiz-section">
+  <div class="container">
+    <div class="quiz-header-row">
+      <div class="quiz-title">🧪 Knowledge Check</div>
+      <div class="quiz-counter" id="quizCounter">0 / 12 answered</div>
+    </div>
+    <div id="quizContainer"></div>
+    <div class="score-banner" id="scoreBanner">
+      <div class="score-num" id="scoreNum">0<span>/12</span></div>
+      <div class="score-label">Physics &amp; Quantum Computing Quiz</div>
+      <div class="score-grade" id="scoreGrade"></div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="retakeQuiz()">Retake Quiz</button>
+        <a href="index.html" class="btn btn-outline">All Modules</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Logical Learning · Applied Physics · Anél Henning</p>
+        <p style="margin-top:4px;"><a href="crypto.html">← Cryptography</a> · <a href="index.html">All Modules</a></p>
+      </div>
+      <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "A qubit in the state |ψ⟩ = α|0⟩ + β|1⟩ is measured. What happens?",
+    opts: ["It remains in superposition", "It collapses to |0⟩ or |1⟩ with probabilities |α|² and |β|²", "Both qubits become entangled", "The amplitudes double"],
+    ans: 1,
+    exp: "Upon measurement, a qubit in superposition <strong>collapses</strong> to |0⟩ with probability |α|² or |1⟩ with probability |β|². This collapse is irreversible — the superposition is destroyed (Nielsen & Chuang, 2010)."
+  },
+  {
+    q: "Two qubits in the Bell state |Φ⁺⟩ = (1/√2)(|00⟩ + |11⟩) are separated by 100 km. Qubit A is measured as |1⟩. What is qubit B's state?",
+    opts: ["|0⟩", "(|0⟩+|1⟩)/√2", "|1⟩", "Unknown until measured independently"],
+    ans: 2,
+    exp: "In the Bell state |Φ⁺⟩, measuring qubit A as |1⟩ <strong>instantaneously collapses</strong> qubit B to |1⟩ — regardless of distance. This is quantum entanglement. However, no information is transmitted faster than light (Bell, 1964)."
+  },
+  {
+    q: "Shor's algorithm threatens RSA encryption because it can:",
+    opts: ["Search unsorted databases in O(√N) time", "Factor large integers in polynomial time", "Clone quantum states for key recovery", "Decrypt AES-256 in constant time"],
+    ans: 1,
+    exp: "<strong>Shor's algorithm</strong> factors large integers in polynomial time O((log N)²), breaking RSA which relies on factoring difficulty. Grover's does O(√N) search. The no-cloning theorem prevents quantum state copying (Shor, 1994)."
+  },
+  {
+    q: "Grover's algorithm provides a quadratic speedup for unstructured search. What is the security implication for AES-256?",
+    opts: ["AES-256 is completely broken", "AES-256 retains 128-bit quantum security", "AES-256 retains 64-bit quantum security", "Grover's cannot be applied to symmetric encryption"],
+    ans: 1,
+    exp: "Grover's algorithm effectively <strong>halves the key length</strong> for brute-force attacks. AES-256 (256-bit key) retains 128-bit quantum security — still considered secure. AES-128 would drop to only 64-bit security (Grover, 1996)."
+  },
+  {
+    q: "QAOA (Quantum Approximate Optimization Algorithm) is relevant to GlideCart because it can:",
+    opts: ["Break the encryption on payment terminals", "Find optimal delivery routes via combinatorial optimization", "Simulate molecular structures for battery design", "Measure quantum states without collapse"],
+    ans: 1,
+    exp: "<strong>QAOA</strong> is a hybrid quantum-classical algorithm for combinatorial optimization. It can solve Vehicle Routing Problems (VRP) and Traveling Salesman Problems — directly applicable to finding optimal paths for GlideCart (Farhi et al., 2014)."
+  },
+  {
+    q: "Which NIST post-quantum standard provides key encapsulation based on module lattice (Learning With Errors)?",
+    opts: ["FIPS 204 (ML-DSA / Dilithium)", "FIPS 205 (SLH-DSA / SPHINCS+)", "FIPS 203 (ML-KEM / Kyber)", "FIPS 140-3"],
+    ans: 2,
+    exp: "<strong>FIPS 203 (ML-KEM / CRYSTALS-Kyber)</strong> is the NIST standard for lattice-based key encapsulation. FIPS 204 is for digital signatures (Dilithium). FIPS 205 is hash-based signatures (SPHINCS+). FIPS 140-3 is for cryptographic module validation (NIST, 2024a)."
+  },
+  {
+    q: "In the BB84 quantum key distribution protocol, how is eavesdropping detected?",
+    opts: ["The key changes color when observed", "The quantum bit error rate (QBER) exceeds ~11%", "Eve's quantum computer decrypts the sifted key", "Entangled photons spontaneously annihilate"],
+    ans: 1,
+    exp: "In BB84, an eavesdropper must measure photons, which <strong>disturbs their quantum state</strong> (Heisenberg uncertainty principle). This introduces errors detectable by comparing a random subset of the sifted key. If QBER exceeds ~11%, the protocol aborts (Bennett & Brassard, 1984)."
+  },
+  {
+    q: "The fault-tolerance threshold for surface codes is approximately:",
+    opts: ["0.001% per gate", "0.01% per gate", "1% per gate", "10% per gate"],
+    ans: 2,
+    exp: "The surface code fault-tolerance threshold is approximately <strong>~1% per gate</strong>. If physical error rates are below this threshold, quantum error correction improves with larger code distance. Google Willow demonstrated below-threshold operation in 2024 (Acharya et al., 2024; Knill et al., 1998)."
+  },
+  {
+    q: "On the Bloch sphere, the state |+⟩ = (|0⟩+|1⟩)/√2 is located at:",
+    opts: ["The north pole (+Z)", "The south pole (−Z)", "The +X axis (equator)", "Inside the sphere (mixed state)"],
+    ans: 2,
+    exp: "On the Bloch sphere, |0⟩ is the north pole, |1⟩ is the south pole, and superposition states like |+⟩ = (|0⟩+|1⟩)/√2 lie on the <strong>equator</strong>. Specifically, |+⟩ is at the +X axis (θ=π/2, φ=0). Mixed states are inside the sphere (Nielsen & Chuang, 2010)."
+  },
+  {
+    q: "Which quantum gate creates a Bell state when applied after a Hadamard gate on |00⟩?",
+    opts: ["Pauli-Z", "SWAP", "CNOT", "Toffoli"],
+    ans: 2,
+    exp: "Applying Hadamard to the first qubit of |00⟩ creates (|0⟩+|1⟩)|0⟩/√2. Then the <strong>CNOT gate</strong> (controlled-NOT) produces (|00⟩+|11⟩)/√2 — the Bell state |Φ⁺⟩. H + CNOT is the standard Bell state preparation circuit (Nielsen & Chuang, 2010)."
+  },
+  {
+    q: "T₁ and T₂ are characteristic decoherence times. What does a high T₂/t_gate ratio indicate?",
+    opts: ["The qubit is very noisy", "Many quantum gates can execute before decoherence destroys coherence", "The qubit operates at high temperature", "The error correction code has high distance"],
+    ans: 1,
+    exp: "T₂/t_gate is the <strong>coherence ratio</strong> — the number of gates possible before decoherence. A ratio >10,000 is needed for fault-tolerant operation. Trapped ions have the highest ratio due to long coherence times, despite slower gates (Abanin et al., 2019)."
+  },
+  {
+    q: "IonQ's trapped-ion quantum computers achieve the highest two-qubit gate fidelity at 99.99%. Compared to IBM's superconducting qubits, their main trade-off is:",
+    opts: ["Lower qubit count", "Slower gate speed (microseconds vs. nanoseconds)", "Requires colder temperatures", "Cannot be accessed via cloud"],
+    ans: 1,
+    exp: "Trapped-ion gates operate in <strong>microseconds</strong> while superconducting gates run in <strong>nanoseconds</strong> — roughly 1,000× slower. However, ions compensate with much longer coherence times and all-to-all connectivity. IonQ is available on AWS, Azure, and Google Cloud (Duan & Monroe, 2010)."
+  }
+];
+
+let answered = 0, correct = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  answered = 0; correct = 0;
+  updateCounter();
+  document.getElementById('scoreBanner').classList.remove('show');
+  QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card fade-in';
+    card.id = 'qcard-' + i;
+    card.innerHTML = `<div class="q-num">Q${i+1} of ${QUESTIONS.length}</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o,j)=>`<button class="opt" onclick="answer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}</div><div class="explanation" id="exp-${i}">${q.exp}</div>`;
+    container.appendChild(card);
+  });
+  setTimeout(() => document.querySelectorAll('.quiz-card.fade-in').forEach((c,i) => setTimeout(()=>c.classList.add('visible'), i*60)), 100);
+}
+
+function answer(qIdx, optIdx) {
+  const q = QUESTIONS[qIdx];
+  const card = document.getElementById('qcard-' + qIdx);
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(o => o.disabled = true);
+  opts[optIdx].classList.add(optIdx === q.ans ? 'correct' : 'wrong');
+  if (optIdx !== q.ans) opts[q.ans].classList.add('correct');
+  document.getElementById('exp-' + qIdx).classList.add('show');
+  answered++;
+  if (optIdx === q.ans) correct++;
+  updateCounter();
+  if (answered === QUESTIONS.length) setTimeout(showScore, 600);
+}
+
+function updateCounter() { document.getElementById('quizCounter').textContent = `${answered} / ${QUESTIONS.length} answered`; }
+
+function showScore() {
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('scoreNum').innerHTML = `${correct}<span>/${QUESTIONS.length}</span>`;
+  let grade, color;
+  if (pct >= 90) { grade = '🏆 Excellent — Quantum-ready!'; color = '#22c55e'; }
+  else if (pct >= 75) { grade = '✅ Good — Review missed concepts'; color = '#f59e0b'; }
+  else if (pct >= 60) { grade = '📖 Keep studying — Focus on explanations'; color = '#f59e0b'; }
+  else { grade = '🔄 Needs work — Re-read all concepts first'; color = '#ef4444'; }
+  document.getElementById('scoreGrade').innerHTML = `<span style="color:${color}">${grade}</span>`;
+  document.getElementById('scoreBanner').classList.add('show');
+  document.getElementById('scoreBanner').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  localStorage.setItem('secplus_score_physics', JSON.stringify({ correct, total: QUESTIONS.length }));
+}
+
+function retakeQuiz() { buildQuiz(); window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 80, behavior: 'smooth' }); }
+
+function toggleConcept(header) {
+  const card = header.parentElement;
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open', !wasOpen);
+  if (!wasOpen) { conceptsSeen.add(parseInt(card.dataset.concept)); updateConceptProgress(); }
+}
+
+const conceptsSeen = new Set();
+function updateConceptProgress() {
+  const total = document.querySelectorAll('.concept-card').length;
+  document.getElementById('modProgress').style.width = (conceptsSeen.size / total * 100) + '%';
+  document.getElementById('modProgressLabel').textContent = `${conceptsSeen.size} / ${total} concepts`;
+}
+
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+buildQuiz();
+</script>
+<script src="tts.js"></script>
+</body>
+</html>
