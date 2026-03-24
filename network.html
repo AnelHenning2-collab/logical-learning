@@ -26,7 +26,7 @@
 <body>
 <nav><div class="container"><div class="nav-inner">
   <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
-  <div class="nav-links"><a href="threats.html">Threats</a><a href="crypto.html">Cryptography</a><a href="network.html" class="active">Network</a><a href="identity.html">Identity</a><a href="logika-learning.html">Logika Learng</a><a href="cornell-notes.html">Cornell Notes</a><a href="ui-prototypes.html">UI Prototypes</a></div>
+  <div class="nav-links"><a href="threats.html">Threats</a><a href="crypto.html">Cryptography</a><a href="network.html" class="active">Network</a><a href="identity.html">Identity</a><a href="physics.html">Physics</a><a href="logika-learning.html">Logika Learng</a><a href="cornell-notes.html">Cornell Notes</a><a href="ui-prototypes.html">UI Prototypes</a></div>
 </div></div></nav>
 
 <header class="module-header"><div class="container">
@@ -58,6 +58,7 @@
           <tr><td>Host-based</td><td>Traffic to/from one specific host</td><td>Software on endpoint (Windows Defender Firewall)</td></tr>
         </tbody>
       </table>
+      <p>Firewalls are broadly categorized by the layers of the OSI model they inspect and the degree of contextual awareness they maintain (Scarfone &amp; Hoffman, 2009). Packet-filtering firewalls operate at Layers 3 and 4 and evaluate each packet independently without session context, making them fast but unable to detect attacks spread across multiple packets (Scarfone &amp; Hoffman, 2009). Stateful inspection firewalls improve on this by maintaining a connection state table, tracking the full TCP handshake to distinguish legitimate session traffic from unsolicited packets (Stallings, 2017). Next-generation firewalls (NGFWs) extend stateful inspection with deep packet inspection and application-layer visibility, enabling policy enforcement based on application identity rather than port alone (Cisco, 2024). Web application firewalls (WAFs) specifically target Layer 7 HTTP/HTTPS traffic, protecting against OWASP Top 10 threats including SQL injection and cross-site scripting (OWASP Foundation, 2021). Host-based firewalls provide a final layer of defense on individual endpoints, complementing network-level controls (CompTIA, 2023).</p>
       <div class="mnemonic"><div class="mnemonic-label">Exam Rule</div>WAF = specifically web (HTTP/HTTPS). NGFW = all traffic, deep inspection. When the scenario mentions "web application attacks" → WAF. When it says "network perimeter with app visibility" → NGFW.</div>
     </div>
   </div>
@@ -80,6 +81,7 @@
           <tr><td>Detection method — Anomaly/Heuristic</td><td>Baseline behavior, detects deviations</td><td>Same — can catch zero-days</td></tr>
         </tbody>
       </table>
+      <p>Intrusion detection and prevention systems (IDPS) monitor network traffic for signs of malicious activity using two primary detection approaches (Scarfone &amp; Mell, 2007). Signature-based detection compares traffic against a database of known attack patterns, offering high accuracy for documented threats but no coverage for zero-day exploits (Scarfone &amp; Mell, 2007). Anomaly-based detection establishes a behavioral baseline and flags deviations, enabling detection of novel attacks at the cost of higher false-positive rates (Stallings, 2017). An IDS is deployed out-of-band — receiving a copy of traffic via a SPAN port or tap — and responds to threats with alerts only, leaving traffic unaffected (Scarfone &amp; Mell, 2007). An IPS is placed inline so all traffic traverses it, enabling active blocking; however, a false positive in an IPS can disrupt legitimate services, a key operational trade-off tested on the Security+ exam (CompTIA, 2023).</p>
       <div class="mnemonic"><div class="mnemonic-label">One-Liner Rule</div>IDS = <strong>I</strong> <strong>D</strong>etect and <strong>S</strong>hout (alert only). IPS = <strong>I</strong> <strong>P</strong>revent and <strong>S</strong>top (blocks inline). If the scenario says "notified but traffic continued" → IDS. If it says "traffic was blocked" → IPS.</div>
     </div>
   </div>
@@ -92,7 +94,7 @@
       <div class="concept-chevron">▼</div>
     </div>
     <div class="concept-body">
-      <p>A <strong>DMZ (Demilitarized Zone)</strong> is a network segment that sits between the public internet and the internal private network. Public-facing servers (web, email, DNS) live here so a compromise doesn't directly reach internal systems.</p>
+      <p>A <strong>DMZ (Demilitarized Zone)</strong> is a network segment that sits between the public internet and the internal private network. Public-facing servers (web, email, DNS) live here so a compromise doesn't directly reach internal systems. The dual-firewall DMZ architecture is a foundational network security pattern, placing the outer firewall between the internet and DMZ and the inner firewall between the DMZ and the internal LAN (Scarfone &amp; Hoffman, 2009).</p>
       <div class="net-diagram">
         <span class="device">Internet</span> <span class="arrow">→</span> [<span class="zone">Outer Firewall</span>] <span class="arrow">→</span> <span class="zone">DMZ</span> (Web Server, Email, DNS)<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span><br>
@@ -100,8 +102,8 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">↓</span><br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="zone">Internal LAN</span> (DB, HR, Finance)
       </div>
-      <p><strong>VLANs</strong> logically segment a physical network — a compromised device in VLAN 10 (users) cannot directly reach VLAN 20 (servers) without going through a router/firewall. <strong>Microsegmentation</strong> takes this further — each workload gets its own segment.</p>
-      <p>An <strong>air gap</strong> is physical isolation — no network connection at all. Used for top-secret or critical infrastructure systems.</p>
+      <p><strong>VLANs</strong> logically segment a physical network — a compromised device in VLAN 10 (users) cannot directly reach VLAN 20 (servers) without going through a router/firewall (Stallings, 2017). <strong>Microsegmentation</strong> extends this principle to individual workloads, enforcing granular east-west traffic policies within a data center or cloud environment; this supports Zero Trust architectures in which no traffic is implicitly trusted regardless of its network origin (SANS Institute, 2024).</p>
+      <p>An <strong>air gap</strong> is physical isolation — no network connection at all. Used for top-secret or critical infrastructure systems where even a compromised network segment must not reach the protected asset (CompTIA, 2023).</p>
     </div>
   </div>
 
@@ -123,8 +125,8 @@
           <tr><td>Full Tunneling</td><td>Any</td><td>ALL traffic routed through VPN — more secure, slower</td></tr>
         </tbody>
       </table>
-      <p><strong>IPSec modes:</strong> <strong>Transport mode</strong> encrypts only the payload (used for host-to-host). <strong>Tunnel mode</strong> encrypts the entire original packet (used for site-to-site VPNs).</p>
-      <div class="mnemonic"><div class="mnemonic-label">Exam Trap</div>Split tunneling is a <strong>security risk</strong> — a compromised endpoint can access both the internet AND the corporate network simultaneously. The exam expects you to recommend full tunnel or to flag split tunneling as a risk.</div>
+      <p>IPSec is a framework of open standards that provides confidentiality, integrity, and authentication for IP-layer communications (Kent &amp; Seo, 2005). The Internet Key Exchange (IKE) protocol is used to negotiate cryptographic parameters and establish security associations between peers (Barker et al., 2020). <strong>IPSec modes:</strong> <strong>Transport mode</strong> encrypts only the payload (used for host-to-host communications). <strong>Tunnel mode</strong> encapsulates the entire original IP packet under a new IP header, protecting both payload and original headers — the standard mode for site-to-site VPNs (Barker et al., 2020). SSL/TLS VPNs operate over port 443 using the TLS protocol; TLS 1.3 (RFC 8446) significantly reduces handshake latency and removes deprecated cipher suites compared to earlier versions (Rescorla, 2018).</p>
+      <div class="mnemonic"><div class="mnemonic-label">Exam Trap</div>Split tunneling is a <strong>security risk</strong> — a compromised endpoint can access both the internet AND the corporate network simultaneously. The exam expects you to recommend full tunnel or to flag split tunneling as a risk (CompTIA, 2023).</div>
     </div>
   </div>
 
@@ -146,8 +148,9 @@
           <tr><td>802.1X / EAP</td><td>Varies by EAP type</td><td style="color:#22c55e;">Enterprise — per-user authentication via RADIUS server.</td></tr>
         </tbody>
       </table>
-      <p><strong>Evil Twin attack:</strong> Attacker sets up a rogue AP with the same SSID as a legitimate network. Users connect thinking it's real — MitM. Mitigated by 802.1X enterprise auth.</p>
-      <p><strong>Deauthentication attack:</strong> Attacker sends deauth frames to disconnect users. Part of WPA2 cracking workflow — forces reconnect to capture handshake for offline cracking.</p>
+      <p>NIST guidance on securing wireless LANs recommends WPA2 with AES-CCMP as a minimum standard, with WPA2-Enterprise (802.1X/EAP) preferred over WPA2-Personal for organizational deployments (Souppaya &amp; Scarfone, 2012). WPA3 was introduced by the Wi-Fi Alliance in 2018 to address WPA2 weaknesses; it replaces the Pre-Shared Key (PSK) exchange with Simultaneous Authentication of Equals (SAE), which provides forward secrecy and resistance to offline dictionary attacks (Wi-Fi Alliance, 2018). The urgency for WPA3 was partly driven by the 2017 KRACK (Key Reinstallation Attack) disclosure, in which Vanhoef and Piessens demonstrated that the WPA2 four-way handshake is vulnerable to nonce reuse, enabling an attacker within radio range to decrypt traffic without knowing the pre-shared key (Vanhoef &amp; Piessens, 2017). 802.1X provides port-based network access control, requiring successful EAP authentication to a RADIUS server before any traffic is forwarded — an effective mitigation against both evil twin attacks and unauthorized device access (IEEE, 2020).</p>
+      <p><strong>Evil Twin attack:</strong> Attacker sets up a rogue AP with the same SSID as a legitimate network. Users connect thinking it's real — MitM. Mitigated by 802.1X enterprise auth, which requires mutual certificate validation (Souppaya &amp; Scarfone, 2012).</p>
+      <p><strong>Deauthentication attack:</strong> Attacker sends deauth frames to disconnect users. Part of WPA2 cracking workflow — forces reconnect to capture handshake for offline cracking (Vanhoef &amp; Piessens, 2017).</p>
     </div>
   </div>
 
@@ -173,10 +176,33 @@
         <div class="port-item"><div class="port-num">1433</div><div class="port-svc">Microsoft SQL Server</div></div>
         <div class="port-item"><div class="port-num">161/162</div><div class="port-svc">SNMP — network monitoring (UDP)</div></div>
       </div>
-      <div class="mnemonic"><div class="mnemonic-label">Risk Ports</div>Telnet (23), FTP (21), HTTP (80), SNMP v1/2 (161) are all unencrypted. The exam will ask you to replace these: Telnet→SSH, FTP→SFTP, HTTP→HTTPS, SNMPv1→SNMPv3.</div>
+      <p>The CompTIA Security+ SY0-701 exam requires candidates to identify insecure protocols and their secure replacements as part of network hardening (CompTIA, 2023). Port 443 carries HTTPS traffic secured by TLS; TLS 1.3 (Rescorla, 2018) is the current recommended version, having deprecated vulnerable cipher suites present in TLS 1.2 and earlier. Firewall policy should deny inbound access to high-risk ports such as 23 (Telnet), 21 (FTP), and 161/162 (SNMPv1/v2) at the network perimeter while permitting only necessary services (Scarfone &amp; Hoffman, 2009). IPSec VPN traffic typically traverses UDP port 500 (IKE) and 4500 (NAT traversal), which must be permitted in firewall rules for site-to-site connectivity (Barker et al., 2020).</p>
+      <div class="mnemonic"><div class="mnemonic-label">Risk Ports</div>Telnet (23), FTP (21), HTTP (80), SNMP v1/2 (161) are all unencrypted. The exam will ask you to replace these: Telnet→SSH, FTP→SFTP, HTTP→HTTPS, SNMPv1→SNMPv3 (CompTIA, 2023).</div>
     </div>
   </div>
 
+</div></section>
+
+<!-- References -->
+<section class="concepts"><div class="container">
+  <div class="section-label">References — APA 7th Edition</div>
+  <div style="background:rgba(13,19,38,0.7);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Barker, E., Dang, Q., Frankel, S., Scarfone, K., &amp; Wouters, P. (2020). <em>Guide to IPsec VPNs</em> (NIST Special Publication 800-77 Rev. 1). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-77r1" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.6028/NIST.SP.800-77r1</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Cichonski, J., Franklin, J. M., &amp; Bartock, M. (2017). <em>Guide to LTE security</em> (NIST Special Publication 800-187). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-187" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.6028/NIST.SP.800-187</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Cisco. (2024). <em>What is a next-generation firewall (NGFW)?</em> <a href="https://www.cisco.com/site/us/en/learn/topics/security/what-is-a-next-generation-firewall.html" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://www.cisco.com/site/us/en/learn/topics/security/what-is-a-next-generation-firewall.html</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">CompTIA. (2023). <em>CompTIA Security+ SY0-701 exam objectives</em>. <a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">IEEE. (2020). <em>IEEE standard for local and metropolitan area networks — port-based network access control</em> (IEEE Std 802.1X-2020). Institute of Electrical and Electronics Engineers. <a href="https://doi.org/10.1109/IEEESTD.2020.9093580" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.1109/IEEESTD.2020.9093580</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Kent, S., &amp; Seo, K. (2005). <em>Security architecture for the Internet Protocol</em> (RFC 4301). Internet Engineering Task Force. <a href="https://datatracker.ietf.org/doc/html/rfc4301" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://datatracker.ietf.org/doc/html/rfc4301</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">OWASP Foundation. (2021). <em>Web Application Firewall</em>. <a href="https://owasp.org/www-community/Web_Application_Firewall" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://owasp.org/www-community/Web_Application_Firewall</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Rescorla, E. (2018). <em>The Transport Layer Security (TLS) protocol version 1.3</em> (RFC 8446). Internet Engineering Task Force. <a href="https://datatracker.ietf.org/doc/html/rfc8446" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://datatracker.ietf.org/doc/html/rfc8446</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">SANS Institute. (2024). <em>Best practices for securing your network with Zero Trust Network Access</em>. <a href="https://www.sans.org/blog/best-practices-for-securing-your-network-with-zero-trust-network-access" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://www.sans.org/blog/best-practices-for-securing-your-network-with-zero-trust-network-access</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Scarfone, K., &amp; Hoffman, P. (2009). <em>Guidelines on firewalls and firewall policy</em> (NIST Special Publication 800-41 Rev. 1). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-41r1" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.6028/NIST.SP.800-41r1</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Scarfone, K., &amp; Mell, P. (2007). <em>Guide to intrusion detection and prevention systems (IDPS)</em> (NIST Special Publication 800-94). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-94" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.6028/NIST.SP.800-94</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Souppaya, M., &amp; Scarfone, K. (2012). <em>Guidelines for securing wireless local area networks (WLANs)</em> (NIST Special Publication 800-153). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-153" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.6028/NIST.SP.800-153</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Stallings, W. (2017). <em>Network security essentials: Applications and standards</em> (6th ed.). Pearson.</p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:10px;">Vanhoef, M., &amp; Piessens, F. (2017). Key reinstallation attacks: Forcing nonce reuse in WPA2. <em>Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security (CCS '17)</em>, 1313–1328. <a href="https://doi.org/10.1145/3133956.3134027" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://doi.org/10.1145/3133956.3134027</a></p>
+    <p style="padding-left:2em;text-indent:-2em;margin-bottom:0;">Wi-Fi Alliance. (2018). <em>Wi-Fi certified WPA3 specification</em>. <a href="https://www.wi-fi.org/file/wpa3-specification" target="_blank" rel="noopener noreferrer" style="color:var(--mod-color);">https://www.wi-fi.org/file/wpa3-specification</a></p>
+  </div>
 </div></section>
 
 <section class="quiz-section"><div class="container">

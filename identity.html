@@ -56,6 +56,36 @@
   .dir-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
   .dir-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
   .dir-tag { display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 6px; background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+
+  /* References section */
+  .ref-list { list-style: none; padding: 0; counter-reset: ref; }
+  .ref-list li {
+    counter-increment: ref; padding: 10px 0 10px 40px; position: relative;
+    font-size: 13px; color: var(--text-muted); line-height: 1.65;
+    border-bottom: 1px solid rgba(245,158,11,0.06);
+  }
+  .ref-list li::before {
+    content: counter(ref) ".";
+    position: absolute; left: 0; top: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #f59e0b; font-weight: 600; width: 30px; text-align: right;
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li a { color: #f59e0b; text-decoration: none; word-break: break-all; }
+  .ref-list li a:hover { text-decoration: underline; }
+  .ref-list li em { font-style: italic; color: var(--white); }
+
+  .ref-section-divider {
+    padding: 32px 0 12px; margin-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .ref-section-divider .ref-part-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.12em; color: #f59e0b;
+  }
+  .ref-section-divider .ref-part-title {
+    font-size: 22px; font-weight: 700; color: var(--white); margin-top: 4px;
+  }
 </style>
 </head>
 <body>
@@ -71,6 +101,7 @@
         <a href="logika-learning.html">Logika Learng</a>
         <a href="cornell-notes.html">Cornell Notes</a>
         <a href="ui-prototypes.html">UI Prototypes</a>
+        <a href="physics.html">Physics</a>
       </div>
     </div>
   </div>
@@ -105,7 +136,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p><strong>Authentication</strong> proves you are who you claim to be. The exam categorizes auth into five factor types — know each category and its examples cold.</p>
+        <p><strong>Authentication</strong> proves you are who you claim to be. The exam categorizes auth into five factor types — know each category and its examples cold (National Institute of Standards and Technology [NIST], 2017; CompTIA, 2023).</p>
         <div class="factor-grid">
           <div class="factor-card">
             <div class="factor-icon">🧠</div>
@@ -138,7 +169,7 @@
             <div class="factor-ex">Typing cadence, signature dynamics, mouse movement patterns</div>
           </div>
         </div>
-        <p><strong>MFA</strong> requires at least two factors from <em>different categories</em>. Password + PIN is NOT MFA (both are "something you know"). Password + OTP app is MFA.</p>
+        <p><strong>MFA</strong> requires at least two factors from <em>different categories</em> (NIST, 2017). Password + PIN is NOT MFA (both are "something you know"). Password + OTP app is MFA. Behavioral factors such as typing cadence and signature dynamics represent an emerging category of continuous authentication (Stallings &amp; Brown, 2018).</p>
         <div class="tag-wrap">
           <span class="tag amber">TOTP</span><span class="tag amber">HOTP</span><span class="tag amber">Push Notification</span><span class="tag amber">Hardware Token</span><span class="tag amber">Biometric</span>
         </div>
@@ -157,7 +188,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p><strong>Single Sign-On (SSO)</strong> lets users authenticate once and access multiple systems without re-entering credentials. The key is understanding which protocol does what.</p>
+        <p><strong>Single Sign-On (SSO)</strong> lets users authenticate once and access multiple systems without re-entering credentials (NIST, 2017). The key is understanding which protocol does what.</p>
         <table class="comp-table">
           <thead><tr><th>Protocol</th><th>Purpose</th><th>Used For</th><th>Exam Clue</th></tr></thead>
           <tbody>
@@ -176,7 +207,7 @@
           <div class="proto-arrow">→</div>
           <div class="proto-box">Service Provider (SP)</div>
         </div>
-        <p class="proto-desc">Federation: different organizations trust the same IdP. User logs in with Company A credentials to access Company B's app.</p>
+        <p class="proto-desc">Federation: different organizations trust the same IdP. User logs in with Company A credentials to access Company B's app (OASIS, 2005). The OAuth 2.0 framework enables authorization delegation without credential sharing (Hardt, 2012), while OpenID Connect adds an identity layer using JSON Web Tokens (Jones et al., 2015). Kerberos provides ticket-based mutual authentication in Active Directory environments (Neuman et al., 2005).</p>
         <div class="mnemonic"><div class="mnemonic-label">Key Distinction</div>OAuth = <strong>authorization</strong> (what you can do). OIDC = OAuth + <strong>authentication</strong> (who you are). SAML = <strong>enterprise federation</strong> with XML. These three are exam favorites.</div>
       </div>
     </div>
@@ -192,19 +223,19 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p><strong>Zero Trust</strong> rejects the concept of a trusted internal network. Every access request is authenticated, authorized, and continuously validated — regardless of source.</p>
+        <p><strong>Zero Trust</strong> rejects the concept of a trusted internal network. Every access request is authenticated, authorized, and continuously validated — regardless of source (Rose et al., 2020). Zero trust assumes there is no implicit trust granted to assets or user accounts based solely on their physical or network location (Rose et al., 2020).</p>
         <div class="zt-pillars">
           <div class="zt-pillar">
             <div class="zt-pillar-title">Never Trust, Always Verify</div>
-            <div class="zt-pillar-body">No implicit trust based on network location. Being inside the corporate LAN grants no automatic access.</div>
+            <div class="zt-pillar-body">No implicit trust based on network location. Being inside the corporate LAN grants no automatic access (Rose et al., 2020).</div>
           </div>
           <div class="zt-pillar">
             <div class="zt-pillar-title">Least Privilege Access</div>
-            <div class="zt-pillar-body">Users and systems receive only the minimum access needed for their task. No standing elevated permissions.</div>
+            <div class="zt-pillar-body">Users and systems receive only the minimum access needed for their task. No standing elevated permissions (Joint Task Force, 2020).</div>
           </div>
           <div class="zt-pillar">
             <div class="zt-pillar-title">Microsegmentation</div>
-            <div class="zt-pillar-body">Network divided into small zones. Lateral movement is blocked — compromise of one zone doesn't mean access to others.</div>
+            <div class="zt-pillar-body">Network divided into small zones. Lateral movement is blocked — compromise of one zone doesn't mean access to others (Rose et al., 2020).</div>
           </div>
           <div class="zt-pillar">
             <div class="zt-pillar-title">Continuous Validation</div>
@@ -239,7 +270,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p><strong>PAM</strong> controls, monitors, and audits access for privileged accounts (admins, root, service accounts). These accounts are high-value targets — PAM reduces the attack surface around them.</p>
+        <p><strong>PAM</strong> controls, monitors, and audits access for privileged accounts (admins, root, service accounts). These accounts are high-value targets — PAM reduces the attack surface around them (Joint Task Force, 2020; CyberArk, 2023). Just-in-time provisioning eliminates standing privileges by granting elevated rights only when needed and for a limited time (CompTIA, 2023).</p>
         <table class="comp-table">
           <thead><tr><th>PAM Feature</th><th>What It Does</th><th>Why It Matters</th></tr></thead>
           <tbody>
@@ -268,27 +299,27 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>Access control models define <strong>who decides</strong> what a subject can access. This is one of the highest-tested IAM topics — know every model's distinguishing characteristic.</p>
+        <p>Access control models define <strong>who decides</strong> what a subject can access. This is one of the highest-tested IAM topics — know every model's distinguishing characteristic (Stallings &amp; Brown, 2018; CompTIA, 2023).</p>
         <div class="ac-flow">
           <div class="ac-row">
             <div class="ac-label">DAC</div>
             <div class="ac-name">Discretionary AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Owner decides who gets access</span></div>
-            <div class="ac-detail">File owner sets permissions (e.g., Windows NTFS, Linux chmod). Most flexible — least secure. User can share their own files freely.</div>
+            <div class="ac-detail">File owner sets permissions (e.g., Windows NTFS, Linux chmod). Most flexible — least secure. User can share their own files freely (Stallings &amp; Brown, 2018).</div>
           </div>
           <div class="ac-row">
             <div class="ac-label">MAC</div>
             <div class="ac-name">Mandatory AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">System enforces based on labels</span></div>
-            <div class="ac-detail">OS assigns sensitivity labels (Top Secret, Secret, Unclassified). Users cannot override. Used in government/military. SELinux is a MAC implementation.</div>
+            <div class="ac-detail">OS assigns sensitivity labels (Top Secret, Secret, Unclassified). Users cannot override. Used in government/military. SELinux is a MAC implementation (Bell &amp; LaPadula, 1973; Joint Task Force, 2020).</div>
           </div>
           <div class="ac-row">
             <div class="ac-label">RBAC</div>
             <div class="ac-name">Role-Based AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Access assigned to roles, not individuals</span></div>
-            <div class="ac-detail">User assigned to role (Admin, HR, Sales). Role has permissions. Most common enterprise model. Easy to manage at scale — change role, change access.</div>
+            <div class="ac-detail">User assigned to role (Admin, HR, Sales). Role has permissions. Most common enterprise model. Easy to manage at scale — change role, change access (Ferraiolo et al., 2001).</div>
           </div>
           <div class="ac-row">
             <div class="ac-label">ABAC</div>
             <div class="ac-name">Attribute-Based AC<br><span style="font-weight:400;color:var(--text-muted);font-size:12px;">Access based on multiple attributes</span></div>
-            <div class="ac-detail">Evaluates user attributes (dept, clearance, time, device) dynamically. Most flexible and granular — "HR managers on corporate devices during business hours." Used in Zero Trust environments.</div>
+            <div class="ac-detail">Evaluates user attributes (dept, clearance, time, device) dynamically. Most flexible and granular — "HR managers on corporate devices during business hours." Used in Zero Trust environments (Hu et al., 2014; Rose et al., 2020).</div>
           </div>
           <div class="ac-row">
             <div class="ac-label">Rule-Based</div>
@@ -311,26 +342,26 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>Directory services store and manage user identities and access policies. The exam expects you to match protocols to use cases and key ports.</p>
+        <p>Directory services store and manage user identities and access policies. The exam expects you to match protocols to use cases and key ports (CompTIA, 2023; Stallings &amp; Brown, 2018).</p>
         <div class="dir-grid">
           <div class="dir-card">
             <div class="dir-name">LDAP</div>
-            <div class="dir-desc">Lightweight Directory Access Protocol. Query and modify directory entries (users, groups, OUs). Port 389 (plain), 636 (LDAPS — encrypted).</div>
+            <div class="dir-desc">Lightweight Directory Access Protocol. Query and modify directory entries (users, groups, OUs). Port 389 (plain), 636 (LDAPS — encrypted) (Sermersheim, 2006).</div>
             <div class="dir-tag">Port 389 / 636</div>
           </div>
           <div class="dir-card">
             <div class="dir-name">Active Directory</div>
-            <div class="dir-desc">Microsoft's directory service using LDAP + Kerberos + DNS. Organizes objects in Domains → Trees → Forests. The standard enterprise identity store.</div>
+            <div class="dir-desc">Microsoft's directory service using LDAP + Kerberos + DNS. Organizes objects in Domains → Trees → Forests. The standard enterprise identity store (Microsoft, 2025).</div>
             <div class="dir-tag">Windows Enterprise</div>
           </div>
           <div class="dir-card">
             <div class="dir-name">Kerberos</div>
-            <div class="dir-desc">Ticket-based auth protocol. User gets Ticket-Granting Ticket (TGT) from KDC, exchanges for service tickets. Mutual auth — both sides verify identity. Port 88.</div>
+            <div class="dir-desc">Ticket-based auth protocol. User gets Ticket-Granting Ticket (TGT) from KDC, exchanges for service tickets. Mutual auth — both sides verify identity. Port 88 (Neuman et al., 2005).</div>
             <div class="dir-tag">Port 88 · TGT / TGS</div>
           </div>
           <div class="dir-card">
             <div class="dir-name">RADIUS</div>
-            <div class="dir-desc">Remote Authentication Dial-In User Service. Centralized AAA (Authentication, Authorization, Accounting) for network access. Used for VPN, Wi-Fi, dial-up. UDP 1812/1813.</div>
+            <div class="dir-desc">Remote Authentication Dial-In User Service. Centralized AAA (Authentication, Authorization, Accounting) for network access. Used for VPN, Wi-Fi, dial-up. UDP 1812/1813 (Joint Task Force, 2020; CompTIA, 2023).</div>
             <div class="dir-tag">UDP 1812/1813</div>
           </div>
           <div class="dir-card">
@@ -371,6 +402,53 @@
         <a href="threats.html" class="btn btn-outline">Review: Threats</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ════════════════ REFERENCES ════════════════ -->
+<section class="concepts" style="padding-bottom: 48px;">
+  <div class="container">
+
+    <div class="ref-section-divider">
+      <div class="ref-part-label">APA 7</div>
+      <div class="ref-part-title">References</div>
+    </div>
+    <div class="section-label">All sources cited throughout this module, formatted per APA 7th edition</div>
+
+    <ol class="ref-list" style="margin-bottom: 48px;">
+
+      <li>Bell, D. E., &amp; LaPadula, L. J. (1973). <em>Secure computer systems: Mathematical foundations</em> (MITRE Technical Report 2547, Vol. I). The MITRE Corporation. <a href="http://www-personal.umich.edu/~cja/LPS12b/refs/belllapadula1.pdf" target="_blank" rel="noopener">http://www-personal.umich.edu/~cja/LPS12b/refs/belllapadula1.pdf</a></li>
+
+      <li>CompTIA. (2023). <em>CompTIA Security+ SY0-701 certification exam objectives</em> (Version 5.0). CompTIA, Inc. <a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf" target="_blank" rel="noopener">https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf</a></li>
+
+      <li>CyberArk. (2023). <em>CyberArk 2023 identity security threat landscape report</em>. CyberArk Software Ltd. <a href="https://www.cyberark.com/resources/ebooks/cyberark-2023-identity-security-threat-landscape-report" target="_blank" rel="noopener">https://www.cyberark.com/resources/ebooks/cyberark-2023-identity-security-threat-landscape-report</a></li>
+
+      <li>Ferraiolo, D. F., Sandhu, R., Gavrila, S., Kuhn, D. R., &amp; Chandramouli, R. (2001). Proposed NIST standard for role-based access control. <em>ACM Transactions on Information and System Security</em>, <em>4</em>(3), 224–274. <a href="https://doi.org/10.1145/501978.501980" target="_blank" rel="noopener">https://doi.org/10.1145/501978.501980</a></li>
+
+      <li>Hardt, D. (Ed.). (2012). <em>The OAuth 2.0 authorization framework</em> (RFC 6749). Internet Engineering Task Force. <a href="https://www.rfc-editor.org/rfc/rfc6749" target="_blank" rel="noopener">https://www.rfc-editor.org/rfc/rfc6749</a></li>
+
+      <li>Hu, V. C., Ferraiolo, D., Kuhn, R., Schnitzer, A., Sandlin, K., Miller, R., &amp; Scarfone, K. (2014). <em>Guide to attribute based access control (ABAC) definition and considerations</em> (NIST Special Publication 800-162). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-162" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.SP.800-162</a></li>
+
+      <li>Joint Task Force. (2020). <em>Security and privacy controls for information systems and organizations</em> (NIST Special Publication 800-53 Rev. 5). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-53r5" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.SP.800-53r5</a></li>
+
+      <li>Jones, M., Bradley, J., &amp; Sakimura, N. (2015). <em>JSON web token (JWT)</em> (RFC 7519). Internet Engineering Task Force. <a href="https://www.rfc-editor.org/rfc/rfc7519" target="_blank" rel="noopener">https://www.rfc-editor.org/rfc/rfc7519</a></li>
+
+      <li>Microsoft. (2025). <em>Active Directory Domain Services overview</em>. Microsoft Learn. <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview</a></li>
+
+      <li>National Institute of Standards and Technology. (2017). <em>Digital identity guidelines</em> (NIST Special Publication 800-63-3). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.SP.800-63-3" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.SP.800-63-3</a></li>
+
+      <li>Neuman, C., Yu, T., Hartman, S., &amp; Raeburn, K. (2005). <em>The Kerberos network authentication service (V5)</em> (RFC 4120). Internet Engineering Task Force. <a href="https://www.rfc-editor.org/rfc/rfc4120" target="_blank" rel="noopener">https://www.rfc-editor.org/rfc/rfc4120</a></li>
+
+      <li>OASIS. (2005). <em>Assertions and protocols for the OASIS security assertion markup language (SAML) V2.0</em> (Document ID saml-core-2.0-os). OASIS Security Services Technical Committee. <a href="https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf" target="_blank" rel="noopener">https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf</a></li>
+
+      <li>Rose, S., Borchert, O., Mitchell, S., &amp; Connelly, S. (2020). <em>Zero trust architecture</em> (NIST Special Publication 800-207). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-207" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.SP.800-207</a></li>
+
+      <li>Sermersheim, J. (Ed.). (2006). <em>Lightweight directory access protocol (LDAP): The protocol</em> (RFC 4511). Internet Engineering Task Force. <a href="https://www.rfc-editor.org/rfc/rfc4511" target="_blank" rel="noopener">https://www.rfc-editor.org/rfc/rfc4511</a></li>
+
+      <li>Stallings, W., &amp; Brown, L. (2018). <em>Computer security: Principles and practice</em> (4th ed.). Pearson Education. <a href="https://www.pearson.com/en-us/subject-catalog/p/computer-security-principles-and-practice/P200000003452" target="_blank" rel="noopener">https://www.pearson.com/en-us/subject-catalog/p/computer-security-principles-and-practice/P200000003452</a></li>
+
+    </ol>
+
   </div>
 </section>
 

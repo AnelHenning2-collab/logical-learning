@@ -46,6 +46,7 @@
         <a href="logika-learning.html">Logika Learng</a>
         <a href="cornell-notes.html">Cornell Notes</a>
         <a href="ui-prototypes.html">UI Prototypes</a>
+        <a href="physics.html">Physics</a>
       </div>
     </div>
   </div>
@@ -89,7 +90,8 @@
             <tr><td>Use case</td><td>Encrypt file contents, disk encryption</td><td>TLS handshake, digital signatures</td></tr>
           </tbody>
         </table>
-        <p>In practice, <strong>TLS uses both</strong>: asymmetric encryption to exchange a symmetric session key, then symmetric encryption for the actual data — best of both worlds.</p>
+        <p>In practice, <strong>TLS uses both</strong>: asymmetric encryption to exchange a symmetric session key, then symmetric encryption for the actual data — best of both worlds (Rescorla, 2018; Stallings, 2022).</p>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">AES-128, AES-192, and AES-256 were standardized as the replacement for DES following the Rijndael block cipher competition (National Institute of Standards and Technology [NIST], 2001). The Diffie-Hellman key exchange protocol solved the foundational key distribution problem (Diffie &amp; Hellman, 1976), while RSA established the practical basis for public-key cryptography and digital signatures (Rivest et al., 1978). ECC provides equivalent security to RSA with much shorter key lengths, making it preferred in constrained environments (Barker, 2020). 3DES is deprecated for new encryption uses (Barker &amp; Roginsky, 2019).</p>
         <div style="margin: 12px 0;">
           <span class="algo-pill sym">AES-256</span><span class="algo-pill sym">AES-128</span><span class="algo-pill sym">3DES</span>
           <span style="margin: 0 8px; color:var(--text-faint); font-size:12px;">Symmetric →</span>
@@ -113,7 +115,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>A <strong>hash function</strong> takes any input and produces a fixed-length output (digest). It is <strong>one-way</strong> — you cannot reverse it to get the original data. Used to verify integrity, not encrypt.</p>
+        <p>A <strong>hash function</strong> takes any input and produces a fixed-length output (digest). It is <strong>one-way</strong> — you cannot reverse it to get the original data. Used to verify integrity, not encrypt (Stallings, 2022; Ferguson et al., 2010).</p>
         <table class="comp-table">
           <thead><tr><th>Algorithm</th><th>Output Size</th><th>Status</th></tr></thead>
           <tbody>
@@ -124,7 +126,8 @@
             <tr><td>HMAC</td><td>Depends on hash used</td><td style="color:#22c55e;">Hash + secret key = message authentication code (integrity + authenticity)</td></tr>
           </tbody>
         </table>
-        <p><strong>Salting</strong> adds a random value to a password before hashing — defeats rainbow table attacks. <strong>Rainbow tables</strong> are precomputed hash lookup tables used to crack unsalted passwords.</p>
+        <p><strong>Salting</strong> adds a random value to a password before hashing — defeats rainbow table attacks. <strong>Rainbow tables</strong> are precomputed hash lookup tables used to crack unsalted passwords (Ferguson et al., 2010; Barker, 2020).</p>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">SHA-256 and SHA-512 are part of the SHA-2 family standardized in FIPS 180-4 (NIST, 2015a). SHA-3 uses a fundamentally different sponge-function construction (NIST, 2015b). MD5 was shown to produce collisions in under an hour via differential cryptanalysis (Wang &amp; Yu, 2005), and SHA-1 was subsequently demonstrated to be practically breakable (Stevens et al., 2017). HMAC combines a hash with a shared secret key to provide both integrity and authenticity (NIST, 2008). The CompTIA Security+ SY0-701 exam objectives flag MD5 and SHA-1 as cryptographically broken (CompTIA, 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">Key Rule</div>MD5 and SHA-1 = <strong>broken for security</strong> but MD5 is still used for non-security checksums (file download verification). The exam will try to trick you — always flag MD5/SHA-1 as insecure options.</div>
       </div>
     </div>
@@ -140,7 +143,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>A digital signature provides three things: <strong>Authentication</strong> (who sent it), <strong>Integrity</strong> (wasn't tampered), and <strong>Non-repudiation</strong> (sender can't deny it).</p>
+        <p>A digital signature provides three things: <strong>Authentication</strong> (who sent it), <strong>Integrity</strong> (wasn't tampered), and <strong>Non-repudiation</strong> (sender can't deny it) (Diffie &amp; Hellman, 1976; Rivest et al., 1978).</p>
         <div class="diagram">
           <div style="color:#a78bfa; margin-bottom:8px; font-size:13px; font-family:'DM Sans',sans-serif; font-weight:600;">How Digital Signing Works:</div>
           Sender:   [Message] → Hash → [Digest] → Encrypt with PRIVATE key → [Signature]
@@ -150,7 +153,7 @@
                     → Decrypt signature with PUBLIC key → [Digest B]
                     → Compare: if A == B → ✓ Valid signature
         </div>
-        <p><strong>Critical exam rule:</strong> You <strong>sign with your PRIVATE key</strong> (proves it came from you). Others <strong>verify with your PUBLIC key</strong>. This is the opposite of encryption (where you encrypt with recipient's public key).</p>
+        <p><strong>Critical exam rule:</strong> You <strong>sign with your PRIVATE key</strong> (proves it came from you). Others <strong>verify with your PUBLIC key</strong>. This is the opposite of encryption (where you encrypt with recipient's public key) (Stallings, 2022; CompTIA, 2023). The sender hashes the message, then encrypts the digest with their private key to form the signature; the receiver independently hashes the received message and decrypts the signature with the sender's public key to compare digests (Ferguson et al., 2010).</p>
         <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div>"<strong>Sign with Private, Verify with Public</strong>" — SVPP. Encryption is the reverse: "Encrypt with Public, Decrypt with Private" — EPDP.</div>
       </div>
     </div>
@@ -166,7 +169,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p><strong>PKI (Public Key Infrastructure)</strong> is the system for issuing, managing, and revoking digital certificates.</p>
+        <p><strong>PKI (Public Key Infrastructure)</strong> is the system for issuing, managing, and revoking digital certificates (Cooper et al., 2008; Barker, 2020).</p>
         <table class="comp-table">
           <thead><tr><th>Component</th><th>Role</th></tr></thead>
           <tbody>
@@ -177,7 +180,7 @@
             <tr><td>X.509</td><td>Standard format for digital certificates (contains public key, subject, issuer, validity).</td></tr>
           </tbody>
         </table>
-        <p><strong>Certificate types:</strong> DV (domain-only), OV (org validated), EV (extended validation — green bar). <strong>Wildcard cert:</strong> *.domain.com — covers all subdomains. <strong>SAN:</strong> Subject Alternative Name — multiple hostnames on one cert.</p>
+        <p><strong>Certificate types:</strong> DV (domain-only), OV (org validated), EV (extended validation — green bar). <strong>Wildcard cert:</strong> *.domain.com — covers all subdomains. <strong>SAN:</strong> Subject Alternative Name — multiple hostnames on one cert. X.509 v3 is the standard certificate format specifying public key, subject, issuer, validity period, and extensions (Cooper et al., 2008). CRL and OCSP revocation mechanisms are both profiled in RFC 5280, with OCSP providing real-time status rather than a periodically updated list (Cooper et al., 2008; CompTIA, 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">CRL vs OCSP</div>CRL = <strong>old list, may be stale</strong>. OCSP = <strong>real-time check</strong>. The exam prefers OCSP for freshness. OCSP Stapling = server caches OCSP response to reduce latency.</div>
       </div>
     </div>
@@ -193,7 +196,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>TLS (Transport Layer Security) uses asymmetric encryption to establish trust and exchange a session key, then switches to fast symmetric encryption for all data.</p>
+        <p>TLS (Transport Layer Security) uses asymmetric encryption to establish trust and exchange a session key, then switches to fast symmetric encryption for all data (Rescorla, 2018; McKay &amp; Cooper, 2019).</p>
         <div class="tls-flow">
           <div style="display:grid; grid-template-columns:140px 1fr 140px; gap:8px; font-size:12px; font-weight:600; color:var(--text-muted); text-align:center; margin-bottom:4px;"><span>CLIENT</span><span></span><span>SERVER</span></div>
           <div class="tls-msg"><div class="tls-party">ClientHello</div><div class="tls-arrow">→</div><div style="font-size:11px; color:var(--text-muted);">TLS version, cipher suites supported, random nonce</div></div>
@@ -203,6 +206,7 @@
           <div class="tls-msg"><div style="font-size:11px; color:var(--text-muted);">Both derive session key from pre-master secret</div><div class="tls-arrow">⇌</div><div class="tls-party">Session Key</div></div>
           <div class="tls-msg"><div class="tls-party" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.3); color:#22c55e;">Encrypted Data (AES)</div><div class="tls-arrow">⇌</div><div class="tls-party" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.3); color:#22c55e;">Encrypted Data (AES)</div></div>
         </div>
+        <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">TLS 1.3, defined in RFC 8446, eliminates static RSA and Diffie-Hellman key exchange, requiring ephemeral key exchange for all sessions, thereby enforcing Perfect Forward Secrecy (Rescorla, 2018). NIST SP 800-52 Rev. 2 mandates TLS 1.2 as the minimum for federal systems and requires support for TLS 1.3 by January 1, 2024 (McKay &amp; Cooper, 2019). TLS 1.0 and 1.1 are deprecated (McKay &amp; Cooper, 2019; CompTIA, 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">Key Point</div>TLS 1.3 removed weak cipher suites (RC4, 3DES, SHA-1) and requires forward secrecy. The exam expects you to flag TLS 1.0/1.1 as deprecated and recommend TLS 1.2 minimum, TLS 1.3 preferred.</div>
       </div>
     </div>
@@ -226,12 +230,12 @@
             <tr><td>Data in Use</td><td>Being processed in memory/CPU</td><td>Trusted Execution Environment (TEE), memory encryption</td></tr>
           </tbody>
         </table>
-        <p><strong>Key Escrow:</strong> A copy of the encryption key is held by a trusted third party — enables recovery if key is lost, but creates a risk if the escrow is compromised.</p>
-        <p><strong>HSM (Hardware Security Module):</strong> Physical device that stores and manages cryptographic keys. Tamper-resistant. Used for CA private keys, payment systems.</p>
+        <p><strong>Key Escrow:</strong> A copy of the encryption key is held by a trusted third party — enables recovery if key is lost, but creates a risk if the escrow is compromised (Barker, 2020; Stallings, 2022).</p>
+        <p><strong>HSM (Hardware Security Module):</strong> Physical device that stores and manages cryptographic keys. Tamper-resistant. Used for CA private keys, payment systems (Ferguson et al., 2010; CompTIA, 2023).</p>
         <div class="tag-wrap">
           <span class="tag purple">Perfect Forward Secrecy</span><span class="tag purple">Key Stretching</span><span class="tag purple">PBKDF2</span><span class="tag purple">bcrypt</span>
         </div>
-        <p style="margin-top:10px;"><strong>Perfect Forward Secrecy (PFS)</strong>: Each session uses a unique key — even if a long-term key is compromised, past sessions remain safe. Required by TLS 1.3.</p>
+        <p style="margin-top:10px;"><strong>Perfect Forward Secrecy (PFS)</strong>: Each session uses a unique key — even if a long-term key is compromised, past sessions remain safe. Required by TLS 1.3 (Rescorla, 2018). Key stretching algorithms such as PBKDF2 and bcrypt increase the computational cost of brute-force and dictionary attacks against stored password hashes (Ferguson et al., 2010; Barker &amp; Roginsky, 2019).</p>
       </div>
     </div>
 
@@ -255,6 +259,48 @@
         <a href="network.html" class="btn btn-outline">Next: Network Security →</a>
         <a href="index.html" class="btn btn-outline">All Modules</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ REFERENCES ════════════════ -->
+<section class="concepts" style="padding-bottom: 48px;">
+  <div class="container">
+    <div class="section-label">References — APA 7th Edition</div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px;">
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Barker, E. (2020). <em>Recommendation for key management: Part 1 — General</em> (NIST SP 800-57 Part 1 Rev. 5). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-57pt1r5" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.SP.800-57pt1r5</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Barker, E., &amp; Roginsky, A. (2019). <em>Transitioning the use of cryptographic algorithms and key lengths</em> (NIST SP 800-131A Rev. 2). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-131Ar2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.SP.800-131Ar2</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">CompTIA. (2023). <em>CompTIA Security+ SY0-701 certification exam objectives</em> (Version 5.0). CompTIA. <a href="https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Cooper, D., Santesson, S., Farrell, S., Boeyen, S., Housley, R., &amp; Polk, W. (2008). <em>Internet X.509 public key infrastructure certificate and certificate revocation list (CRL) profile</em> (RFC 5280). Internet Engineering Task Force. <a href="https://datatracker.ietf.org/doc/html/rfc5280" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://datatracker.ietf.org/doc/html/rfc5280</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Diffie, W., &amp; Hellman, M. E. (1976). New directions in cryptography. <em>IEEE Transactions on Information Theory, 22</em>(6), 644–654. <a href="https://doi.org/10.1109/TIT.1976.1055638" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.1109/TIT.1976.1055638</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Ferguson, N., Schneier, B., &amp; Kohno, T. (2010). <em>Cryptography engineering: Design principles and practical applications</em>. Wiley. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781118722367" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://onlinelibrary.wiley.com/doi/book/10.1002/9781118722367</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">McKay, K. A., &amp; Cooper, D. A. (2019). <em>Guidelines for the selection, configuration, and use of Transport Layer Security (TLS) implementations</em> (NIST SP 800-52 Rev. 2). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-52r2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.SP.800-52r2</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">National Institute of Standards and Technology. (2001). <em>Advanced encryption standard (AES)</em> (FIPS 197). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.197-upd1" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.FIPS.197-upd1</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">National Institute of Standards and Technology. (2008). <em>The keyed-hash message authentication code (HMAC)</em> (FIPS 198-1). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.198-1" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.FIPS.198-1</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">National Institute of Standards and Technology. (2015a). <em>Secure hash standard (SHS)</em> (FIPS 180-4). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.180-4" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.FIPS.180-4</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">National Institute of Standards and Technology. (2015b). <em>SHA-3 standard: Permutation-based hash and extendable-output functions</em> (FIPS 202). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.FIPS.202" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.FIPS.202</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Rescorla, E. (2018). <em>The Transport Layer Security (TLS) protocol version 1.3</em> (RFC 8446). Internet Engineering Task Force. <a href="https://datatracker.ietf.org/doc/html/rfc8446" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://datatracker.ietf.org/doc/html/rfc8446</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Rivest, R. L., Shamir, A., &amp; Adleman, L. (1978). A method for obtaining digital signatures and public-key cryptosystems. <em>Communications of the ACM, 21</em>(2), 120–126. <a href="https://doi.org/10.1145/359340.359342" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.1145/359340.359342</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Stallings, W. (2022). <em>Cryptography and network security: Principles and practice</em> (8th ed.). Pearson. <a href="https://www.pearson.com/en-us/subject-catalog/p/cryptography-and-network-security-principles-and-practice/P200000003477/9780135764213" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.pearson.com/en-us/subject-catalog/p/cryptography-and-network-security-principles-and-practice/P200000003477/9780135764213</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Stevens, M., Bursztein, E., Karpman, P., Albertini, A., &amp; Markov, Y. (2017). The first collision for full SHA-1. In <em>Advances in Cryptology — CRYPTO 2017</em> (pp. 570–596). Springer. <a href="https://shattered.io" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://shattered.io</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 0; padding-left: 2em; text-indent: -2em;">Wang, X., &amp; Yu, H. (2005). How to break MD5 and other hash functions. In <em>Advances in Cryptology — EUROCRYPT 2005</em> (Lecture Notes in Computer Science, vol. 3494, pp. 19–35). Springer. <a href="https://doi.org/10.1007/11426639_2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.1007/11426639_2</a></p>
+
     </div>
   </div>
 </section>

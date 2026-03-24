@@ -46,6 +46,7 @@
         <a href="crypto.html">Cryptography</a>
         <a href="network.html">Network</a>
         <a href="identity.html">Identity</a>
+        <a href="physics.html">Physics</a>
         <a href="logika-learning.html">Logika Learng</a>
         <a href="cornell-notes.html">Cornell Notes</a>
         <a href="ui-prototypes.html">UI Prototypes</a>
@@ -83,14 +84,14 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>A <strong>threat actor</strong> is any entity that poses a risk to your systems. The exam tests you on matching actor TYPE to their likely MOTIVATION and SOPHISTICATION level.</p>
+        <p>A <strong>threat actor</strong> is any entity that poses a risk to your systems (CompTIA, 2023). The exam tests you on matching actor TYPE to their likely MOTIVATION and SOPHISTICATION level (CompTIA, 2023).</p>
         <div class="threat-actor-grid">
-          <div class="actor-card"><div class="actor-icon">🏛️</div><div class="actor-name">Nation-State</div><div class="actor-desc">Highest sophistication. Motivation: espionage, disruption. APT groups. Example: Volt Typhoon, Lazarus Group.</div></div>
-          <div class="actor-card"><div class="actor-icon">✊</div><div class="actor-name">Hacktivist</div><div class="actor-desc">Political/ideological motivation. Medium skill. DDoS, defacement. Example: Anonymous.</div></div>
-          <div class="actor-card"><div class="actor-icon">💰</div><div class="actor-name">Cybercriminal</div><div class="actor-desc">Financial motivation. Ransomware, fraud, data theft. Operates in dark web markets.</div></div>
-          <div class="actor-card"><div class="actor-icon">🏢</div><div class="actor-name">Insider Threat</div><div class="actor-desc">Current or former employee. Can be malicious (revenge, money) or unintentional (negligence).</div></div>
-          <div class="actor-card"><div class="actor-icon">👾</div><div class="actor-name">Script Kiddie</div><div class="actor-desc">Low skill. Uses existing tools/exploits. Motivation: notoriety. Opportunistic, not targeted.</div></div>
-          <div class="actor-card"><div class="actor-icon">🤝</div><div class="actor-name">Competitor</div><div class="actor-desc">Corporate espionage. Motivation: financial advantage. Often hires others.</div></div>
+          <div class="actor-card"><div class="actor-icon">🏛️</div><div class="actor-name">Nation-State</div><div class="actor-desc">Highest sophistication. Motivation: espionage, disruption. APT groups. Example: Volt Typhoon (CISA et al., 2023), Lazarus Group (FBI et al., 2022).</div></div>
+          <div class="actor-card"><div class="actor-icon">✊</div><div class="actor-name">Hacktivist</div><div class="actor-desc">Political/ideological motivation. Medium skill. DDoS, defacement. Example: Anonymous (Stallings &amp; Brown, 2023).</div></div>
+          <div class="actor-card"><div class="actor-icon">💰</div><div class="actor-name">Cybercriminal</div><div class="actor-desc">Financial motivation. Ransomware, fraud, data theft. Operates in dark web markets (Verizon, 2024).</div></div>
+          <div class="actor-card"><div class="actor-icon">🏢</div><div class="actor-name">Insider Threat</div><div class="actor-desc">Current or former employee. Can be malicious (revenge, money) or unintentional (negligence) (NIST, 2012).</div></div>
+          <div class="actor-card"><div class="actor-icon">👾</div><div class="actor-name">Script Kiddie</div><div class="actor-desc">Low skill. Uses existing tools/exploits. Motivation: notoriety. Opportunistic, not targeted (CompTIA, 2023).</div></div>
+          <div class="actor-card"><div class="actor-icon">🤝</div><div class="actor-name">Competitor</div><div class="actor-desc">Corporate espionage. Motivation: financial advantage. Often hires others (Stallings &amp; Brown, 2023).</div></div>
         </div>
         <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div>"<strong>N</strong>ations <strong>H</strong>ack, <strong>C</strong>riminals <strong>I</strong>nvade, <strong>S</strong>cripts <strong>C</strong>opy" → Nation-state, Hacktivist, Cybercriminal, Insider, Script kiddie, Competitor</div>
       </div>
@@ -107,7 +108,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>The key exam distinction is <strong>how malware spreads</strong> and <strong>what it does</strong>. Know these pairs cold:</p>
+        <p>The key exam distinction is <strong>how malware spreads</strong> and <strong>what it does</strong> (CompTIA, 2023). Know these pairs cold (Souppaya &amp; Scarfone, 2013):</p>
         <table class="comp-table">
           <thead><tr><th>Type</th><th>Spreads How?</th><th>What It Does</th><th>Exam Clue</th></tr></thead>
           <tbody>
@@ -121,6 +122,7 @@
             <tr><td>Botnet/Bot</td><td>Worm, trojan</td><td>C2 controlled, used for DDoS/spam</td><td>"Command & Control"</td></tr>
           </tbody>
         </table>
+        <p style="margin-top:12px; font-size:13px; color:var(--text-muted);">Ransomware and extortion techniques were involved in 32% of all breaches in 2023, highlighting the persistent financial motivation behind malware deployment (Verizon, 2024). Rootkits operate at the OS or firmware level and are among the most difficult malware categories to detect and remove (Stallings &amp; Brown, 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">Key Rule</div>Worm = <strong>self-spreads</strong>. Virus = needs a <strong>host file</strong>. Trojan = <strong>disguised</strong>. These three are the most commonly confused on the exam.</div>
       </div>
     </div>
@@ -136,7 +138,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>Social engineering exploits <strong>human psychology</strong>, not technical vulnerabilities. The exam loves scenario questions: read the scenario, identify the attack type.</p>
+        <p>Social engineering exploits <strong>human psychology</strong>, not technical vulnerabilities (Cialdini, 2007). The exam loves scenario questions: read the scenario, identify the attack type (CompTIA, 2023). The 2024 DBIR found that 68% of breaches involved a non-malicious human element, such as falling victim to a social engineering attack (Verizon, 2024).</p>
         <table class="comp-table">
           <thead><tr><th>Attack</th><th>Vector</th><th>Key Feature</th></tr></thead>
           <tbody>
@@ -153,7 +155,7 @@
         <div class="tag-wrap">
           <span class="tag red">Urgency</span><span class="tag red">Authority</span><span class="tag red">Scarcity</span><span class="tag red">Familiarity</span><span class="tag red">Fear</span>
         </div>
-        <p style="margin-top:12px;">These are the <strong>six principles of influence</strong> that social engineers exploit. The exam may ask which principle is being used.</p>
+        <p style="margin-top:12px;">These are the <strong>six principles of influence</strong> that social engineers exploit (Cialdini, 2007). The exam may ask which principle is being used (CompTIA, 2023). Phishing remains one of the most prevalent initial access vectors across all industries (CISA et al., 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">Memory Hook</div><strong>P</strong>hishing = mass email. <strong>S</strong>pear = specific. <strong>W</strong>haling = C-suite. <strong>V</strong>ishing = Voice. <strong>S</strong>mishing = SMS. "PSW VS" — think Password Stolen Via Verbal/SMS.</div>
       </div>
     </div>
@@ -169,15 +171,16 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p><strong>DoS vs DDoS:</strong> A DoS (Denial of Service) comes from one source. A DDoS (Distributed DoS) comes from many — typically a botnet. Both overwhelm a target with traffic or requests.</p>
+        <p><strong>DoS vs DDoS:</strong> A DoS (Denial of Service) comes from one source. A DDoS (Distributed DoS) comes from many — typically a botnet (Stallings &amp; Brown, 2023). Both overwhelm a target with traffic or requests, disrupting service availability (NIST, 2012).</p>
         <div class="attack-flow">
           <div class="flow-step"><div class="flow-num">1</div><strong style="color:var(--white); min-width:120px;">SYN Flood</strong><span style="color:var(--text-muted); font-size:13px;">Sends many TCP SYN packets, never completes handshake — exhausts connection table</span></div>
           <div class="flow-step"><div class="flow-num">2</div><strong style="color:var(--white); min-width:120px;">Man-in-Middle</strong><span style="color:var(--text-muted); font-size:13px;">Attacker intercepts traffic between two parties — ARP poisoning, rogue AP</span></div>
           <div class="flow-step"><div class="flow-num">3</div><strong style="color:var(--white); min-width:120px;">Replay Attack</strong><span style="color:var(--text-muted); font-size:13px;">Captures valid auth token and replays it — mitigated by timestamps/nonces</span></div>
-          <div class="flow-step"><div class="flow-num">4</div><strong style="color:var(--white); min-width:120px;">SQL Injection</strong><span style="color:var(--text-muted); font-size:13px;">Inserts SQL code into input fields — ' OR '1'='1 — mitigated by parameterized queries</span></div>
-          <div class="flow-step"><div class="flow-num">5</div><strong style="color:var(--white); min-width:120px;">XSS</strong><span style="color:var(--text-muted); font-size:13px;">Cross-Site Scripting — injects malicious script into web page viewed by other users</span></div>
+          <div class="flow-step"><div class="flow-num">4</div><strong style="color:var(--white); min-width:120px;">SQL Injection</strong><span style="color:var(--text-muted); font-size:13px;">Inserts SQL code into input fields — ' OR '1'='1 — mitigated by parameterized queries (OWASP, 2021)</span></div>
+          <div class="flow-step"><div class="flow-num">5</div><strong style="color:var(--white); min-width:120px;">XSS</strong><span style="color:var(--text-muted); font-size:13px;">Cross-Site Scripting — injects malicious script into web page viewed by other users (OWASP, 2021)</span></div>
           <div class="flow-step"><div class="flow-num">6</div><strong style="color:var(--white); min-width:120px;">Buffer Overflow</strong><span style="color:var(--text-muted); font-size:13px;">Sends more data than buffer can hold — overwrites memory, executes arbitrary code</span></div>
         </div>
+        <p style="margin-top:12px; font-size:13px; color:var(--text-muted);">SQL injection and XSS are ranked among the most critical web application security risks (OWASP, 2021). Buffer overflow vulnerabilities result from insufficient input validation and can allow arbitrary code execution (Stallings &amp; Brown, 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">Exam Trap</div>XSS injects into a <strong>web page</strong>. CSRF forces a <strong>logged-in user to take an action</strong>. These are commonly confused — different targets, different mechanisms.</div>
       </div>
     </div>
@@ -193,7 +196,7 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>The <strong>Cyber Kill Chain</strong> (Lockheed Martin) describes the 7 stages of an advanced attack:</p>
+        <p>The <strong>Cyber Kill Chain</strong> (Lockheed Martin) describes the 7 stages of an advanced attack, from initial reconnaissance through to the final objective (Hutchins et al., 2011):</p>
         <div class="kill-chain">
           <div class="kc-step">Recon<span>Research</span></div>
           <div class="kc-step">Weaponize<span>Build payload</span></div>
@@ -203,8 +206,8 @@
           <div class="kc-step">C2<span>Command</span></div>
           <div class="kc-step">Exfil<span>Goal</span></div>
         </div>
-        <p><strong>MITRE ATT&CK</strong> is a detailed knowledge base of adversary tactics and techniques (TTP). Used by security teams to map real-world attack behaviors. The exam expects you to know it exists and its purpose — not memorize every technique.</p>
-        <p>The <strong>Diamond Model</strong> analyzes attacks through four points: Adversary, Infrastructure, Capability, Victim — useful for threat intelligence correlation.</p>
+        <p><strong>MITRE ATT&CK</strong> is a globally accessible knowledge base of adversary tactics and techniques (TTPs) based on real-world observations (MITRE, 2024). Used by security teams to map real-world attack behaviors, it enables defenders to anticipate and detect adversary actions. The exam expects you to know it exists and its purpose — not memorize every technique (CompTIA, 2023).</p>
+        <p>The <strong>Diamond Model</strong> analyzes attacks through four points: Adversary, Infrastructure, Capability, Victim — useful for threat intelligence correlation (Stallings &amp; Brown, 2023).</p>
         <div class="mnemonic"><div class="mnemonic-label">Kill Chain Mnemonic</div><strong>R</strong>eal <strong>W</strong>omen <strong>D</strong>on't <strong>E</strong>at <strong>I</strong>cy <strong>C</strong>ake <strong>E</strong>very Day — Recon, Weaponize, Deliver, Exploit, Install, C2, Exfiltrate</div>
       </div>
     </div>
@@ -220,21 +223,22 @@
         <div class="concept-chevron">▼</div>
       </div>
       <div class="concept-body">
-        <p>A <strong>vulnerability</strong> is a weakness. A <strong>threat</strong> exploits it. A <strong>risk</strong> is the probability × impact. Know this triangle cold.</p>
+        <p>A <strong>vulnerability</strong> is a weakness. A <strong>threat</strong> exploits it. A <strong>risk</strong> is the probability × impact (NIST, 2012). Know this triangle cold (CompTIA, 2023). Misconfigurations remain the most common real-world vulnerability category, while supply chain attacks — exemplified by the 2020 SolarWinds compromise — represent an increasingly prevalent threat vector (CISA &amp; FBI, 2020; Verizon, 2024).</p>
         <table class="comp-table">
           <thead><tr><th>Term</th><th>Definition</th><th>Key Detail</th></tr></thead>
           <tbody>
-            <tr><td>Zero-day</td><td>Unknown vulnerability, no patch exists</td><td>Most dangerous — no defense except behavior monitoring</td></tr>
-            <tr><td>CVE</td><td>Common Vulnerabilities and Exposures</td><td>Standardized ID: CVE-2024-XXXXX</td></tr>
-            <tr><td>CVSS</td><td>Common Vulnerability Scoring System</td><td>0–10 severity score; drives patch priority</td></tr>
-            <tr><td>Misconfiguration</td><td>Default settings, open ports, weak ACLs</td><td>Most common real-world vuln category</td></tr>
-            <tr><td>Supply Chain</td><td>Compromise via third-party software/hardware</td><td>SolarWinds is the canonical example</td></tr>
-            <tr><td>Weak Credentials</td><td>Default/reused/simple passwords</td><td>Mitigated by MFA, PAM, password policy</td></tr>
+            <tr><td>Zero-day</td><td>Unknown vulnerability, no patch exists</td><td>Most dangerous — no defense except behavior monitoring (CompTIA, 2023)</td></tr>
+            <tr><td>CVE</td><td>Common Vulnerabilities and Exposures</td><td>Standardized ID: CVE-2024-XXXXX (MITRE, 2024)</td></tr>
+            <tr><td>CVSS</td><td>Common Vulnerability Scoring System</td><td>0–10 severity score; drives patch priority (CompTIA, 2023)</td></tr>
+            <tr><td>Misconfiguration</td><td>Default settings, open ports, weak ACLs</td><td>Most common real-world vuln category (Verizon, 2024)</td></tr>
+            <tr><td>Supply Chain</td><td>Compromise via third-party software/hardware</td><td>SolarWinds is the canonical example (CISA &amp; FBI, 2020)</td></tr>
+            <tr><td>Weak Credentials</td><td>Default/reused/simple passwords</td><td>Mitigated by MFA, PAM, password policy (NIST, 2012)</td></tr>
           </tbody>
         </table>
         <div class="tag-wrap">
           <span class="tag red">Patch Management</span><span class="tag amber">Vulnerability Scanning</span><span class="tag green">Penetration Testing</span><span class="tag">Threat Intelligence</span>
         </div>
+        <p style="margin-top:12px; font-size:13px; color:var(--text-muted);">CVE identifiers and CVSS scores provide a standardized framework for communicating vulnerability severity and guiding patch prioritization decisions (Stallings &amp; Brown, 2023; CompTIA, 2023).</p>
       </div>
     </div>
 
@@ -260,6 +264,44 @@
         <a href="crypto.html" class="btn btn-outline">Next: Cryptography →</a>
         <a href="index.html" class="btn btn-outline">All Modules</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ REFERENCES ════════════════ -->
+<section class="concepts" style="padding-bottom: 48px;">
+  <div class="container">
+    <div class="section-label">References — APA 7th Edition</div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px;">
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Cialdini, R. B. (2007). <em>Influence: The psychology of persuasion</em> (rev. ed.). HarperCollins.</p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Cichonski, P., Millar, T., Grance, T., &amp; Scarfone, K. (2012). <em>Computer security incident handling guide</em> (NIST Special Publication 800-61 Rev. 2). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-61r2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.SP.800-61r2</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">CISA, NSA, FBI, ACSC, CCCS, NCSC-NZ, &amp; NCSC-UK. (2023). <em>People’s Republic of China state-sponsored cyber actor living off the land to evade detection</em> (Advisory AA23-144A). Cybersecurity and Infrastructure Security Agency. <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-144a" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-144a</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">CISA &amp; FBI. (2020). <em>Ransomware activity targeting the healthcare and public health sector</em> (Alert AA20-302A). Cybersecurity and Infrastructure Security Agency. <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-302a" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-302a</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">CompTIA. (2023). <em>CompTIA Security+ SY0-701 certification exam objectives</em> (Version 6.0). CompTIA. <a href="https://www.comptia.org/certifications/security" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.comptia.org/certifications/security</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">FBI, CISA, &amp; U.S. Treasury. (2022). <em>TraderTraitor: North Korean state-sponsored APT targets blockchain companies</em> (Advisory AA22-108A). Cybersecurity and Infrastructure Security Agency. <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-108a" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.cisa.gov/news-events/cybersecurity-advisories/aa22-108a</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Hutchins, E. M., Cloppert, M. J., &amp; Amin, R. M. (2011). <em>Intelligence-driven computer network defense informed by analysis of adversary campaigns and intrusion kill chains</em> [White paper]. Lockheed Martin Corporation. <a href="https://www.lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.lockheedmartin.com/content/dam/lockheed-martin/rms/documents/cyber/LM-White-Paper-Intel-Driven-Defense.pdf</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">MITRE. (2024). <em>MITRE ATT&amp;CK®: Adversarial tactics, techniques, and common knowledge</em>. The MITRE Corporation. <a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://attack.mitre.org/</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">MITRE. (2024). <em>Common vulnerabilities and exposures (CVE)</em>. The MITRE Corporation. <a href="https://cve.mitre.org/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://cve.mitre.org/</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">National Institute of Standards and Technology. (2012). <em>Computer security incident handling guide</em> (NIST Special Publication 800-61 Rev. 2). U.S. Department of Commerce. <a href="https://doi.org/10.6028/NIST.SP.800-61r2" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.SP.800-61r2</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">OWASP Foundation. (2021). <em>OWASP Top 10:2021 — The ten most critical web application security risks</em>. OWASP. <a href="https://owasp.org/Top10/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://owasp.org/Top10/</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Souppaya, M., &amp; Scarfone, K. (2013). <em>Guide to malware incident prevention and handling for desktops and laptops</em> (NIST Special Publication 800-83 Rev. 1). National Institute of Standards and Technology. <a href="https://doi.org/10.6028/NIST.SP.800-83r1" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://doi.org/10.6028/NIST.SP.800-83r1</a></p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Stallings, W., &amp; Brown, L. (2023). <em>Computer security: Principles and practice</em> (5th ed.). Pearson.</p>
+
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; padding-left: 2em; text-indent: -2em;">Verizon. (2024). <em>2024 data breach investigations report</em>. Verizon Business. <a href="https://www.verizon.com/business/resources/reports/dbir.html" target="_blank" rel="noopener noreferrer" style="color: var(--accent); word-break: break-all;">https://www.verizon.com/business/resources/reports/dbir.html</a></p>
+
     </div>
   </div>
 </section>
