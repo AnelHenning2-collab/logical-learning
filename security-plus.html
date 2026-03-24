@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security+ SY0-701 Hub — Logical Learning</title>
+<meta name="description" content="Four interactive study modules covering all major CompTIA Security+ SY0-701 exam domains — concept explainers and scored quizzes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg-mid: #111827;
+    --bg-card: #161d2e;
+    --border: rgba(99,179,237,0.14);
+    --accent: #63b3ed;
+    --accent-glow: rgba(99,179,237,0.15);
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --purple: #a78bfa;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-faint: #4b5563;
+    --white: #f8fafc;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* Subtle dot grid */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(rgba(99,179,237,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,30,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .nav-brand { font-size: 15px; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -0.01em; }
+  .nav-brand span { color: var(--text-muted); font-weight: 400; }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;
+    text-decoration: none; color: var(--text-muted); transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); background: var(--accent-glow); }
+  .nav-links a.active { color: var(--accent); background: var(--accent-glow); }
+
+  /* ── HEADER ── */
+  .hub-header {
+    padding: 72px 0 48px;
+    text-align: center;
+  }
+  .hub-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    background: var(--accent-glow); border: 1px solid var(--border);
+    color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .hub-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hub-header h1 {
+    font-size: clamp(30px, 4.5vw, 48px); font-weight: 700;
+    line-height: 1.15; color: var(--white);
+  }
+  .hub-header .subtitle {
+    font-size: 17px; color: var(--text-muted);
+    max-width: 640px; margin: 16px auto 0; line-height: 1.65;
+  }
+
+  /* ── DOMAIN GRID ── */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 16px 0 56px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media (max-width: 640px) {
+    .domain-grid { grid-template-columns: 1fr; }
+  }
+
+  .domain-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 250px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .domain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--card-accent);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .domain-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .domain-card:hover {
+    border-color: var(--card-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  }
+  .domain-card:hover::before { opacity: 1; }
+  .domain-card:hover::after {
+    opacity: 1;
+    background: radial-gradient(circle at 30% 20%, var(--card-glow), transparent 70%);
+  }
+
+  .card-icon {
+    font-size: 42px;
+    line-height: 1;
+  }
+
+  .card-domain-label {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--card-accent);
+  }
+
+  .card-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--white); line-height: 1.25;
+  }
+
+  .card-desc {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.55; flex: 1;
+  }
+
+  .card-footer {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-top: 8px;
+  }
+  .card-quiz-count {
+    font-size: 12px; color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .card-arrow {
+    font-size: 13px; font-weight: 600;
+    padding: 4px 12px; border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    color: var(--card-accent);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s;
+  }
+  .domain-card:hover .card-arrow {
+    background: var(--card-accent);
+    color: var(--bg);
+  }
+
+  /* ── CONTINUE SECTION ── */
+  .continue-section {
+    padding: 0 0 80px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .continue-label {
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-muted); margin-bottom: 16px;
+  }
+  .continue-links {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .continue-card {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 24px;
+    text-decoration: none; color: inherit;
+    transition: all 0.25s;
+  }
+  .continue-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+  .continue-icon { font-size: 24px; }
+  .continue-text .continue-title {
+    font-size: 15px; font-weight: 600; color: var(--white);
+  }
+  .continue-text .continue-desc {
+    font-size: 13px; color: var(--text-muted); margin-top: 2px;
+  }
+  .continue-card .arrow-right {
+    margin-left: auto; color: var(--text-faint);
+    font-size: 18px; transition: color 0.2s;
+  }
+  .continue-card:hover .arrow-right { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer { padding: 32px 0; border-top: 1px solid var(--border); }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 13px; color: var(--text-faint); }
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
+      <div class="nav-links">
+  <a href="logika-learning.html">Intro</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="security-plus.html" class="active">Security+</a>
+  <a href="pentest.html">Pen+</a>
+  <a href="physics.html">Physics</a>
+  <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact Us</a>
+</div>
+    </div>
+  </div>
+</nav>
+
+<section class="hub-header">
+  <div class="container">
+    <div class="hub-badge">CompTIA Security+ SY0-701</div>
+    <h1>CompTIA Security+ SY0-701</h1>
+    <p class="subtitle">Four interactive study modules covering all major exam domains — concept explainers and scored quizzes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="domain-grid">
+
+      <!-- Domain 1: Threats & Attacks -->
+      <a href="threats.html" class="domain-card" style="--card-accent:#dc2626; --card-glow:rgba(220,38,38,0.10);">
+        <div class="card-icon">🛡️</div>
+        <div class="card-domain-label">Domain 1 · ~22%</div>
+        <div class="card-title">Threats &amp; Attacks</div>
+        <div class="card-desc">Threat actors, malware types, social engineering, attack frameworks, vulnerability categories</div>
+        <div class="card-footer">
+          <span class="card-quiz-count">12 Quiz Questions</span>
+          <span class="card-arrow">Start →</span>
+        </div>
+      </a>
+
+      <!-- Domain 2: Cryptography & PKI -->
+      <a href="crypto.html" class="domain-card" style="--card-accent:#2563eb; --card-glow:rgba(37,99,235,0.10);">
+        <div class="card-icon">🔐</div>
+        <div class="card-domain-label">Domain 2 · ~15%</div>
+        <div class="card-title">Cryptography &amp; PKI</div>
+        <div class="card-desc">Symmetric/asymmetric, hashing, PKI, TLS, digital signatures, certificate management</div>
+        <div class="card-footer">
+          <span class="card-quiz-count">12 Quiz Questions</span>
+          <span class="card-arrow">Start →</span>
+        </div>
+      </a>
+
+      <!-- Domain 3: Network Security -->
+      <a href="network.html" class="domain-card" style="--card-accent:#16a34a; --card-glow:rgba(22,163,74,0.10);">
+        <div class="card-icon">🌐</div>
+        <div class="card-domain-label">Domain 3 · ~24%</div>
+        <div class="card-title">Network Security</div>
+        <div class="card-desc">Firewalls, IDS/IPS, VPNs, DMZ, segmentation, wireless security, protocols</div>
+        <div class="card-footer">
+          <span class="card-quiz-count">12 Quiz Questions</span>
+          <span class="card-arrow">Start →</span>
+        </div>
+      </a>
+
+      <!-- Domain 4: Identity & Access -->
+      <a href="identity.html" class="domain-card" style="--card-accent:#7c3aed; --card-glow:rgba(124,58,237,0.10);">
+        <div class="card-icon">👤</div>
+        <div class="card-domain-label">Domain 4 · ~16%</div>
+        <div class="card-title">Identity &amp; Access</div>
+        <div class="card-desc">Auth factors, MFA, SSO/federation, Zero Trust, PAM, access control models, directory services</div>
+        <div class="card-footer">
+          <span class="card-quiz-count">12 Quiz Questions</span>
+          <span class="card-arrow">Start →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="continue-section">
+      <div class="continue-label">Continue your certification path</div>
+      <div class="continue-links">
+        <a href="pentest.html" class="continue-card">
+          <div class="continue-icon">🧪</div>
+          <div class="continue-text">
+            <div class="continue-title">CompTIA PenTest+ — Ethical Hacking Lab</div>
+            <div class="continue-desc">Hands-on penetration testing concepts, tools, and methodologies</div>
+          </div>
+          <div class="arrow-right">→</div>
+        </a>
+        <a href="physics.html" class="continue-card">
+          <div class="continue-icon">⚛️</div>
+          <div class="continue-text">
+            <div class="continue-title">Physics Foundations for Quantum Computing</div>
+            <div class="continue-desc">EM theory, quantum mechanics, quantum algorithms, and post-quantum cryptography</div>
+          </div>
+          <div class="arrow-right">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Anél Henning · MS Cybersecurity · Purdue Global 2026</p>
+        <p style="margin-top:4px;"><a href="https://github.com/AnelHenning2-collab" target="_blank">GitHub</a> · <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a></p>
+      </div>
+      <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Update cards with saved scores from localStorage
+const domains = [
+  { key: 'threats', selector: 0 },
+  { key: 'crypto', selector: 1 },
+  { key: 'network', selector: 2 },
+  { key: 'identity', selector: 3 }
+];
+const cards = document.querySelectorAll('.domain-card');
+domains.forEach(d => {
+  const saved = localStorage.getItem('secplus_score_' + d.key);
+  if (saved) {
+    const data = JSON.parse(saved);
+    const pct = Math.round((data.correct / data.total) * 100);
+    const card = cards[d.selector];
+    if (card) {
+      const arrow = card.querySelector('.card-arrow');
+      if (arrow) {
+        arrow.textContent = pct + '% — Review →';
+        arrow.style.background = 'rgba(34,197,94,0.12)';
+        arrow.style.color = '#22c55e';
+        arrow.style.borderColor = 'rgba(34,197,94,0.2)';
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

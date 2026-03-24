@@ -17,7 +17,7 @@
 <link rel="author" href="https://www.perplexity.ai/computer">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Logical Learning — Security+ SY0-701 · Anél Henning</title>
+<title>Logical Learning — Cybersecurity &amp; Applied Physics · Anél Henning</title>
 <meta name="description" content="Interactive CompTIA Security+ study modules: visual explainers and quizzes for Threats, Cryptography, Network Security, and Identity & Access.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,28 +172,25 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
       <div class="nav-links">
-        <a href="threats.html">Threats</a>
-        <a href="crypto.html">Cryptography</a>
-        <a href="network.html">Network</a>
-        <a href="identity.html">Identity</a>
-        <a href="logika-learning.html">Logika Learng</a>
-        <a href="cornell-notes.html">Cornell Notes</a>
-        <a href="ui-prototypes.html">UI Prototypes</a>
-        <a href="physics.html">Physics</a>
-        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact Hub</a>
-      </div>
+  <a href="logika-learning.html">Intro</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="security-plus.html">Security+</a>
+  <a href="pentest.html">Pen+</a>
+  <a href="physics.html">Physics</a>
+  <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact Us</a>
+</div>
     </div>
   </div>
 </nav>
 
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">CompTIA Security+ SY0-701</div>
+    <div class="hero-badge">Cybersecurity &amp; Applied Physics</div>
     <h1>Study Smarter.<br><em>Not Just Harder.</em></h1>
-    <p class="hero-sub">Interactive visual explainers and scored quizzes for the four core Security+ domains. Built from Anél Henning's Cornell note system — every concept explained, then tested.</p>
+    <p class="hero-sub">Interactive visual explainers and scored quizzes for CompTIA Security+, PenTest+, and applied physics. Built from Anél Henning's Cornell note system — every concept explained, then tested.</p>
 
     <div class="progress-bar-wrap">
-      <label><span>Overall Progress</span><span id="overallPct">0 / 4 complete</span></label>
+      <label><span>Overall Progress</span><span id="overallPct">0 / 5 complete</span></label>
       <div class="progress-track"><div class="progress-fill" id="overallBar"></div></div>
     </div>
   </div>
@@ -203,59 +200,29 @@
   <div class="container">
     <div class="module-grid">
 
-      <a href="threats.html" class="module-card" style="--card-color:#ef4444; --card-glow:rgba(239,68,68,0.12);" id="card-threats">
-        <div class="card-score" id="score-threats"></div>
-        <div class="module-icon">⚠️</div>
+      <a href="security-plus.html" class="module-card" style="--card-color:#63b3ed; --card-glow:rgba(99,179,237,0.12);" id="card-secplus">
+        <div class="module-icon">🔒</div>
         <div>
-          <div class="module-num">Domain 1</div>
-          <div class="module-title">Threats &amp; Attacks</div>
+          <div class="module-num">CompTIA Security+ SY0-701</div>
+          <div class="module-title">Security+ Study Hub</div>
         </div>
-        <div class="module-desc">Threat actors, malware types, phishing, social engineering, attack vectors, and vulnerability categories.</div>
+        <div class="module-desc">Four interactive modules — Threats &amp; Attacks, Cryptography &amp; PKI, Network Security, Identity &amp; Access — with visual explainers and scored quizzes.</div>
         <div class="module-meta">
-          <span class="module-count">12 questions</span>
-          <span class="module-status" id="status-threats">Start →</span>
+          <span class="module-count">4 domains · 48 questions</span>
+          <span class="module-status" id="status-secplus">Explore →</span>
         </div>
       </a>
 
-      <a href="crypto.html" class="module-card" style="--card-color:#a78bfa; --card-glow:rgba(167,139,250,0.12);" id="card-crypto">
-        <div class="card-score" id="score-crypto"></div>
-        <div class="module-icon">🔐</div>
+      <a href="pentest.html" class="module-card" style="--card-color:#c8a44a; --card-glow:rgba(200,164,74,0.12);" id="card-pentest">
+        <div class="module-icon">🧪</div>
         <div>
-          <div class="module-num">Domain 2</div>
-          <div class="module-title">Cryptography &amp; PKI</div>
+          <div class="module-num">CompTIA PenTest+</div>
+          <div class="module-title">Ethical Hacking Lab</div>
         </div>
-        <div class="module-desc">Symmetric vs asymmetric encryption, hashing, digital signatures, PKI, TLS handshakes, and certificate management.</div>
+        <div class="module-desc">Penetration testing concepts, methodologies, tools, and hands-on practice for the CompTIA PenTest+ certification.</div>
         <div class="module-meta">
-          <span class="module-count">12 questions</span>
-          <span class="module-status" id="status-crypto">Start →</span>
-        </div>
-      </a>
-
-      <a href="network.html" class="module-card" style="--card-color:#22c55e; --card-glow:rgba(34,197,94,0.12);" id="card-network">
-        <div class="card-score" id="score-network"></div>
-        <div class="module-icon">🌐</div>
-        <div>
-          <div class="module-num">Domain 3</div>
-          <div class="module-title">Network Security</div>
-        </div>
-        <div class="module-desc">Firewalls, VPNs, IDS vs IPS, DMZ architecture, network segmentation, protocols, and wireless security.</div>
-        <div class="module-meta">
-          <span class="module-count">12 questions</span>
-          <span class="module-status" id="status-network">Start →</span>
-        </div>
-      </a>
-
-      <a href="identity.html" class="module-card" style="--card-color:#f59e0b; --card-glow:rgba(245,158,11,0.12);" id="card-identity">
-        <div class="card-score" id="score-identity"></div>
-        <div class="module-icon">🪪</div>
-        <div>
-          <div class="module-num">Domain 4</div>
-          <div class="module-title">Identity &amp; Access</div>
-        </div>
-        <div class="module-desc">Authentication factors, MFA, SSO, Zero Trust, PAM, IAM frameworks, and directory services.</div>
-        <div class="module-meta">
-          <span class="module-count">12 questions</span>
-          <span class="module-status" id="status-identity">Start →</span>
+          <span class="module-count">Interactive lab</span>
+          <span class="module-status">Explore →</span>
         </div>
       </a>
 
@@ -303,24 +270,37 @@
 
 <script>
 // Load scores from localStorage
-const modules = ['threats','crypto','network','identity','physics'];
-let completed = 0;
-modules.forEach(m => {
+const secModules = ['threats','crypto','network','identity'];
+let secCompleted = 0;
+secModules.forEach(m => {
   const saved = localStorage.getItem('secplus_score_' + m);
-  if (saved) {
-    const d = JSON.parse(saved);
-    const pct = Math.round((d.correct / d.total) * 100);
-    document.getElementById('score-' + m).textContent = pct + '%';
-    document.getElementById('score-' + m).style.display = 'block';
-    document.getElementById('status-' + m).textContent = 'Review →';
-    document.getElementById('status-' + m).className = 'module-status done';
-    completed++;
-  }
+  if (saved) secCompleted++;
 });
+if (secCompleted > 0) {
+  const el = document.getElementById('status-secplus');
+  if (el) {
+    el.textContent = secCompleted + '/4 done →';
+    if (secCompleted === 4) el.className = 'module-status done';
+  }
+}
+
+// Physics score
+const physSaved = localStorage.getItem('secplus_score_physics');
+if (physSaved) {
+  const d = JSON.parse(physSaved);
+  const scorePct = Math.round((d.correct / d.total) * 100);
+  const scoreEl = document.getElementById('score-physics');
+  if (scoreEl) { scoreEl.textContent = scorePct + '%'; scoreEl.style.display = 'block'; }
+  const statusEl = document.getElementById('status-physics');
+  if (statusEl) { statusEl.textContent = 'Review →'; statusEl.className = 'module-status done'; }
+}
+
+// Overall progress (sec+ domains + physics)
+const totalCompleted = secCompleted + (physSaved ? 1 : 0);
 const bar = document.getElementById('overallBar');
-const pct = document.getElementById('overallPct');
-bar.style.width = (completed / 5 * 100) + '%';
-pct.textContent = completed + ' / 5 complete';
+const pctLabel = document.getElementById('overallPct');
+if (bar) bar.style.width = (totalCompleted / 5 * 100) + '%';
+if (pctLabel) pctLabel.textContent = totalCompleted + ' / 5 complete';
 </script>
 </body>
 </html>

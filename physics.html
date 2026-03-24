@@ -130,6 +130,69 @@
 
   /* Allow large concept bodies to expand fully */
   .concept-card.open .concept-body { max-height: 5000px; }
+
+  /* ── TOPIC NAV BAR ── */
+  .topic-nav {
+    position: sticky;
+    top: 53px; /* below main nav */
+    z-index: 90;
+    background: rgba(10,15,30,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .topic-nav::-webkit-scrollbar { height: 0; }
+  .topic-nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .topic-group-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .topic-group-label:not(:first-child) {
+    margin-top: 10px;
+  }
+  .topic-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .topic-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    background: rgba(99,179,237,0.06);
+    border: 1px solid rgba(99,179,237,0.1);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .topic-pill:hover {
+    color: #06b6d4;
+    background: rgba(6,182,212,0.12);
+    border-color: rgba(6,182,212,0.3);
+  }
+  .topic-pill .pill-icon {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .concept-card[id] {
+    scroll-margin-top: 140px;
+  }
 </style>
 </head>
 <body>
@@ -138,16 +201,13 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-brand">Logical <span>Learning</span></a>
       <div class="nav-links">
-        <a href="threats.html">Threats</a>
-        <a href="crypto.html">Cryptography</a>
-        <a href="network.html">Network</a>
-        <a href="identity.html">Identity</a>
-        <a href="logika-learning.html">Logika Learng</a>
-        <a href="cornell-notes.html">Cornell Notes</a>
-        <a href="ui-prototypes.html">UI Prototypes</a>
-        <a href="physics.html" class="active">Physics</a>
-        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact Hub</a>
-      </div>
+  <a href="logika-learning.html">Intro</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="security-plus.html">Security+</a>
+  <a href="pentest.html">Pen+</a>
+  <a href="physics.html">Physics</a>
+  <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact Us</a>
+</div>
     </div>
   </div>
 </nav>
@@ -165,6 +225,34 @@
   </div>
 </header>
 
+<!-- ── TOPIC NAVIGATION ── -->
+<div class="topic-nav">
+  <div class="topic-nav-inner">
+    <div class="topic-group-label">Classical Physics</div>
+    <div class="topic-pills">
+      <a href="#em-theory" class="topic-pill"><span class="pill-icon">📡</span> EM Theory</a>
+      <a href="#semiconductors" class="topic-pill"><span class="pill-icon">🔌</span> Semiconductors</a>
+      <a href="#photonics" class="topic-pill"><span class="pill-icon">💡</span> Photonics</a>
+      <a href="#thermodynamics" class="topic-pill"><span class="pill-icon">🌡️</span> Thermodynamics</a>
+    </div>
+    <div class="topic-group-label">Quantum Physics</div>
+    <div class="topic-pills">
+      <a href="#wave-particle" class="topic-pill"><span class="pill-icon">🌊</span> Wave-Particle</a>
+      <a href="#superposition" class="topic-pill"><span class="pill-icon">⚛️</span> Superposition</a>
+      <a href="#entanglement" class="topic-pill"><span class="pill-icon">🔗</span> Entanglement</a>
+      <a href="#tunneling" class="topic-pill"><span class="pill-icon">🕳️</span> Tunneling</a>
+      <a href="#quantum-states" class="topic-pill"><span class="pill-icon">📐</span> Dirac Notation</a>
+      <a href="#bloch-sphere" class="topic-pill"><span class="pill-icon">🌐</span> Bloch Sphere</a>
+      <a href="#quantum-gates" class="topic-pill"><span class="pill-icon">🔀</span> Gates</a>
+      <a href="#quantum-algorithms" class="topic-pill"><span class="pill-icon">⚡</span> Algorithms</a>
+      <a href="#error-correction" class="topic-pill"><span class="pill-icon">🛡️</span> Error Correction</a>
+      <a href="#quantum-crypto" class="topic-pill"><span class="pill-icon">🔐</span> Crypto</a>
+      <a href="#decoherence" class="topic-pill"><span class="pill-icon">📉</span> Decoherence</a>
+      <a href="#quantum-hardware" class="topic-pill"><span class="pill-icon">🖥️</span> Hardware</a>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════════════════════ -->
 <!--  PART 1: PHYSICS FOUNDATIONS                                -->
 <!-- ═══════════════════════════════════════════════════════════ -->
@@ -177,7 +265,7 @@
     <div class="section-label">Classical physics concepts critical to computing &amp; security</div>
 
     <!-- 1. Electromagnetic Theory -->
-    <div class="concept-card fade-in" data-concept="0">
+    <div class="concept-card fade-in" id="em-theory" data-concept="0">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">📡</div>
         <div class="concept-title-wrap">
@@ -211,7 +299,7 @@
     </div>
 
     <!-- 2. Semiconductor Physics -->
-    <div class="concept-card fade-in" data-concept="1">
+    <div class="concept-card fade-in" id="semiconductors" data-concept="1">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🔬</div>
         <div class="concept-title-wrap">
@@ -242,7 +330,7 @@
     </div>
 
     <!-- 3. Photonics -->
-    <div class="concept-card fade-in" data-concept="2">
+    <div class="concept-card fade-in" id="photonics" data-concept="2">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">💡</div>
         <div class="concept-title-wrap">
@@ -272,7 +360,7 @@
     </div>
 
     <!-- 4. Thermodynamics -->
-    <div class="concept-card fade-in" data-concept="3">
+    <div class="concept-card fade-in" id="thermodynamics" data-concept="3">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🌡️</div>
         <div class="concept-title-wrap">
@@ -318,7 +406,7 @@
     <div class="section-label">The physics underpinning quantum computing, quantum cryptography, and the post-quantum transition</div>
 
     <!-- 5. Wave-Particle Duality -->
-    <div class="concept-card fade-in" data-concept="4">
+    <div class="concept-card fade-in" id="wave-particle" data-concept="4">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🌊</div>
         <div class="concept-title-wrap">
@@ -367,7 +455,7 @@
     </div>
 
     <!-- 6. Superposition -->
-    <div class="concept-card fade-in" data-concept="5">
+    <div class="concept-card fade-in" id="superposition" data-concept="5">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">⚛️</div>
         <div class="concept-title-wrap">
@@ -404,7 +492,7 @@
     </div>
 
     <!-- 7. Entanglement -->
-    <div class="concept-card fade-in" data-concept="6">
+    <div class="concept-card fade-in" id="entanglement" data-concept="6">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🔗</div>
         <div class="concept-title-wrap">
@@ -450,7 +538,7 @@
     </div>
 
     <!-- 8. Quantum Tunneling -->
-    <div class="concept-card fade-in" data-concept="7">
+    <div class="concept-card fade-in" id="tunneling" data-concept="7">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🚇</div>
         <div class="concept-title-wrap">
@@ -487,7 +575,7 @@
     </div>
 
     <!-- 9. Quantum States & Dirac Notation -->
-    <div class="concept-card fade-in" data-concept="8">
+    <div class="concept-card fade-in" id="quantum-states" data-concept="8">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">📐</div>
         <div class="concept-title-wrap">
@@ -528,7 +616,7 @@
     </div>
 
     <!-- 10. Bloch Sphere -->
-    <div class="concept-card fade-in" data-concept="9">
+    <div class="concept-card fade-in" id="bloch-sphere" data-concept="9">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🌐</div>
         <div class="concept-title-wrap">
@@ -585,7 +673,7 @@
     </div>
 
     <!-- 11. Quantum Gates -->
-    <div class="concept-card fade-in" data-concept="10">
+    <div class="concept-card fade-in" id="quantum-gates" data-concept="10">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🔀</div>
         <div class="concept-title-wrap">
@@ -657,7 +745,7 @@
     </div>
 
     <!-- 12. Quantum Algorithms -->
-    <div class="concept-card fade-in" data-concept="11">
+    <div class="concept-card fade-in" id="quantum-algorithms" data-concept="11">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">⚡</div>
         <div class="concept-title-wrap">
@@ -720,7 +808,7 @@
     </div>
 
     <!-- 13. Quantum Error Correction -->
-    <div class="concept-card fade-in" data-concept="12">
+    <div class="concept-card fade-in" id="error-correction" data-concept="12">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🛡️</div>
         <div class="concept-title-wrap">
@@ -773,7 +861,7 @@
     </div>
 
     <!-- 14. Quantum Cryptography & Post-Quantum -->
-    <div class="concept-card fade-in" data-concept="13">
+    <div class="concept-card fade-in" id="quantum-crypto" data-concept="13">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🔐</div>
         <div class="concept-title-wrap">
@@ -839,7 +927,7 @@
     </div>
 
     <!-- 15. Decoherence & Noise -->
-    <div class="concept-card fade-in" data-concept="14">
+    <div class="concept-card fade-in" id="decoherence" data-concept="14">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">📉</div>
         <div class="concept-title-wrap">
@@ -879,7 +967,7 @@
     </div>
 
     <!-- 16. Quantum Hardware -->
-    <div class="concept-card fade-in" data-concept="15">
+    <div class="concept-card fade-in" id="quantum-hardware" data-concept="15">
       <div class="concept-header" onclick="toggleConcept(this)">
         <div class="concept-icon">🖥️</div>
         <div class="concept-title-wrap">
