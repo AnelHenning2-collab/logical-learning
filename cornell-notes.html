@@ -113,9 +113,12 @@
     background: var(--bg-card); border: 1px solid var(--border);
     border-radius: 14px; overflow: hidden;
   }
-  .video-card video {
+  .video-card video, .video-card iframe {
     width: 100%; display: block;
     background: #000; max-height: 440px; object-fit: contain;
+  }
+  .video-card iframe {
+    aspect-ratio: 16/9; height: auto; min-height: 360px; border: none;
   }
   .video-info {
     padding: 16px 20px;
@@ -408,7 +411,7 @@
     </div>
     <div class="video-card" style="margin-top: 20px;">
       <video controls preload="metadata">
-        <source src="https://www.dropbox.com/scl/fi/fxxl15h6c32w03we7w7cd/AnelHenning_Chapter2-3ReviewQA.mp4?rlkey=w2bh0c5vt8tp6emujv3blwpqx&raw=1" type="video/mp4">
+        <source src="https://www.dropbox.com/scl/fi/fxxl15h6c32w03we7w7cd/AnelHenning_Chapter2-3ReviewQA.mp4?rlkey=w2bh0c5vt8tp6emujv3blwpqx&dl=1" type="video/mp4">
       </video>
       <div class="video-info">
         <span class="label">Cornell Outline Video</span>
