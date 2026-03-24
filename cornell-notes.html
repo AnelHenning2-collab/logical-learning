@@ -407,10 +407,9 @@
       </div>
     </div>
     <div class="video-card" style="margin-top: 20px;">
-      <video controls preload="metadata" crossorigin="anonymous" id="ch23Video">
-        <source src="https://www.dropbox.com/scl/fi/fxxl15h6c32w03we7w7cd/AnelHenning_Chapter2-3ReviewQA.mp4?rlkey=w2bh0c5vt8tp6emujv3blwpqx&raw=1" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; background:#0d1326;">
+        <iframe src="https://www.dropbox.com/scl/fi/fxxl15h6c32w03we7w7cd/AnelHenning_Chapter2-3ReviewQA.mp4?rlkey=w2bh0c5vt8tp6emujv3blwpqx&raw=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen allow="autoplay"></iframe>
+      </div>
       <div class="video-info" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
         <div>
           <span class="label">Cornell Outline Video</span>
@@ -419,17 +418,6 @@
         <a href="https://www.dropbox.com/scl/fi/fxxl15h6c32w03we7w7cd/AnelHenning_Chapter2-3ReviewQA.mp4?rlkey=w2bh0c5vt8tp6emujv3blwpqx&dl=0" target="_blank" rel="noopener noreferrer" style="font-size:12px; color:var(--accent); text-decoration:none; padding:5px 12px; border:1px solid var(--border); border-radius:6px; white-space:nowrap;">Open in Dropbox ↗</a>
       </div>
     </div>
-    <script>
-      // Fallback: if Dropbox video fails to load, show direct link prominently
-      document.getElementById('ch23Video').addEventListener('error', function() {
-        this.style.display = 'none';
-        var fallback = document.createElement('div');
-        fallback.style.cssText = 'padding:40px 20px;text-align:center;background:rgba(13,19,38,0.9);border-radius:10px;';
-        fallback.innerHTML = '<p style="color:var(--text-muted);margin-bottom:12px;">Video preview unavailable in browser.</p>' +
-          '<a href="https://www.dropbox.com/scl/fi/fxxl15h6c32w03we7w7cd/AnelHenning_Chapter2-3ReviewQA.mp4?rlkey=w2bh0c5vt8tp6emujv3blwpqx&dl=0" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 24px;background:var(--accent);color:#0a0f1e;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;">Watch on Dropbox</a>';
-        this.parentNode.insertBefore(fallback, this);
-      }, true);
-    </script>
   </div>
 </section>
 
