@@ -24,20 +24,22 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0f1e;
-    --bg-mid: #111827;
-    --bg-card: #161d2e;
-    --border: rgba(99,179,237,0.14);
-    --accent: #63b3ed;
-    --accent-glow: rgba(99,179,237,0.15);
-    --green: #22c55e;
-    --red: #ef4444;
-    --amber: #f59e0b;
-    --purple: #a78bfa;
-    --text: #e2e8f0;
-    --text-muted: #94a3b8;
-    --text-faint: #4b5563;
-    --white: #f8fafc;
+    --bg: #ffffff;
+    --bg-mid: #f8f9fb;
+    --bg-card: #ffffff;
+    --border: rgba(15,23,42,0.09);
+    --border-hover: rgba(15,23,42,0.18);
+    --accent: #2563eb;
+    --accent-glow: rgba(37,99,235,0.08);
+    --green: #16a34a;
+    --red: #dc2626;
+    --amber: #d97706;
+    --purple: #7c3aed;
+    --text: #334155;
+    --text-muted: #64748b;
+    --text-faint: #94a3b8;
+    --heading: #0f172a;
+    --white: #0f172a;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,21 +53,12 @@
     min-height: 100vh;
   }
 
-  /* Subtle dot grid */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: radial-gradient(rgba(99,179,237,0.07) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none; z-index: 0;
-  }
-
   .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
   /* ── NAV ── */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(10,15,30,0.92); backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
     padding: 14px 0;
   }
@@ -85,26 +78,26 @@
   .hero-badge {
     display: inline-flex; align-items: center; gap: 7px;
     padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
-    background: var(--accent-glow); border: 1px solid var(--border);
+    background: var(--accent-glow); border: 1px solid rgba(37,99,235,0.15);
     color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
     margin-bottom: 20px;
   }
   .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  h1 { font-size: clamp(32px, 5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--white); }
+  h1 { font-size: clamp(32px, 5vw, 54px); font-weight: 700; line-height: 1.1; color: var(--heading); }
   h1 em { font-style: normal; color: var(--accent); }
 
   .hero-sub { font-size: 17px; color: var(--text-muted); max-width: 580px; margin-top: 16px; line-height: 1.65; }
 
   .progress-bar-wrap {
     margin-top: 32px; max-width: 400px;
-    background: var(--bg-card); border: 1px solid var(--border);
+    background: var(--bg-mid); border: 1px solid var(--border);
     border-radius: 12px; padding: 16px 20px;
   }
   .progress-bar-wrap label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: flex; justify-content: space-between; margin-bottom: 10px; }
-  .progress-track { height: 8px; background: rgba(99,179,237,0.1); border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #90cdf4); border-radius: 4px; width: 0%; transition: width 1s ease; }
+  .progress-track { height: 8px; background: rgba(37,99,235,0.08); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #60a5fa); border-radius: 4px; width: 0%; transition: width 1s ease; }
 
   /* ── MODULE GRID ── */
   .module-grid {
@@ -117,33 +110,33 @@
     border-radius: 14px; padding: 28px; text-decoration: none; color: inherit;
     display: flex; flex-direction: column; gap: 14px;
     transition: all 0.25s; position: relative; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-  .module-card::after {
-    content: ''; position: absolute; inset: 0; border-radius: 14px;
-    opacity: 0; transition: opacity 0.25s;
+  .module-card:hover {
+    border-color: var(--card-color, var(--accent));
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
   }
-  .module-card:hover { border-color: var(--card-color, var(--accent)); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  .module-card:hover::after { opacity: 1; background: radial-gradient(circle at 30% 30%, var(--card-glow, var(--accent-glow)), transparent 70%); }
 
   .module-icon { font-size: 32px; }
   .module-num { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
-  .module-title { font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.25; }
+  .module-title { font-size: 18px; font-weight: 700; color: var(--heading); line-height: 1.25; }
   .module-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; flex: 1; }
 
   .module-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
   .module-count { font-size: 12px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; }
   .module-status {
     font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 10px;
-    background: var(--accent-glow); color: var(--accent); border: 1px solid var(--border);
+    background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(37,99,235,0.15);
   }
-  .module-status.done { background: rgba(34,197,94,0.1); color: var(--green); border-color: rgba(34,197,94,0.2); }
+  .module-status.done { background: rgba(22,163,74,0.08); color: var(--green); border-color: rgba(22,163,74,0.18); }
 
   /* Score badge on card */
   .card-score {
     position: absolute; top: 16px; right: 16px;
     font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
     padding: 3px 8px; border-radius: 8px;
-    background: rgba(34,197,94,0.12); color: var(--green);
+    background: rgba(22,163,74,0.08); color: var(--green);
     display: none;
   }
 
@@ -152,7 +145,7 @@
   .tips-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
   .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
   .tip-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-mid); border: 1px solid var(--border); border-radius: 10px;
     padding: 14px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.55;
   }
   .tip-card strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -200,7 +193,7 @@
   <div class="container">
     <div class="module-grid">
 
-      <a href="security-plus.html" class="module-card" style="--card-color:#63b3ed; --card-glow:rgba(99,179,237,0.12);" id="card-secplus">
+      <a href="security-plus.html" class="module-card" style="--card-color:#2563eb;" id="card-secplus">
         <div class="module-icon">🔒</div>
         <div>
           <div class="module-num">CompTIA Security+ SY0-701</div>
@@ -213,7 +206,7 @@
         </div>
       </a>
 
-      <a href="pentest.html" class="module-card" style="--card-color:#c8a44a; --card-glow:rgba(200,164,74,0.12);" id="card-pentest">
+      <a href="pentest.html" class="module-card" style="--card-color:#d97706;" id="card-pentest">
         <div class="module-icon">🧪</div>
         <div>
           <div class="module-num">CompTIA PenTest+</div>
@@ -226,7 +219,7 @@
         </div>
       </a>
 
-      <a href="physics.html" class="module-card" style="--card-color:#06b6d4; --card-glow:rgba(6,182,212,0.12);" id="card-physics">
+      <a href="physics.html" class="module-card" style="--card-color:#0891b2;" id="card-physics">
         <div class="card-score" id="score-physics"></div>
         <div class="module-icon">⚛️</div>
         <div>
