@@ -1,0 +1,861 @@
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Work Preview — Anél Henning</title>
+  <style>
+    :root {
+      --navy: #0d1b3e;
+      --navy-mid: #162447;
+      --navy-light: #1f3566;
+      --gold: #c8a44a;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(200,164,74,0.12);
+      --text: #d4d4d4;
+      --text-bright: #f0f0f0;
+      --muted: #8b949e;
+      --surface: #0f1729;
+      --card-bg: #131d35;
+      --border: rgba(200,164,74,0.2);
+      --green: #4ade80;
+      --teal: #2dd4bf;
+      --purple: #a78bfa;
+      --rose: #fb7185;
+      --blue: #60a5fa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: rgba(13,27,62,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 54px;
+    }
+    .nav-brand {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.2rem; align-items: center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--surface) 100%);
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 1.4rem;
+      text-align: center;
+    }
+    .stat-num {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+    }
+
+    /* ── PREVIEW CARDS ── */
+    .previews {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.6rem;
+    }
+    .preview-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .preview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(200,164,74,0.1);
+    }
+
+    .card-header {
+      padding: 1.4rem 1.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .card-icon.grad { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+    .card-icon.cs { background: linear-gradient(135deg, var(--blue), var(--teal)); }
+    .card-icon.gc { background: linear-gradient(135deg, var(--green), #059669); }
+    .card-icon.ux { background: linear-gradient(135deg, var(--purple), #7c3aed); }
+    .card-icon.sec { background: linear-gradient(135deg, var(--rose), #e11d48); }
+
+    .card-meta { flex: 1; }
+    .card-collection {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .card-collection.grad { color: var(--gold); }
+    .card-collection.cs { color: var(--blue); }
+    .card-collection.gc { color: var(--green); }
+    .card-collection.ux { color: var(--purple); }
+    .card-collection.sec { color: var(--rose); }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      line-height: 1.3;
+    }
+    .card-count {
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .card-body {
+      padding: 1rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 1rem;
+    }
+    .tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .card-lock {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .lock-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0.8;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ACCESS FORM ── */
+    .form-section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+    .form-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .form-wrapper h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .form-wrapper .form-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.65;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.03em;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      color: var(--text-bright);
+      font-size: 0.88rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--navy); color: var(--text); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .form-check {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin-top: 0.5rem;
+    }
+    .form-check input[type="checkbox"] {
+      margin-top: 0.25rem;
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .form-check label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .form-submit {
+      grid-column: 1 / -1;
+      margin-top: 0.5rem;
+    }
+    .form-submit button {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: none;
+      border-radius: 8px;
+      padding: 0.85rem 1.5rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .form-submit button:hover { opacity: 0.88; }
+
+    .form-notice {
+      grid-column: 1 / -1;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    /* ── SUCCESS MESSAGE ── */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .success-msg.show { display: block; }
+    .success-msg .check {
+      width: 56px;
+      height: 56px;
+      background: rgba(74,222,128,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-size: 1.5rem;
+    }
+    .success-msg h3 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .success-msg p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── IP NOTICE BAR ── */
+    .ip-bar {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 2rem;
+      text-align: center;
+    }
+    .ip-bar p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .ip-bar a { color: var(--gold); text-decoration: none; }
+    .ip-bar a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .section { padding: 3rem 1.5rem; }
+      .form-wrapper { padding: 2rem 1.5rem; }
+      .previews { grid-template-columns: 1fr; }
+      .hero-stats { gap: 0.8rem; }
+      .stat { padding: 0.5rem 1rem; }
+      .nav-links { gap: 0.8rem; }
+      .nav-links a { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">Logical Learning</a>
+    <div class="nav-links">
+      <a href="index.html">Study Home</a>
+      <a href="security-plus.html">Security+</a>
+      <a href="#previews">Work Samples</a>
+      <a href="#access">Request Access</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Academic Work Preview</div>
+    <h1>Five Collections. <span>One Highlight Each.</span></h1>
+    <p class="hero-sub">
+      Below is a curated preview of my academic and research portfolio spanning
+      cybersecurity, computer science, quantum research, UX design, and Security+ study materials.
+      Full access is available by request.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Collections</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100+</span>
+        <span class="stat-label">Pages</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Courses</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Degrees</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVIEWS -->
+  <section class="section" id="previews">
+    <h2 class="section-title">Featured Work</h2>
+    <p class="section-sub">
+      One representative piece from each collection. Request access below to see everything.
+    </p>
+
+    <div class="previews">
+
+      <!-- 1. Purdue Grad — MS Cybersecurity -->
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-icon grad">MS</div>
+          <div class="card-meta">
+            <div class="card-collection grad">Purdue Global — MS Cybersecurity</div>
+            <div class="card-title">Predict Loan Default Risk (GLM)</div>
+            <div class="card-count">From a collection of 48 pages across 10+ courses</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">
+            A quantitative risk model using Generalized Linear Models to predict loan default probability.
+            Demonstrates statistical analysis, data preprocessing, model evaluation with confusion matrices,
+            and clear executive-level reporting of findings — connecting cybersecurity risk modeling
+            to real-world financial decision systems.
+          </p>
+          <div class="card-tags">
+            <span class="tag">GLM</span>
+            <span class="tag">Risk Modeling</span>
+            <span class="tag">R / Python</span>
+            <span class="tag">Data Analysis</span>
+            <span class="tag">APA 7</span>
+          </div>
+          <div class="card-lock">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            47 more pages in this collection
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Rasmussen — BS Computer Science -->
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-icon cs">BS</div>
+          <div class="card-meta">
+            <div class="card-collection cs">Rasmussen University — BS Computer Science</div>
+            <div class="card-title">Retail RDBM — Online Sales Portal Capstone</div>
+            <div class="card-count">From a collection of 58 pages across 15+ courses</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">
+            A full-stack capstone project designing a relational database management system
+            for an online retail sales portal. Covers ER diagrams, normalization to 3NF,
+            SQL stored procedures, and a front-end interface — demonstrating end-to-end
+            software engineering from requirements gathering to deployment.
+          </p>
+          <div class="card-tags">
+            <span class="tag">MySQL</span>
+            <span class="tag">Java</span>
+            <span class="tag">ER Diagrams</span>
+            <span class="tag">Full-Stack</span>
+            <span class="tag">Capstone</span>
+          </div>
+          <div class="card-lock">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            57 more pages in this collection
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. GlideCart — Quantum Research -->
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-icon gc">QC</div>
+          <div class="card-meta">
+            <div class="card-collection gc">GlideCart Research Labs — Quantum Computing</div>
+            <div class="card-title">GlassVision — T-OLED Retail Display Concept</div>
+            <div class="card-count">From a collection of 12+ research pages and deliverables</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">
+            A glassmorphism-inspired concept for transparent OLED retail displays
+            that integrate real-time product data, customer behavior analytics,
+            and quantum-safe encryption. Part of the GlideCart autonomous grocery
+            research initiative supporting PhD preparation in quantum computing
+            for retail automation.
+          </p>
+          <div class="card-tags">
+            <span class="tag">T-OLED</span>
+            <span class="tag">Quantum-Safe</span>
+            <span class="tag">Retail UX</span>
+            <span class="tag">ML Models</span>
+            <span class="tag">Research</span>
+          </div>
+          <div class="card-lock">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            11 more pages in this collection
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Adobe XD — UX Design -->
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-icon ux">UX</div>
+          <div class="card-meta">
+            <div class="card-collection ux">Portfolio Samples — UX / Graphic Design</div>
+            <div class="card-title">Adobe XD Daily Challenge Prototypes</div>
+            <div class="card-count">From a collection of UI/UX prototypes and brand work</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">
+            Interactive prototypes from the 2018 Adobe XD Daily Challenge series,
+            demonstrating mobile-first UI design, micro-interactions, and brand identity systems.
+            Showcases the UX foundation that informs all current product concepts
+            including GlassVision, ClearReg, and the Logical Learning platform.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Adobe XD</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">Mobile UI</span>
+            <span class="tag">Brand Systems</span>
+            <span class="tag">BFA</span>
+          </div>
+          <div class="card-lock">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            Full prototypes available on request
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Security+ Study Site -->
+      <div class="preview-card">
+        <div class="card-header">
+          <div class="card-icon sec">S+</div>
+          <div class="card-meta">
+            <div class="card-collection sec">Logical Learning — CompTIA Security+</div>
+            <div class="card-title">Threats, Vulnerabilities & Mitigations — Cornell Notes</div>
+            <div class="card-count">Active study site — exam target June 2026</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">
+            Cornell-method study notes covering the highest-weighted Security+ domain (22%):
+            malware types, social engineering, application attacks, network vulnerabilities,
+            and indicator analysis. Demonstrates structured self-teaching methodology
+            using audio-visual reinforcement and spaced repetition.
+          </p>
+          <div class="card-tags">
+            <span class="tag">SY0-701</span>
+            <span class="tag">Cornell Notes</span>
+            <span class="tag">Self-Teaching</span>
+            <span class="tag">Spaced Repetition</span>
+          </div>
+          <div class="card-lock">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 11V7a4 4 0 118 0v4"/>
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            </svg>
+            <span style="color:var(--green);">Public</span> — <a href="threats.html" style="color:var(--green); text-decoration:underline;">view now</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ACCESS REQUEST FORM -->
+  <section class="form-section" id="access">
+    <div class="form-wrapper">
+      <div id="form-content">
+        <h2>Request Full Access</h2>
+        <p class="form-sub">
+          To view the complete collections, please share a bit about yourself and how you plan to use the materials.
+          Access is typically granted within 24-48 hours.
+        </p>
+
+        <form id="access-form" action="https://api.web3forms.com/submit" method="POST" class="form-grid">
+          <input type="hidden" name="access_key" value="b4c1a5cc-7041-4bb8-804a-ad0aab863b4f">
+          <input type="hidden" name="subject" value="Portfolio Access Request — Logical Learning">
+          <input type="hidden" name="from_name" value="Logical Learning Showcase">
+          <!-- honeypot -->
+          <input type="text" name="botcheck" style="display:none !important;">
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Jane Smith">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="jane@university.edu">
+          </div>
+
+          <div class="form-group">
+            <label for="role">I am a...</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="Professor / Advisor">Professor / Advisor</option>
+              <option value="Hiring Manager / Recruiter">Hiring Manager / Recruiter</option>
+              <option value="Student / Researcher">Student / Researcher</option>
+              <option value="Donor / Supporter">Donor / Supporter</option>
+              <option value="Industry Professional">Industry Professional</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="org">Organization / University</label>
+            <input type="text" id="org" name="organization" placeholder="MIT, Google, etc.">
+          </div>
+
+          <div class="form-group full">
+            <label for="collections">Which collections interest you?</label>
+            <select id="collections" name="collections_requested" required>
+              <option value="" disabled selected>Select a collection</option>
+              <option value="All Collections">All Collections</option>
+              <option value="MS Cybersecurity (Purdue Global)">MS Cybersecurity (Purdue Global)</option>
+              <option value="BS Computer Science (Rasmussen)">BS Computer Science (Rasmussen)</option>
+              <option value="GlideCart Quantum Research">GlideCart Quantum Research</option>
+              <option value="UX / Design Portfolio">UX / Design Portfolio</option>
+              <option value="Security+ Study Materials">Security+ Study Materials</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="purpose">How do you plan to use these materials?</label>
+            <textarea id="purpose" name="purpose" placeholder="e.g., Evaluating for a position, reviewing for academic collaboration, assessing for funding..."></textarea>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="agree" name="agreement" value="Agreed" required>
+            <label for="agree">
+              I understand this work is protected under CC BY-NC-ND 4.0 and will not reproduce, modify,
+              or distribute any materials without written permission from the author.
+            </label>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit">Request Access</button>
+          </div>
+
+          <p class="form-notice">
+            Your information is collected only to process your access request.
+            It is not shared with third parties. Access decisions are made with
+            research integrity and participant protection in mind.
+          </p>
+        </form>
+      </div>
+
+      <div id="success" class="success-msg">
+        <div class="check">&#10003;</div>
+        <h3>Request Received</h3>
+        <p>
+          Thank you for your interest in my academic work.
+          I will review your request and respond within 24-48 hours.
+          In the meantime, feel free to explore the
+          <a href="index.html" style="color:var(--gold);">Security+ study site</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IP NOTICE BAR -->
+  <div class="ip-bar">
+    <p>
+      All content &copy; 2026 An&eacute;l Henning / Logika Coders.
+      Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.
+      Protected by U.S. Copyright Law, Florida &sect; 540.08, and DMCA (17 U.S.C. &sect; 512).
+      Unauthorized reproduction, AI-generated derivatives, or identity impersonation will be pursued under applicable law.
+      <br><a href="SECURITY.md">Report unauthorized use</a>
+    </p>
+  </div>
+
+  <footer>
+    <p>
+      <a href="index.html">Study Home</a> &middot;
+      <a href="https://github.com/AnelHenning2-collab">GitHub</a> &middot;
+      <a href="https://anelhenning2-collab.github.io/contact-hub/">Contact</a>
+    </p>
+    <p style="margin-top:0.6rem; opacity:0.5;">
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">
+        Created with Perplexity Computer
+      </a>
+    </p>
+  </footer>
+
+  <script>
+    // Handle form submission with success message
+    const form = document.getElementById('access-form');
+    const formContent = document.getElementById('form-content');
+    const success = document.getElementById('success');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+        });
+
+        if (response.ok) {
+          formContent.querySelector('h2').style.display = 'none';
+          formContent.querySelector('.form-sub').style.display = 'none';
+          form.style.display = 'none';
+          success.classList.add('show');
+        } else {
+          btn.textContent = 'Something went wrong — try again';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        btn.textContent = 'Connection error — try again';
+        btn.disabled = false;
+      }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
