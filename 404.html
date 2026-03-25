@@ -11,7 +11,7 @@
     body {
       font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       margin: 0; padding: 0;
-      background: #f8f9fb;
+      background: #f9f8f6;
       color: #334155;
       display: flex;
       align-items: center;
@@ -20,7 +20,8 @@
     }
     .card {
       max-width: 520px;
-      padding: 2.5rem 3rem;
+      width: 90%;
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 3rem);
       background: #ffffff;
       border: 1px solid rgba(15,23,42,0.09);
       border-radius: 16px;
@@ -28,19 +29,19 @@
       text-align: center;
     }
     h1 {
-      font-size: 1.6rem;
+      font-size: clamp(1.25rem, 2.5vw + 0.25rem, 1.6rem);
       color: #0f172a;
       margin-bottom: 0.8rem;
       font-weight: 800;
     }
     p {
-      font-size: 0.92rem;
+      font-size: clamp(0.8125rem, 0.5vw + 0.75rem, 0.92rem);
       line-height: 1.7;
       margin-bottom: 0.8rem;
       color: #334155;
     }
     .note {
-      font-size: 0.82rem;
+      font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.82rem);
       color: #64748b;
       line-height: 1.65;
     }
@@ -49,13 +50,13 @@
       flex-wrap: wrap;
       gap: 0.7rem;
       justify-content: center;
-      margin-top: 1.8rem;
+      margin-top: clamp(1rem, 3vw, 1.8rem);
     }
     .links a {
       display: inline-block;
-      padding: 0.6rem 1.4rem;
+      padding: clamp(0.45rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.4rem);
       border-radius: 8px;
-      font-size: 0.85rem;
+      font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.85rem);
       font-weight: 600;
       text-decoration: none;
       transition: opacity 0.2s;
