@@ -1,283 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- meta tags, title, fonts -->
+  <meta charset="UTF-8">
+  <title>Logical Learning – Showcase · Anél Henning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* navy + gold CSS goes here */
-    <style>
-  :root {
-    --bg: #0f1729;
-    --bg-mid: #131d35;
-    --bg-card: #131d35;
-    --border: rgba(200,164,74,0.2);
-    --border-hover: rgba(200,164,74,0.4);
-    --accent: #c8a44a;
-    --accent-glow: rgba(200,164,74,0.12);
-    --green: #4ade80;
-    --red: #fb7185;
-    --amber: #e8c97a;
-    --purple: #a78bfa;
-    --text: #d4d4d4;
-    --text-muted: #8b949e;
-    --text-faint: #6b7280;
-    --heading: #f0f0f0;
-    --white: #f0f0f0;
-  }
+    :root {
+      --bg: #0f1729;
+      --bg-mid: #131d35;
+      --bg-card: #131d35;
+      --border: rgba(200,164,74,0.2);
+      --border-hover: rgba(200,164,74,0.4);
+      --accent: #c8a44a;
+      --accent-glow: rgba(200,164,74,0.12);
+      --green: #4ade80;
+      --text: #d4d4d4;
+      --text-muted: #8b949e;
+      --text-faint: #6b7280;
+      --heading: #f0f0f0;
+    }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    min-height: 100vh;
-  }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
 
-  .container {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 clamp(1rem, 3vw, 1.5rem);
-    position: relative;
-    z-index: 1;
-  }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3vw, 1.5rem);
+      position: relative;
+      z-index: 1;
+    }
 
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(13,27,62,0.95);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 0;
-  }
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .nav-brand {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-  .nav-brand span {
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-  .nav-links {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
-  .nav-links a {
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: clamp(0.75rem, 0.3vw + 0.65rem, 0.8125rem);
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--text-muted);
-    transition: all 0.2s;
-  }
-  .nav-links a:hover {
-    color: var(--accent);
-    background: var(--accent-glow);
-  }
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,27,62,0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-brand span {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
 
-  .hero {
-    padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(1.75rem, 4vw, 3rem);
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    background: var(--accent-glow);
-    border: 1px solid rgba(37,99,235,0.15);
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 20px;
-  }
-  .hero-badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  h1 {
-    font-size: clamp(1.9rem, 4vw + 0.4rem, 3.3rem);
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--heading);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  h1 em {
-    font-style: normal;
-    color: var(--accent);
-  }
-  .hero-sub {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    max-width: 640px;
-    margin-top: 14px;
-  }
+    /* HERO */
+    h1, h2, h3 { text-transform: uppercase; }
 
-  .section-heading {
-    font-size: 0.78rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-  }
-  .section-heading span {
-    color: var(--accent);
-  }
+    .hero {
+      padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(1.75rem, 4vw, 3rem);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--accent-glow);
+      border: 1px solid rgba(37,99,235,0.15);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    h1 {
+      font-size: clamp(1.9rem, 4vw + 0.4rem, 3.3rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--heading);
+      letter-spacing: 0.04em;
+    }
+    h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-top: 14px;
+    }
 
-  .card-shell {
-    background: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  }
+    .section-heading {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .section-heading span { color: var(--accent); }
 
-  /* form section */
-  .form-section {
-    padding: 0 0 clamp(2.5rem, 5vw, 3.5rem);
-  }
-  .form-wrapper {
-    max-width: 760px;
-    margin: 0 auto;
-  }
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem 1rem;
-    margin-top: 1rem;
-  }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-group label,
-  .form-check label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-  input[type="text"],
-  input[type="email"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 0.45rem 0.55rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--bg-mid);
-    color: var(--text);
-    font-size: 0.85rem;
-  }
-  textarea { min-height: 90px; resize: vertical; }
+    .card-shell {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .card-shell h2 {
+      font-size: 0.95rem;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+    }
+    .card-shell ul { padding-left: 1.1rem; margin-top: 0.4rem; }
+    .card-shell li { margin-bottom: 0.25rem; }
 
-  .form-check {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.4rem;
-    margin-top: 0.4rem;
-  }
-  .form-check input[type="checkbox"] {
-    margin-top: 0.15rem;
-  }
+    /* FORM */
+    .form-section {
+      padding: 0 0 clamp(2.5rem, 5vw, 3.5rem);
+    }
+    .form-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .form-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem 1rem;
+      margin-top: 0.5rem;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label,
+    .form-check label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.45rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-mid);
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+    textarea { min-height: 90px; resize: vertical; }
 
-  .form-submit {
-    grid-column: 1 / -1;
-    margin-top: 0.5rem;
-  }
-  .form-submit button {
-    padding: 0.55rem 1.4rem;
-    border-radius: 999px;
-    border: none;
-    background: var(--accent);
-    color: #111827;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
+    .form-check {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+    .form-check input[type="checkbox"] { margin-top: 0.2rem; }
 
-  .form-notice {
-    grid-column: 1 / -1;
-    font-size: 0.8rem;
-    color: var(--text-faint);
-    margin-top: 0.25rem;
-  }
+    .form-submit {
+      grid-column: 1 / -1;
+      margin-top: 0.5rem;
+    }
+    .form-submit button {
+      padding: 0.55rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #111827;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
 
-  .success-msg {
-    display: none;
-    text-align: left;
-    background: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    padding: 1.75rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  }
-  .success-msg.show { display: block; }
-  .success-msg .check {
-    width: 28px;
-    height: 28px;
-    border-radius: 999px;
-    border: 2px solid var(--green);
-    color: var(--green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    margin-bottom: 0.6rem;
-  }
+    .form-notice {
+      grid-column: 1 / -1;
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      margin-top: 0.4rem;
+    }
 
-  footer {
-    padding: 32px 0;
-    border-top: 1px solid var(--border);
-  }
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  footer p {
-    font-size: 13px;
-    color: var(--text-faint);
-  }
-  footer a {
-    color: var(--text-muted);
-    text-decoration: none;
-  }
-  footer a:hover { color: var(--accent); }
+    .success-msg {
+      display: none;
+      text-align: left;
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      margin-top: 1.5rem;
+    }
+    .success-msg.show { display: block; }
+    .success-msg .check {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 2px solid var(--green);
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
 
-  @media (max-width: 768px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .footer-inner { flex-direction: column; text-align: center; }
-  }
-</style>
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p {
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
-
 <body>
-  <!-- nav + hero + other sections -->
+
 <nav>
   <div class="container">
     <div class="nav-inner">
@@ -298,9 +308,8 @@
     <div class="hero-badge">Logical Learning · Portfolio Showcase</div>
     <h1>Academic & Project<br><em>Showcase</em></h1>
     <p class="hero-sub">
-      A curated view of my MS Cybersecurity, BS Computer Science,
-      GlideCart™ research, and UX work. Use the form below to
-      request full access to protected collections.
+      A curated view of my MS Cybersecurity, BS Computer Science, GlideCart™ research,
+      and UX work. Use the form below to request full access to protected collections.
     </p>
   </div>
 </section>
@@ -308,126 +317,137 @@
 <section>
   <div class="container">
     <div class="card-shell">
-      <!-- your existing descriptive text / list of collections goes here -->
+      <div class="section-heading"><span>Collections</span> · overview</div>
+      <h2>What you can request</h2>
+      <ul>
+        <li>MS Cybersecurity (Purdue Global) – coursework, labs, and research artifacts.</li>
+        <li>BS Computer Science (Rasmussen) – foundational projects and capstone work.</li>
+        <li>GlideCart™ Quantum Research – applied physics and autonomous retail security notes.</li>
+        <li>UX / Design Portfolio – interface and experience design samples.</li>
+        <li>Security+ Study Materials – Logical Learning maps, labs, and notes.</li>
+      </ul>
+      <p style="margin-top:0.9rem;">
+        To protect academic integrity and partner confidentiality, detailed artifacts are shared
+        only on request with professors, recruiters, and collaborators.
+      </p>
     </div>
   </div>
 </section>
-  <!-- ACCESS REQUEST / ACCESS STATE -->
-  <section class="form-section" id="access">
-    ...
-  </section>
-
-  <!-- scripts at the very end, before </body> -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    // JS you pasted above
-  </script>
-</body>
-</html>
 
 <!-- ACCESS REQUEST / ACCESS STATE -->
 <section class="form-section" id="access">
-  <div class="form-wrapper">
-
-    <!-- WHEN ACCESS IS NOT YET GRANTED (DEFAULT) -->
-    <div id="form-content">
-      <h2>Request Full Access</h2>
-      <p class="form-sub">
-        To view the complete collections, please share a bit about yourself and how you plan to use the materials.
-        Access is typically granted within 24–48 hours.
-      </p>
-
-      <form id="access-form" action="https://api.web3forms.com/submit" method="POST" class="form-grid">
-        <input type="hidden" name="access_key" value="b4c1a5cc-7041-4bb8-804a-ad0aab863b4f">
-        <input type="hidden" name="subject" value="Portfolio Access Request — Anél Henning">
-        <input type="hidden" name="from_name" value="Anél Henning Portfolio">
-
-        <!-- honeypot -->
-        <input type="text" name="botcheck" style="display:none !important;">
-
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" required placeholder="Jane Smith">
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="jane@university.edu">
-        </div>
-
-        <div class="form-group">
-          <label for="role">I am a...</label>
-          <select id="role" name="role" required>
-            <option value="" disabled selected>Select your role</option>
-            <option value="Professor / Advisor">Professor / Advisor</option>
-            <option value="Hiring Manager / Recruiter">Hiring Manager / Recruiter</option>
-            <option value="Student / Researcher">Student / Researcher</option>
-            <option value="Donor / Supporter">Donor / Supporter</option>
-            <option value="Industry Professional">Industry Professional</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="org">Organization / University</label>
-          <input type="text" id="org" name="organization" placeholder="MIT, Google, etc.">
-        </div>
-
-        <div class="form-group full">
-          <label for="collections">Which collections interest you?</label>
-          <select id="collections" name="collections_requested" required>
-            <option value="" disabled selected>Select a collection</option>
-            <option value="All Collections">All Collections</option>
-            <option value="MS Cybersecurity (Purdue Global)">MS Cybersecurity (Purdue Global)</option>
-            <option value="BS Computer Science (Rasmussen)">BS Computer Science (Rasmussen)</option>
-            <option value="GlideCart Quantum Research">GlideCart Quantum Research</option>
-            <option value="UX / Design Portfolio">UX / Design Portfolio</option>
-            <option value="Security+ Study Materials">Security+ Study Materials</option>
-          </select>
-        </div>
-
-        <div class="form-group full">
-          <label for="purpose">How do you plan to use these materials?</label>
-          <textarea id="purpose" name="purpose" placeholder="e.g., Evaluating for a position, reviewing for academic collaboration, assessing for funding..."></textarea>
-        </div>
-
-        <div class="form-check">
-          <input type="checkbox" id="agree" name="agreement" value="Agreed" required>
-          <label for="agree">
-            I understand this work is protected under CC BY‑NC‑ND 4.0 and will not reproduce, modify,
-            or distribute any materials without written permission from the author.
-          </label>
-        </div>
-
-        <div class="form-submit">
-          <button type="submit">Request Access</button>
-        </div>
-
-        <p class="form-notice">
-          Your information is collected only to process your access request.
-          It is not shared with third parties. Access decisions are made with
-          research integrity and participant protection in mind.
+  <div class="container">
+    <div class="form-wrapper">
+      <div id="form-content">
+        <h2>Request Full Access</h2>
+        <p class="form-sub">
+          To view the complete collections, please share a bit about yourself and how you plan to use the materials.
+          Access is typically granted within 24–48 hours.
         </p>
-      </form>
-    </div>
 
-    <!-- WHEN ACCESS HAS BEEN GRANTED (MATCH ACCESS GRANTED PAGE) -->
-    <div id="success" class="success-msg">
-      <div class="check">&#10003;</div>
-      <h3>Access Granted</h3>
-      <p>
-        Thank you for confirming your email and interest in my academic work.
-        You now have full access to the requested Logical Learning and portfolio materials.
-      </p>
-      <p style="margin-top:1rem;">
-        You can return to the main study dashboard any time from the navigation bar,
-        or bookmark this page as your personal access gateway.
-      </p>
+        <form id="access-form" action="https://api.web3forms.com/submit" method="POST" class="form-grid">
+          <input type="hidden" name="access_key" value="b4c1a5cc-7041-4bb8-804a-ad0aab863b4f">
+          <input type="hidden" name="subject" value="Portfolio Access Request — Anél Henning">
+          <input type="hidden" name="from_name" value="Anél Henning Portfolio">
+          <input type="text" name="botcheck" style="display:none !important;">
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Jane Smith">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="jane@university.edu">
+          </div>
+
+          <div class="form-group">
+            <label for="role">I am a...</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="Professor / Advisor">Professor / Advisor</option>
+              <option value="Hiring Manager / Recruiter">Hiring Manager / Recruiter</option>
+              <option value="Student / Researcher">Student / Researcher</option>
+              <option value="Donor / Supporter">Donor / Supporter</option>
+              <option value="Industry Professional">Industry Professional</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="org">Organization / University</label>
+            <input type="text" id="org" name="organization" placeholder="MIT, Google, etc.">
+          </div>
+
+          <div class="form-group full">
+            <label for="collections">Which collections interest you?</label>
+            <select id="collections" name="collections_requested" required>
+              <option value="" disabled selected>Select a collection</option>
+              <option value="All Collections">All Collections</option>
+              <option value="MS Cybersecurity (Purdue Global)">MS Cybersecurity (Purdue Global)</option>
+              <option value="BS Computer Science (Rasmussen)">BS Computer Science (Rasmussen)</option>
+              <option value="GlideCart Quantum Research">GlideCart Quantum Research</option>
+              <option value="UX / Design Portfolio">UX / Design Portfolio</option>
+              <option value="Security+ Study Materials">Security+ Study Materials</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="purpose">How do you plan to use these materials?</label>
+            <textarea id="purpose" name="purpose" placeholder="e.g., Evaluating for a position, reviewing for academic collaboration, assessing for funding..."></textarea>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="agree" name="agreement" value="Agreed" required>
+            <label for="agree">
+              I understand this work is protected under CC BY‑NC‑ND 4.0 and will not reproduce, modify,
+              or distribute any materials without written permission from the author.
+            </label>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit">Request Access</button>
+          </div>
+
+          <p class="form-notice">
+            Your information is collected only to process your access request.
+            It is not shared with third parties. Access decisions are made with
+            research integrity and participant protection in mind.
+          </p>
+        </form>
+      </div>
+
+      <div id="success" class="success-msg">
+        <div class="check">&#10003;</div>
+        <h3>Access Granted</h3>
+        <p>
+          Thank you for confirming your email and interest in my academic work.
+          You now have full access to the requested Logical Learning and portfolio materials.
+        </p>
+        <p style="margin-top:1rem;">
+          You can return to the main study dashboard any time from the navigation bar,
+          or bookmark this page as your personal access gateway.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- update script at the bottom to keep Access Granted behavior in sync -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p>Anél Henning · MS Cybersecurity (in progress) · Purdue Global</p>
+        <p style="margin-top:4px;">
+          <a href="https://github.com/AnelHenning2-collab" target="_blank">GitHub</a>
+          ·
+          <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   const form = document.getElementById('access-form');
@@ -469,14 +489,7 @@
       btn.disabled = false;
     }
   });
-
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
 </script>
+
+</body>
+</html>
