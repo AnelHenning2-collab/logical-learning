@@ -467,27 +467,31 @@
       });
 
       if (response.ok) {
-        try {
-          emailjs.init('eNqe8da4upozA7C6Z');
-          await emailjs.send('default_service', 'auto_reply', {
-            to_name: document.getElementById('name').value,
-            to_email: document.getElementById('email').value,
-            collection: document.getElementById('collections').value,
-          });
-        } catch (emailErr) {
-          console.log('Auto-reply skipped:', emailErr);
-        }
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const collection = document.getElementById('collections').value;
 
-        formContent.style.display = 'none';
-        success.classList.add('show');
-      } else {
-        btn.textContent = 'Something went wrong — try again';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      btn.textContent = 'Connection error — try again';
-      btn.disabled = false;
+  try {
+    emailjs.init('eNqe8da4upozA7C6Z');
+
+    let templateId = 'deliverables_all';
+    if (collection === 'Security+ Study Materials') {
+      templateId = 'deliverables_security_plus';
     }
+
+    await emailjs.send('default_service', templateId, {
+      to_name: name,
+      to_email: email,
+      collection: collection
+    });
+
+  } catch (emailErr) {
+    console.log('EmailJS error:', emailErr);
+  }
+
+  formContent.style.display = 'none';
+  success.classList.add('show');
+}
   });
 </script>
 
