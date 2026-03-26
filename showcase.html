@@ -1,157 +1,147 @@
-<!-- replace from: <!-- ACCESS REQUEST FORM --> down to just before <!-- IP NOTICE BAR --> -->
+<!-- ACCESS REQUEST / ACCESS STATE -->
+<section class="form-section" id="access">
+  <div class="form-wrapper">
 
-  <!-- ACCESS REQUEST / ACCESS STATE -->
-  <section class="form-section" id="access">
-    <div class="form-wrapper">
+    <!-- WHEN ACCESS IS NOT YET GRANTED (DEFAULT) -->
+    <div id="form-content">
+      <h2>Request Full Access</h2>
+      <p class="form-sub">
+        To view the complete collections, please share a bit about yourself and how you plan to use the materials.
+        Access is typically granted within 24–48 hours.
+      </p>
 
-      <!-- WHEN ACCESS IS NOT YET GRANTED (DEFAULT) -->
-      <div id="form-content">
-        <h2>Request Full Access</h2>
-        <p class="form-sub">
-          To view the complete collections, please share a bit about yourself and how you plan to use the materials.
-          Access is typically granted within 24-48 hours.
-        </p>
+      <form id="access-form" action="https://api.web3forms.com/submit" method="POST" class="form-grid">
+        <input type="hidden" name="access_key" value="b4c1a5cc-7041-4bb8-804a-ad0aab863b4f">
+        <input type="hidden" name="subject" value="Portfolio Access Request — Anél Henning">
+        <input type="hidden" name="from_name" value="Anél Henning Portfolio">
 
-        <form id="access-form" action="https://api.web3forms.com/submit" method="POST" class="form-grid">
-          <input type="hidden" name="access_key" value="b4c1a5cc-7041-4bb8-804a-ad0aab863b4f">
-          <input type="hidden" name="subject" value="Portfolio Access Request — Anél Henning">
-          <input type="hidden" name="from_name" value="Anél Henning Portfolio">
+        <!-- honeypot -->
+        <input type="text" 804a-ad0aab863b4f">
+        <input tyimportant;">
 
-          <!-- honeypot -->
-          <input type="text" name="botcheck" style="display:none !important;">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input ty804a-ad0aab863b4f">
+        <input tyred placeho804a-ad0aab863b4f">
+        <input ty      <div class="form-group">
+          <label for="e804a-ad0aab863b4f">
+        <input tytype="email" id="email" name="email" required placeholder="jane@university.e804a-ad0aab863b4f">
+        <input tyss="form-gro804a-ad0aab863b4f">
+        <input ty a...</label>
+          <select id="role" name="804a-ad0aab863b4f">
+        <input tyalue="" disabled selected>Select your role</option>
+            <option v804a-ad0aab863b4f">
+        <input ty/ Advisor</option>
+            <option value="Hiring Manager / Recruit804a-ad0aab863b4f">
+        <input tyn>
+            <option value="Student / Researcher">Student / Research804a-ad0aab863b4f">
+        <input ty="Donor / Supporter">Donor / Supporter</opt804a-ad0aab863b4f">
+        <input tytry Professional">Industry Professional</opt804a-ad0aab863b4f">
+        <input ty">Other</option>
+          </select>
+        </804a-ad0aab863b4f">
+        <input ty>
+          <label f804a-ad0aab863b4f">
+        <input tyabel>
+          <input ty804a-ad0aab863b4f">
+        <input ty" placeholder="MIT, Google, etc.">
+        </div>
 
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required placeholder="Jane Smith">
-          </div>
+        <div cla804a-ad0aab863b4f">
+        <input tyl for="collections">Which collections interest you?</label>
+          <select 804a-ad0aab863b4f">
+        <input tyquested" required>
+            <option value="" disabled selected>Select a collec804a-ad0aab863b4f">
+        <input ty4a-ad0aab863b4f">
+        <input tys</opt804a-ad0aab863b4f">
+        <input ty863b4f">
+        <input ty)">MS Cybersecurity (Purdue Gl804a-ad0aab863b4f">
+        <input tylue="BS Computer Science (Rasmussen)">BS Computer Science (Rasmussen)</opt804a-ad0aab863b4f">
+        <input tyCart Quantum Research">GlideCart Quantum Research</opt804a-ad0aab863b4f">
+        <input tyDesign Portfolio">UX / Design Portfolio</option>
+            <option v804a-ad0aab863b4f">
+        <input tyrity+ Study Materials</option>
+          </select>
+        </div>
 
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="jane@university.edu">
-          </div>
+        <div cla804a-ad0aab863b4f">
+        <input tyl for="purpose">How do you 804a-ad0aab863b4f">
+        <input ty          <textarea id="purpose" name="purpose" placeholder="e.g., E804a-ad0aab863b4f">
+        <input tyor academic collaboration, assessing for funding..."></texta804a-ad0aab863b4f">
+        <input tyss="form-che804a-ad0aab863b4f">
+        <input ty3b4f">
+        <input tyent" value="Agreed" required>
+          <label for="agree">
+            I understand this work is protected under CC BY‑NC‑ND 4.0 and will804a-ad0aab863b4f">
+        <input tyr distribute any materials without written permission from the author.
+          </label>
+        </div>
 
-          <div class="form-group">
-            <label for="role">I am a...</label>
-            <select id="role" name="role" required>
-              <option value="" disabled selected>Select your role</option>
-              <option value="Professor / Advisor">Professor / Advisor</option>
-              <option value="Hiring Manager / Recruiter">Hiring Manager / Recruiter</option>
-              <option value="Student / Researcher">Student / Researcher</option>
-              <option value="Donor / Supporter">Donor / Supporter</option>
-              <option value="Industry Professional">Industry Professional</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="org">Organization / University</label>
-            <input type="text" id="org" name="organization" placeholder="MIT, Google, etc.">
-          </div>
-
-          <div class="form-group full">
-            <label for="collections">Which collections interest you?</label>
-            <select id="collections" name="collections_requested" required>
-              <option value="" disabled selected>Select a collection</option>
-              <option value="All Collections">All Collections</option>
-              <option value="MS Cybersecurity (Purdue Global)">MS Cybersecurity (Purdue Global)</option>
-              <option value="BS Computer Science (Rasmussen)">BS Computer Science (Rasmussen)</option>
-              <option value="GlideCart Quantum Research">GlideCart Quantum Research</option>
-              <option value="UX / Design Portfolio">UX / Design Portfolio</option>
-              <option value="Security+ Study Materials">Security+ Study Materials</option>
-            </select>
-          </div>
-
-          <div class="form-group full">
-            <label for="purpose">How do you plan to use these materials?</label>
-            <textarea id="purpose" name="purpose" placeholder="e.g., Evaluating for a position, reviewing for academic collaboration, assessing for funding..."></textarea>
-          </div>
-
-          <div class="form-check">
-            <input type="checkbox" id="agree" name="agreement" value="Agreed" required>
-            <label for="agree">
-              I understand this work is protected under CC BY-NC-ND 4.0 and will not reproduce, modify,
-              or distribute any materials without written permission from the author.
-            </label>
-          </div>
-
-          <div class="form-submit">
-            <button type="submit">Request Access</button>
-          </div>
-
-          <p class="form-notice">
-            Your information is collected only to process your access request.
-            It is not shared with third parties. Access decisions are made with
-            research integrity and participant protection in mind.
-          </p>
-        </form>
-      </div>
-
-      <!-- WHEN ACCESS HAS BEEN GRANTED (MATCH ACCESS GRANTED PAGE) -->
-      <div id="success" class="success-msg">
-        <div class="check">&#10003;</div>
-        <h3>Access Granted</h3>
-        <p>
-          Thank you for confirming your email and interest in my academic work.
-          You now have full access to the requested Logical Learning and portfolio materials.
-        </p>
-        <p style="margin-top:1rem;">
-          You can return to the main study dashboard any time from the navigation bar,
-          or bookmark this page as your personal access gateway.
-        </p>
-      </div>
+        <div class="form-submit">
+          <button type="submit">Request Access</but804a-ad0aab863b4f">
+        <input ty="form-notice">
+          Your informa804a-ad0aab863b4f">
+        <input tyr access request.
+          It is not shared with third par804a-ad0aab863b4f">
+        <input ty          research integrity and participant protection in mind.
+        </804a-ad0aab863b4f">
+        <input ty WHEN ACCESS HAS BEEN GRANTED (MATCH ACCESS GRANTED PAGE) -->
+    <div id="suc804a-ad0aab863b4f">
+        <input ty class="check">&#10003;</div>
+      <h3>Access Gra804a-ad0aab863b4f">
+        <input ty for confirming your email and interest i804a-ad0aab863b4f">
+        <input tyave full access to the requested Logical Learning804a-ad0aab863b4f">
+        <input ty      <p s804a-ad0aab863b4f">
+        <input tycan return to804a-ad0aab863b4f">
+        <input tyom the navigation bar,
+        or bookmark this page as 804a-ad0aab863b4f">
+        <input ty/p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- update script at the bottom to keep Access Granted behavior in sync -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    const form = document.getElementById('access-form');
-    const formContent = document.getElementById('form-content');
-    const success = document.getElementById('success');
+<!-- up804a-ad0aab863b4f">
+        <input tyess Granted behavior in sync -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/bro804a-ad0aab863b4f">
+        <input tyscript>
+  const form = document.getElementById('access-804a-ad0aab863b4f">
+        <input tyt.getElementById('form-con804a-ad0aab863b4f">
+        <input ty>
+        <input ty      <input tyddEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.804a-ad0aab863b4f">
+        <input tyisabled = true;
 
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-        });
-
-        if (response.ok) {
-          try {
-            emailjs.init('anel_portfolio_public');
-            await emailjs.send('default_service', 'auto_reply', {
-              to_name: document.getElementById('name').value,
-              to_email: document.getElementById('email').value,
-              collection: document.getElementById('collections').value,
-            });
-          } catch (emailErr) {
-            console.log('Auto-reply skipped:', emailErr);
-          }
-
-          formContent.style.display = 'none';
-          success.classList.add('show');
-        } else {
-          btn.textContent = 'Something went wrong — try again';
-          btn.disabled = false;
-        }
-      } catch (err) {
-        btn.textContent = 'Connection error — try again';
-        btn.disabled = false;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+     804a-ad0aab863b4f">
+        <input ty  try {
+          emailjs.init('anel_portfolio_public');
+          await emailjs.send('default_service804a-ad0aab863b4f">
+        <input tye: document.getElementById('name').value,
+            to_email: document.getElementById('email').v804a-ad0aab863b4f">
+        <input tyt.getElementById('collections').value,
+          }804a-ad0aab863b4f">
+        <input ty     console.log('Auto-reply ski804a-ad0aab863b4f">
+        <input ty formContent.style.displ804a-ad0aab863b4f">
+        <input tyinput ty4f">
+        <input ty        btn.textContent = 'Something went wro804a-ad0aab863b4f">
+        <input ty = false;
+      }
+    } catch (err) {
+      btn.textContent = 'Connection error — try again';
+      btn.disa804a-ad0aab863b4f">
+        <input ty.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = docu804a-ad0aab863b4f">
+        <input ty'href'));
+      if (target) {
+        e.preventDefaul804a-ad0aab863b4f">
+        <input tybehavior: 'smooth', block: 'start' });
       }
     });
-
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
+  });
+</script>
