@@ -15,13 +15,16 @@
 <meta name="author" content="Perplexity Computer">
 <meta property="og:see_also" content="https://www.perplexity.ai/computer">
 <link rel="author" href="https://www.perplexity.ai/computer">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Logical Learning — Cybersecurity &amp; Applied Physics · Anél Henning</title>
-<meta name="description" content="Interactive CompTIA Security+ study modules: visual explainers and quizzes for Threats, Cryptography, Network Security, and Identity & Access.">
+<title>Logical Learning — Cybersecurity & Applied Physics · Anél Henning</title>
+<meta name="description" content="Logical Learning: open Security+ study map, labs, and educator collaboration hub by Anél Henning.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --bg: #0f1729;
@@ -53,64 +56,177 @@
     min-height: 100vh;
   }
 
-  .container { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 1.5rem); position: relative; z-index: 1; }
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 1.5rem);
+    position: relative;
+    z-index: 1;
+  }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(13,27,62,0.95); backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,27,62,0.95);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
     padding: 14px 0;
   }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .nav-brand { font-size: 15px; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -0.01em; }
-  .nav-brand span { color: var(--text-muted); font-weight: 400; }
-  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
-  .nav-links a {
-    padding: 5px 12px; border-radius: 6px; font-size: clamp(0.75rem, 0.3vw + 0.65rem, 0.8125rem); font-weight: 500;
-    text-decoration: none; color: var(--text-muted); transition: all 0.2s;
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  .nav-links a:hover { color: var(--accent); background: var(--accent-glow); }
+  .nav-brand {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand span {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: clamp(0.75rem, 0.3vw + 0.65rem, 0.8125rem);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--accent);
+    background: var(--accent-glow);
+  }
 
-  /* ── HERO ── */
-  .hero { padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 5vw, 3.75rem); }
+  /* HERO */
+  h1, h2, h3 { text-transform: uppercase; }
 
+  .hero {
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 5vw, 3.75rem);
+  }
   .hero-badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
-    background: var(--accent-glow); border: 1px solid rgba(37,99,235,0.15);
-    color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--accent-glow);
+    border: 1px solid rgba(37,99,235,0.15);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     margin-bottom: 20px;
   }
-  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  h1, h2, h3, h4 { text-transform: uppercase; }
-  h1 { font-size: clamp(1.75rem, 4vw + 0.5rem, 3.375rem); font-weight: 700; line-height: 1.35; color: var(--heading); letter-spacing: 0.04em; }
-  h1 em { font-style: normal; color: var(--accent); }
-
-  .hero-sub { font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1.0625rem); color: var(--text-muted); max-width: 580px; margin-top: 16px; line-height: 1.65; }
-
-  .progress-bar-wrap {
-    margin-top: clamp(1.5rem, 3vw, 2rem); max-width: 400px;
-    background: var(--bg-mid); border: 1px solid var(--border);
-    border-radius: 12px; padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 2.5vw, 1.25rem);
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
   }
-  .progress-bar-wrap label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: flex; justify-content: space-between; margin-bottom: 10px; }
-  .progress-track { height: 8px; background: rgba(200,164,74,0.12); border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #e8c97a); border-radius: 4px; width: 0%; transition: width 1s ease; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
 
-  /* ── MODULE GRID ── */
+  h1 {
+    font-size: clamp(1.75rem, 4vw + 0.5rem, 3.375rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--heading);
+    letter-spacing: 0.04em;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1.0625rem);
+    color: var(--text-muted);
+    max-width: 620px;
+    margin-top: 16px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .hero-btn.primary {
+    background: var(--accent);
+    color: #111827;
+    border-color: transparent;
+  }
+  .hero-btn.primary:hover {
+    filter: brightness(0.95);
+  }
+  .hero-btn.ghost {
+    background: transparent;
+    color: var(--text-muted);
+  }
+  .hero-btn.ghost:hover {
+    border-color: var(--border-hover);
+    color: var(--accent);
+  }
+
+  /* MODULE GRID */
+  .section-heading {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .section-heading span {
+    color: var(--accent);
+  }
+
   .module-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: clamp(0.75rem, 2vw, 1.25rem); padding: clamp(2rem, 4vw, 3rem) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: clamp(0.9rem, 2.4vw, 1.4rem);
+    padding: 0 0 clamp(2.25rem, 5vw, 3rem);
   }
 
   .module-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 14px; padding: clamp(1.25rem, 2.5vw, 1.75rem); text-decoration: none; color: inherit;
-    display: flex; flex-direction: column; gap: 14px;
-    transition: all 0.25s; position: relative; overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.25s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
   .module-card:hover {
@@ -119,46 +235,93 @@
     box-shadow: 0 12px 40px rgba(200,164,74,0.1);
   }
 
-  .module-icon { font-size: 32px; }
-  .module-num { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
-  .module-title { font-size: clamp(1rem, 0.5vw + 0.85rem, 1.125rem); font-weight: 700; color: var(--heading); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.03em; }
-  .module-desc { font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.8125rem); color: var(--text-muted); line-height: 1.55; flex: 1; }
-
-  .module-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
-  .module-count { font-size: 12px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; }
+  .module-icon { font-size: 28px; }
+  .module-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .module-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--heading);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .module-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .module-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
   .module-status {
-    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 10px;
-    background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(200,164,74,0.25);
-  }
-  .module-status.done { background: rgba(74,222,128,0.1); color: var(--green); border-color: rgba(74,222,128,0.2); }
-
-  /* Score badge on card */
-  .card-score {
-    position: absolute; top: 16px; right: 16px;
-    font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
-    padding: 3px 8px; border-radius: 8px;
-    background: rgba(74,222,128,0.1); color: var(--green);
-    display: none;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    border: 1px solid rgba(200,164,74,0.25);
   }
 
-  /* ── TIPS ── */
-  .tips-section { padding: 16px 0 clamp(2rem, 5vw, 4rem); }
-  .tips-title { font-size: clamp(0.6875rem, 0.3vw + 0.6rem, 0.8125rem); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 16px; }
-  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: clamp(0.5rem, 1.5vw, 0.75rem); }
+  /* TIPS */
+  .tips-section {
+    padding: 0 0 clamp(2.75rem, 6vw, 4rem);
+  }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: clamp(0.5rem, 1.5vw, 0.8rem);
+  }
   .tip-card {
-    background: var(--bg-mid); border: 1px solid var(--border); border-radius: 10px;
-    padding: clamp(0.75rem, 2vw, 0.875rem) clamp(0.875rem, 2vw, 1rem); font-size: clamp(0.75rem, 0.3vw + 0.7rem, 0.8125rem); color: var(--text-muted); line-height: 1.55;
+    background: var(--bg-mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
   }
-  .tip-card strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tip-card strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
 
-  /* ── FOOTER ── */
-  footer { padding: 32px 0; border-top: 1px solid var(--border); }
-  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  footer p { font-size: 13px; color: var(--text-faint); }
-  footer a { color: var(--text-muted); text-decoration: none; }
-  footer a:hover { color: var(--accent); }
+  /* FOOTER */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer p {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  footer a:hover {
+    color: var(--accent);
+  }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .module-grid { grid-template-columns: 1fr; }
     .tips-grid { grid-template-columns: 1fr 1fr; }
@@ -175,73 +338,87 @@
 <nav>
   <div class="container">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">LOGIKA LEARNING</a>
+      <a href="index.html" class="nav-brand">LOGIKA LEARNING <span>by Anél Henning</span></a>
       <div class="nav-links">
-  <a href="logika-learning.html">Intro</a>
-  <a href="cornell-notes.html">Cornell Notes</a>
-  <a href="security-plus.html">Security+</a>
-  <a href="pentest.html">Pen+</a>
-  <a href="physics.html">Physics</a>
-  <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact Us</a>
-</div>
+        <a href="logika-learning.html">Intro</a>
+        <a href="security-plus.html">Security+</a>
+        <a href="pentest.html">Pen+</a>
+        <a href="physics.html">Physics</a>
+        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact</a>
+      </div>
     </div>
   </div>
 </nav>
 
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">Cybersecurity &amp; Applied Physics</div>
-    <h1>Study Smarter.<br><em>Not Just Harder.</em></h1>
-    <p class="hero-sub">Interactive visual explainers and scored quizzes for CompTIA Security+, PenTest+, and applied physics. Built from Anél Henning's Cornell note system — every concept explained, then tested.</p>
+    <div class="hero-badge">Cybersecurity & Applied Physics</div>
+    <h1>Logical Learning<br><em>Security+ and beyond.</em></h1>
+    <p class="hero-sub">
+      A home for my open Security+ study map, interactive labs, and
+      educator collaboration work. Built from my own Cornell note
+      system so learners can see each concept, then test it.
+    </p>
 
-    <div class="progress-bar-wrap">
-      <label><span>Overall Progress</span><span id="overallPct">0 / 5 complete</span></label>
-      <div class="progress-track"><div class="progress-fill" id="overallBar"></div></div>
+    <div class="hero-cta-row">
+      <a href="learners/" class="hero-btn primary">Start as a learner</a>
+      <a href="partners/" class="hero-btn ghost">For educators & partners</a>
     </div>
   </div>
 </section>
 
 <section>
   <div class="container">
+    <p class="section-heading"><span>Open modules</span> · public overview</p>
     <div class="module-grid">
 
-      <a href="security-plus.html" class="module-card" style="--card-color:#2563eb;" id="card-secplus">
+      <a href="security-plus.html" class="module-card" style="--card-color:#2563eb;">
         <div class="module-icon">🔒</div>
         <div>
-          <div class="module-num">CompTIA Security+ SY0-701</div>
-          <div class="module-title">Security+ Study Hub</div>
+          <div class="module-num">CompTIA Security+ SY0‑701</div>
+          <div class="module-title">Security+ Study Map</div>
         </div>
-        <div class="module-desc">Four interactive modules — Threats &amp; Attacks, Cryptography &amp; PKI, Network Security, Identity &amp; Access — with visual explainers and scored quizzes.</div>
+        <div class="module-desc">
+          Domain‑by‑domain outline, visual explainers, and question
+          sets. The core of Logical Learning for new security
+          analysts and students.
+        </div>
         <div class="module-meta">
-          <span class="module-count">4 domains · 48 questions</span>
-          <span class="module-status" id="status-secplus">Explore →</span>
+          <span>Public preview</span>
+          <span class="module-status">View →</span>
         </div>
       </a>
 
-      <a href="pentest.html" class="module-card" style="--card-color:#d97706;" id="card-pentest">
+      <a href="pentest.html" class="module-card" style="--card-color:#d97706;">
         <div class="module-icon">🧪</div>
         <div>
           <div class="module-num">CompTIA PenTest+</div>
           <div class="module-title">Ethical Hacking Lab</div>
         </div>
-        <div class="module-desc">Penetration testing concepts, methodologies, tools, and hands-on practice for the CompTIA PenTest+ certification.</div>
+        <div class="module-desc">
+          Early notes and lab ideas for PenTest+ and hands‑on
+          offensive security concepts.
+        </div>
         <div class="module-meta">
-          <span class="module-count">Interactive lab</span>
-          <span class="module-status">Explore →</span>
+          <span>Work in progress</span>
+          <span class="module-status">Preview →</span>
         </div>
       </a>
 
-      <a href="physics.html" class="module-card" style="--card-color:#0891b2;" id="card-physics">
-        <div class="card-score" id="score-physics"></div>
+      <a href="physics.html" class="module-card" style="--card-color:#0891b2;">
         <div class="module-icon">⚛️</div>
         <div>
           <div class="module-num">Applied Physics</div>
-          <div class="module-title">Physics &amp; Quantum Computing</div>
+          <div class="module-title">Physics & Quantum</div>
         </div>
-        <div class="module-desc">EM theory, semiconductor physics, quantum mechanics, gates, algorithms, error correction, post-quantum cryptography, and GlideCart research contacts.</div>
+        <div class="module-desc">
+          Supporting notes in EM, semiconductors, and quantum
+          computing that feed into cryptography and GlideCart™
+          research.
+        </div>
         <div class="module-meta">
-          <span class="module-count">12 questions</span>
-          <span class="module-status" id="status-physics">Start →</span>
+          <span>Reference notes</span>
+          <span class="module-status">Browse →</span>
         </div>
       </a>
 
@@ -251,12 +428,29 @@
 
 <section class="tips-section">
   <div class="container">
-    <div class="tips-title">Exam Tips — SY0-701</div>
+    <p class="section-heading"><span>For learners</span> · how to use this</p>
     <div class="tips-grid">
-      <div class="tip-card"><strong>Know the "Why"</strong>Questions often test why you choose one control over another, not just definitions. Understand tradeoffs.</div>
-      <div class="tip-card"><strong>Scenario-Based</strong>Most questions present a real-world scenario. Map symptoms → attack type → mitigation before reading answers.</div>
-      <div class="tip-card"><strong>NIST Framework</strong>Know Identify → Protect → Detect → Respond → Recover. Many questions map to this lifecycle.</div>
-      <div class="tip-card"><strong>Acronym Trap</strong>IDS vs IPS, DAC vs MAC vs RBAC, symmetric vs asymmetric — examiners love look-alike pairs. Drill these.</div>
+      <div class="tip-card">
+        <strong>Follow the map</strong>
+        Pick your current domain in Security+, then move through
+        topics in order instead of jumping randomly.
+      </div>
+      <div class="tip-card">
+        <strong>Take your own notes</strong>
+        Use the Cornell layout that inspired these labs or your own
+        system, but always write in your own words.
+      </div>
+      <div class="tip-card">
+        <strong>AI with integrity</strong>
+        It’s fine to ask AI to explain ideas. It’s not okay to paste
+        AI answers into graded work—always follow your school’s
+        policy.
+      </div>
+      <div class="tip-card">
+        <strong>Tell me what’s missing</strong>
+        If a topic isn’t clear or a lab idea would help you, reach
+        out via the Contact Hub and I’ll add it to the roadmap.
+      </div>
     </div>
   </div>
 </section>
@@ -265,47 +459,21 @@
   <div class="container">
     <div class="footer-inner">
       <div>
-        <p>Anél Henning · MS Cybersecurity · Purdue Global 2026</p>
-        <p style="margin-top:4px;"><a href="https://github.com/AnelHenning2-collab" target="_blank">GitHub</a> · <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a></p>
+        <p>Anél Henning · MS Cybersecurity (in progress) · Purdue Global</p>
+        <p style="margin-top:4px;">
+          <a href="https://github.com/AnelHenning2-collab" target="_blank">GitHub</a>
+          ·
+          <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a>
+        </p>
       </div>
-      <p><a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">Created with Perplexity Computer</a></p>
+      <p>
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">
+          Created with Perplexity Computer
+        </a>
+      </p>
     </div>
   </div>
 </footer>
 
-<script>
-// Load scores from localStorage
-const secModules = ['threats','crypto','network','identity'];
-let secCompleted = 0;
-secModules.forEach(m => {
-  const saved = localStorage.getItem('secplus_score_' + m);
-  if (saved) secCompleted++;
-});
-if (secCompleted > 0) {
-  const el = document.getElementById('status-secplus');
-  if (el) {
-    el.textContent = secCompleted + '/4 done →';
-    if (secCompleted === 4) el.className = 'module-status done';
-  }
-}
-
-// Physics score
-const physSaved = localStorage.getItem('secplus_score_physics');
-if (physSaved) {
-  const d = JSON.parse(physSaved);
-  const scorePct = Math.round((d.correct / d.total) * 100);
-  const scoreEl = document.getElementById('score-physics');
-  if (scoreEl) { scoreEl.textContent = scorePct + '%'; scoreEl.style.display = 'block'; }
-  const statusEl = document.getElementById('status-physics');
-  if (statusEl) { statusEl.textContent = 'Review →'; statusEl.className = 'module-status done'; }
-}
-
-// Overall progress (sec+ domains + physics)
-const totalCompleted = secCompleted + (physSaved ? 1 : 0);
-const bar = document.getElementById('overallBar');
-const pctLabel = document.getElementById('overallPct');
-if (bar) bar.style.width = (totalCompleted / 5 * 100) + '%';
-if (pctLabel) pctLabel.textContent = totalCompleted + ' / 5 complete';
-</script>
 </body>
 </html>
