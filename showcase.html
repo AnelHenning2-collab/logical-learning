@@ -476,23 +476,29 @@
 
     let templateId = 'deliverables_all';
     if (collection === 'Security+ Study Materials') {
-      templateId = 'deliverables_security_plus';
+      templateId = 'deliverables_security_pl';
     }
 
     await emailjs.send('default_service', templateId, {
       to_name: name,
       to_email: email,
       collection: collection
+    }).then(function() {
+      console.log('Deliverables email sent');
+    }, function(error) {
+      console.log('EmailJS error:', error);
     });
 
   } catch (emailErr) {
-    console.log('EmailJS error:', emailErr);
+    console.log('EmailJS init/send threw:', emailErr);
   }
 
   formContent.style.display = 'none';
   success.classList.add('show');
+} else {
+  btn.textContent = 'Something went wrong — try again';
+  btn.disabled = false;
 }
-  });
 </script>
 
 </body>
