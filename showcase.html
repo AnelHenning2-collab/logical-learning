@@ -473,39 +473,28 @@
         const collection = document.getElementById('collections').value;
 
         try {
-          emailjs.init('eNqe8da4upozA7C6Z');
+  emailjs.init('eNqe8da4upozA7C6Z');
 
-          let templateId = 'deliverables_all';
-          if (collection === 'Security+ Study Materials') {
-            templateId = 'deliverables_security_pl';
-          }
+  let templateId = 'deliverables_all';
+  if (collection === 'Security+ Study Materials') {
+    // use the real Template ID from EmailJS
+    templateId = 'deliverablessecurity+';
+  }
 
-          await emailjs.send('service_w3dn43e', templateId, {
-            email: email,          // matches {{email}} in To Email
-            to_name: name,         // matches {{to_name}} in body
-            collection: collection
-          }).then(function () {
-            console.log('Deliverables email sent');
-          }, function (error) {
-            console.log('EmailJS error:', error);
-          });
-
-        } catch (emailErr) {
-          console.log('EmailJS init/send threw:', emailErr);
-        }
-
-        formContent.style.display = 'none';
-        success.classList.add('show');
-      } else {
-        btn.textContent = 'Something went wrong — try again';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      console.error('Form submit error:', err);
-      btn.textContent = 'Something went wrong — try again';
-      btn.disabled = false;
-    }
+  await emailjs.send('service_w3dn43e', templateId, {
+    email: email,          // for {{email}} in "To Email"
+    to_name: name,         // for {{to_name}} in body
+    collection: collection
+  }).then(function () {
+    console.log('Deliverables email sent');
+  }, function (error) {
+    console.log('EmailJS error:', error);
   });
+
+} catch (emailErr) {
+  console.log('EmailJS init/send threw:', emailErr);
+}
+  );
 </script>
 
 </body>
