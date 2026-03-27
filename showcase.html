@@ -454,8 +454,9 @@
   const formContent = document.getElementById('form-content');
   const success = document.getElementById('success');
 
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
+
     const btn = form.querySelector('button[type="submit"]');
     btn.textContent = 'Sending...';
     btn.disabled = true;
@@ -467,38 +468,44 @@
       });
 
       if (response.ok) {
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const collection = document.getElementById('collections').value;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const collection = document.getElementById('collections').value;
 
-  try {
-    emailjs.init('eNqe8da4upozA7C6Z');
+        try {
+          emailjs.init('eNqe8da4upozA7C6Z');
 
-    let templateId = 'deliverables_all';
-    if (collection === 'Security+ Study Materials') {
-      templateId = 'deliverables_security_pl';
+          let templateId = 'deliverables_all';
+          if (collection === 'Security+ Study Materials') {
+            templateId = 'deliverables_security_pl';
+          }
+
+          await emailjs.send('default_service', templateId, {
+            email: email,          // matches {{email}} in To Email
+            to_name: name,         // matches {{to_name}} in body
+            collection: collection
+          }).then(function () {
+            console.log('Deliverables email sent');
+          }, function (error) {
+            console.log('EmailJS error:', error);
+          });
+
+        } catch (emailErr) {
+          console.log('EmailJS init/send threw:', emailErr);
+        }
+
+        formContent.style.display = 'none';
+        success.classList.add('show');
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      console.error('Form submit error:', err);
+      btn.textContent = 'Something went wrong — try again';
+      btn.disabled = false;
     }
-
-    await emailjs.send('default_service', templateId, {
-      to_name: name,
-      to_email: email,
-      collection: collection
-    }).then(function() {
-      console.log('Deliverables email sent');
-    }, function(error) {
-      console.log('EmailJS error:', error);
-    });
-
-  } catch (emailErr) {
-    console.log('EmailJS init/send threw:', emailErr);
-  }
-
-  formContent.style.display = 'none';
-  success.classList.add('show');
-} else {
-  btn.textContent = 'Something went wrong — try again';
-  btn.disabled = false;
-}
+  });
 </script>
 
 </body>
