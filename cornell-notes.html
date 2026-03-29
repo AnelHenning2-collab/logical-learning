@@ -7024,6 +7024,55 @@
     }
   }, 15000);
 })();
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const videos = document.querySelectorAll('video');
+
+  videos.forEach((video) => {
+    video.autoplay = false;
+    video.removeAttribute('autoplay');
+    video.pause();
+
+    const defaultVolume = parseFloat(video.dataset.defaultVolume || '0.2');
+    if (!Number.isNaN(defaultVolume)) {
+      video.volume = Math.min(Math.max(defaultVolume, 0), 1);
+    }
+
+    video.addEventListener('play', function () {
+      videos.forEach((otherVideo) => {
+        if (otherVideo !== video && !otherVideo.paused) {
+          otherVideo.pause();
+        }
+      });
+    });
+  });
+
+  const fallbackPairs = [
+    { videoId: 'ch2-3-video', fallbackId: 'ch2-3-fallback' },
+    { videoId: 'chapter2-video', fallbackId: 'chapter2-fallback' },
+    { videoId: 'chapter3-video', fallbackId: 'chapter3-fallback' }
+  ];
+
+  fallbackPairs.forEach(({ videoId, fallbackId }) => {
+    const video = document.getElementById(videoId);
+    const fallback = document.getElementById(fallbackId);
+
+    if (!video || !fallback) return;
+
+    const showFallback = () => {
+      video.style.display = 'none';
+      fallback.style.display = 'block';
+    };
+
+    video.addEventListener('error', showFallback);
+
+    const source = video.querySelector('source');
+    if (source) {
+      source.addEventListener('error', showFallback);
+    }
+  });
+});
+</script> 
 </script>
 </body>
 </html>
