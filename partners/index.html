@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -259,6 +258,14 @@
   .tips-section {
     padding: 0 0 clamp(2.75rem, 6vw, 4rem);
   }
+  .tips-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
   .tips-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -300,6 +307,7 @@
   footer a {
     color: var(--text-muted);
     text-decoration: none;
+    font-size: 13px;
   }
   footer a:hover {
     color: var(--accent);
@@ -327,7 +335,7 @@
         <a href="../security-plus.html">Security+</a>
         <a href="../pentest.html">Pen+</a>
         <a href="../physics.html">Physics</a>
-        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact</a>
+        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank" rel="noopener noreferrer">Contact</a>
       </div>
     </div>
   </div>
@@ -349,7 +357,9 @@
     <p class="section-heading"><span>Collaboration areas</span> · overview</p>
     <div class="module-grid">
 
-      <div class="module-card" style="--card-color:#2563eb;">
+      <!-- Card 1 – click goes to Security+ page or specific repo -->
+      <a class="module-card" style="--card-color:#2563eb;"
+         href="https://anelhenning2-collab.github.io/logical-learning/security-plus.html" target="_blank" rel="noopener noreferrer">
         <div class="module-icon">📚</div>
         <div>
           <div class="module-num">Course materials</div>
@@ -360,12 +370,14 @@
           objectives. Designed to drop into LMS or classroom use.
         </div>
         <div class="module-meta">
-          <span>Links → GitHub repos</span>
-          <span class="module-status">Request access</span>
+          <span>Open Security+ learning page</span>
+          <span class="module-status">View labs →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="module-card" style="--card-color:#a855f7;">
+      <!-- Card 2 – click opens contact hub -->
+      <a class="module-card" style="--card-color:#a855f7;"
+         href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank" rel="noopener noreferrer">
         <div class="module-icon">🤝</div>
         <div>
           <div class="module-num">Collaboration</div>
@@ -376,12 +388,14 @@
           co‑designing new exercises? I’d love to collaborate.
         </div>
         <div class="module-meta">
-          <span>Email subject: “Collaboration”</span>
+          <span>Use contact form · subject “Collaboration”</span>
           <span class="module-status">Contact →</span>
         </div>
-      </div>
+      </a>
 
-      <div class="module-card" style="--card-color:#eab308;">
+      <!-- Card 3 – click opens email compose -->
+      <a class="module-card" style="--card-color:#eab308;"
+         href="mailto:anelhenning2@student.purdueglobal.edu?subject=Security%2B%20Sponsorship%20or%20Services">
         <div class="module-icon">✨</div>
         <div>
           <div class="module-num">Sponsors &amp; Clients</div>
@@ -392,10 +406,10 @@
           custom content, workshops, or GlideCart™ research support.
         </div>
         <div class="module-meta">
-          <span>By inquiry only</span>
-          <span class="module-status">Discuss →</span>
+          <span>Direct email inquiry</span>
+          <span class="module-status">Email →</span>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -403,7 +417,7 @@
 
 <section class="tips-section">
   <div class="container">
-    <div class="tips-title">How to work together</div>
+    <p class="tips-title">How to work together</p>
     <div class="tips-grid">
       <div class="tip-card">
         <strong>Pilot a module</strong>
@@ -417,34 +431,35 @@
       </div>
       <div class="tip-card">
         <strong>Academic integrity</strong>
-        Materials are designed to reduce copy‑paste cheating andiv>
-      <div clasafe, transparent AI use for students.
+        Materials are designed to reduce copy‑paste cheating and
+        encourage safe, transparent AI use for students.
       </div>
     </div>
+
     <p style="margin-top:1.25rem;font-size:0.85rem;color:#8b949e;">
-      To collaborate or reqdiv>
-      <div clail
-      <a div>
-      <div clanning2@student.purdueglobal.edu">anelhenning2@student.purdueglobal.edu</a>
+      To collaborate or request materials, email
+      <a href="mailto:anelhenning2@student.purdueglobal.edu">anelhenning2@student.purdueglobal.edu</a>
       with “Collaboration” or “Sponsorship” in the subject line.
     </p>
-  </didiv>
-      <div clater>
+  </div>
+</section>
+
+<footer>
   <div class="container">
     <div class="footer-inner">
       <div>
-        <p>Anél Hendiv>
-      <div clarity (in progress) · Purdue Global</div>
-      <div cla="margin-top:4px;">
-          <a href="https://github.com/AnelHenning2-collab" target="_blank">GitHubdiv>
-      <div cla        <a href="mailto:anelhenning2@student.purdueglobal.edu">Contactdiv>
-      <div cla     </div>
-      <p>
-        <a div>
-      <div claerplexity.ai/computer" target="_blank" rel="noopener noreferrer" style="font-size:12px;">
+        <p>Anél Henning · Cybersecurity &amp; Security+ Learning (in progress) · Purdue Global</p>
+      </div>
+      <div>
+        <a href="https://github.com/AnelHenning2-collab" target="_blank" rel="noopener noreferrer">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">
           Created with Perplexity Computer
-        </a>div>
-      <div claiv>
+        </a>
+      </div>
+    </div>
   </div>
 </footer>
 
