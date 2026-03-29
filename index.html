@@ -349,7 +349,33 @@
     </div>
   </div>
 </nav>
+<section class="video-section" style="padding: 24px 16px;">
+  <div style="max-width: 960px; margin: 0 auto;">
+    <div style="background: #111827; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px;">
+      <video controls preload="metadata" playsinline width="100%" style="border-radius: 12px;">
+        <source src="https://www.dropbox.com/scl/fi/n542s9x2obxndcx8udrik/AnelHenning_ChapterFour.mp4?rlkey=2s8awqrh3h2n15b2g3tmwh6sa&raw=1" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
 
+      <div style="margin-top: 12px;">
+        <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #94a3b8;">
+          Cornell Outline Video
+        </div>
+        <div style="font-size: 18px; font-weight: 600; color: #e5e7eb; margin-top: 4px;">
+          Anél Henning — Chapter 4
+        </div>
+        <a
+          href="https://www.dropbox.com/scl/fi/n542s9x2obxndcx8udrik/AnelHenning_ChapterFour.mp4?rlkey=2s8awqrh3h2n15b2g3tmwh6sa&dl=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display: inline-block; margin-top: 10px; color: #38bdf8; text-decoration: underline;"
+        >
+          Open in Dropbox if video does not load
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="hero">
   <div class="container">
     <div class="hero-badge">Cybersecurity & Applied Physics</div>
@@ -474,6 +500,15 @@
     </div>
   </div>
 </footer>
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const video = document.querySelector('.video-section video');
+  if (!video) return;
+  video.autoplay = false;
+  video.removeAttribute('autoplay');
+  video.volume = 0.2;
+  video.pause();
+});
+</script>
 </body>
 </html>
