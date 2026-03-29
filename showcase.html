@@ -297,7 +297,7 @@
         <a href="security-plus.html">Security+</a>
         <a href="pentest.html">Pen+</a>
         <a href="physics.html">Physics</a>
-        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank">Contact</a>
+        <a href="https://anelhenning2-collab.github.io/contact-hub/" target="_blank" rel="noopener noreferrer">Contact</a>
       </div>
     </div>
   </div>
@@ -334,7 +334,6 @@
   </div>
 </section>
 
-<!-- ACCESS REQUEST / ACCESS STATE -->
 <section class="form-section" id="access">
   <div class="container">
     <div class="form-wrapper">
@@ -419,14 +418,14 @@
 
       <div id="success" class="success-msg">
         <div class="check">&#10003;</div>
-        <h3>Access Granted</h3>
+        <h3>Access Requested</h3>
         <p>
-          Thank you for confirming your email and interest in my academic work.
-          You now have full access to the requested Logical Learning and portfolio materials.
+          Thank you for your interest in my academic work. Your request has been submitted.
+          You will receive an email with links to the requested materials.
         </p>
         <p style="margin-top:1rem;">
-          You can return to the main study dashboard any time from the navigation bar,
-          or bookmark this page as your personal access gateway.
+          If you do not see an email within a few minutes, please check your spam folder
+          or contact me directly via the Contact link in the navigation bar.
         </p>
       </div>
     </div>
@@ -439,7 +438,7 @@
       <div>
         <p>Anél Henning · MS Cybersecurity (in progress) · Purdue Global</p>
         <p style="margin-top:4px;">
-          <a href="https://github.com/AnelHenning2-collab" target="_blank">GitHub</a>
+          <a href="https://github.com/AnelHenning2-collab" target="_blank" rel="noopener noreferrer">GitHub</a>
           ·
           <a href="mailto:anelhenning2@student.purdueglobal.edu">Contact</a>
         </p>
@@ -450,51 +449,62 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  const form = document.getElementById('access-form');
-  const formContent = document.getElementById('form-content');
-  const success = document.getElementById('success');
+  (function() {
+    const form = document.getElementById('access-form');
+    const formContent = document.getElementById('form-content');
+    const success = document.getElementById('success');
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-    const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-      });
+      try {
+        // Send to Web3Forms
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+        });
 
-      if (response.ok) {
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const collection = document.getElementById('collections').value;
 
+        // Send deliverables via EmailJS
         try {
-  emailjs.init('eNqe8da4upozA7C6Z');
+          emailjs.init('eNqe8da4upozA7C6Z');
 
-  let templateId = 'deliverables_all';
-  if (collection === 'Security+ Study Materials') {
-    // use the real Template ID from EmailJS
-    templateId = 'deliverablessecurity+';
-  }
+          let templateId = 'deliverables_all';
+          if (collection === 'Security+ Study Materials') {
+            templateId = 'deliverablessecurity+'; // your real Security+ template ID
+          }
 
-  await emailjs.send('service_w3dn43e', templateId, {
-    email: email,          // for {{email}} in "To Email"
-    to_name: name,         // for {{to_name}} in body
-    collection: collection
-  }).then(function () {
-    console.log('Deliverables email sent');
-  }, function (error) {
-    console.log('EmailJS error:', error);
-  });
+          await emailjs.send('service_w3dn43e', templateId, {
+            email: email,
+            to_name: name,
+            collection: collection
+          });
+        } catch (emailErr) {
+          console.log('EmailJS error:', emailErr);
+        }
 
-} catch (emailErr) {
-  console.log('EmailJS init/send threw:', emailErr);
-}
-  );
+        form.reset();
+        formContent.style.display = 'none';
+        success.classList.add('show');
+      } catch (err) {
+        console.error(err);
+        btn.textContent = 'Request Access';
+        btn.disabled = false;
+        alert('There was a problem submitting your request. Please try again.');
+      }
+    });
+  })();
 </script>
 
 </body>
