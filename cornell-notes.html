@@ -442,12 +442,50 @@
         style="display:none; text-align:center; padding:14px; color:#63b3ed; font-size:13px; text-decoration:underline;"
       >
         Video loading failed — click to watch on Dropbox
+<!-- Chapter 3 Video -->
+<section class="video-section">
+  <h2 class="chapter-label">Chapter 3</h2>
+  <div class="video-wrapper">
+    <video controls preload="metadata" playsinline width="100%" id="chapter3-video" data-default-volume="0.2">
+      <source src="https://www.dropbox.com/scl/fi/buo9ztjc40fwaz0srmx3s/Ahenning_Chapter3_ALLb.mp4?rlkey=jspmlu6nrsyewjlvlw458riw4&raw=1" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <a
+      id="chapter3-fallback"
+      href="https://www.dropbox.com/scl/fi/buo9ztjc40fwaz0srmx3s/Ahenning_Chapter3_ALLb.mp4?rlkey=jspmlu6nrsyewjlvlw458riw4&dl=0"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display:none; text-align:center; padding:14px; color:#63b3ed; font-size:13px; text-decoration:underline; margin-top:10px;"
+    >
+      Video loading failed — click to watch Chapter 3 on Dropbox
+    </a>
+  </div>
+</section>
+
+<!-- Chapter 4 Video -->
+<section class="video-section">
+  <h2 class="chapter-label">Chapter 4</h2>
+  <div class="video-wrapper">
+    <video controls preload="metadata" playsinline width="100%" id="chapter4-video" data-default-volume="0.2">
+      <source src="https://www.dropbox.com/scl/fi/dwg6dfgixdv8zvojsktme/Ahenning_Chapter4_ALL.mp4?rlkey=6v63agkuf8aaapyggnr4ddnl5&raw=1" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <a
+      id="chapter4-fallback"
+      href="https://www.dropbox.com/scl/fi/dwg6dfgixdv8zvojsktme/Ahenning_Chapter4_ALL.mp4?rlkey=6v63agkuf8aaapyggnr4ddnl5&dl=0"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display:none; text-align:center; padding:14px; color:#63b3ed; font-size:13px; text-decoration:underline; margin-top:10px;"
+    >
+      Video loading failed — click to watch Chapter 4 on Dropbox
+    </a>
+  </div>
+</section>
+         
       </a>
       <div class="video-info">
         <span class="label">Source Lecture</span>
         <span class="title">Anél Henning — Chapter 2</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -7072,7 +7110,56 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-</script> 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const videos = document.querySelectorAll('video');
+
+  videos.forEach((video) => {
+    video.autoplay = false;
+    video.removeAttribute('autoplay');
+    video.pause();
+
+    const defaultVolume = parseFloat(video.dataset.defaultVolume || '0.2');
+    if (!Number.isNaN(defaultVolume)) {
+      video.volume = Math.min(Math.max(defaultVolume, 0), 1);
+    }
+
+    video.addEventListener('play', function () {
+      videos.forEach((otherVideo) => {
+        if (otherVideo !== video && !otherVideo.paused) {
+          otherVideo.pause();
+        }
+      });
+    });
+  });
+
+  const fallbackPairs = [
+    { videoId: 'ch2-3-video', fallbackId: 'ch2-3-fallback' },
+    { videoId: 'chapter2-video', fallbackId: 'chapter2-fallback' },
+    { videoId: 'chapter3-video', fallbackId: 'chapter3-fallback' },
+    { videoId: 'chapter4-video', fallbackId: 'chapter4-fallback' }
+  ];
+
+  fallbackPairs.forEach(({ videoId, fallbackId }) => {
+    const video = document.getElementById(videoId);
+    const fallback = document.getElementById(fallbackId);
+
+    if (!video || !fallback) return;
+
+    const showFallback = () => {
+      video.style.display = 'none';
+      fallback.style.display = 'block';
+    };
+
+    video.addEventListener('error', showFallback);
+
+    const source = video.querySelector('source');
+    if (source) {
+      source.addEventListener('error', showFallback);
+    }
+  });
+});
+</script>
 </script>
 </body>
 </html>
