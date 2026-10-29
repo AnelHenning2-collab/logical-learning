@@ -1,13 +1,13 @@
 # Security & Ownership Notice
 
 ## Author
-**Anél Henning**  
+**Anèl Henning**  
 Email: logicalcoders@outlook.com  
 GitHub: [@AnelHenning2-collab](https://github.com/AnelHenning2-collab)  
 Business: Logika Coders, Tampa, Florida  
 
 ## Intellectual Property
-All content in this repository is the original work of Anél Henning, protected under:
+All content in this repository is the original work of Anèl Henning, protected under:
 - **CC BY-NC-ND 4.0** — Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
 - **U.S. Copyright Law** (17 U.S.C.)
 - **Florida Right of Publicity** (§ 540.08, Florida Statutes)

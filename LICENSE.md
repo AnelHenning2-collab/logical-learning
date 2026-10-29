@@ -2,7 +2,7 @@
 
 ## Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 
-Copyright © 2026 Anél Henning. All rights reserved.
+Copyright © 2026 Anèl Henning. All rights reserved.
 
 This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
