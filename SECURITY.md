@@ -4,7 +4,7 @@
 **Anèl Henning**  
 Email: logicalcoders@outlook.com  
 GitHub: [@AnelHenning2-collab](https://github.com/AnelHenning2-collab)  
-Business: Logika Coders, Tampa, Florida  
+Business: Logical Coders, Tampa, Florida  
 
 ## Intellectual Property
 All content in this repository is the original work of Anèl Henning, protected under:
